@@ -1,5 +1,4 @@
-!/target/
-/target/*
-!/target/mybatis-generator/
-/target/mybatis-generator/*
-!/target/mybatis-generator/.gitkeep
+/target/
+!/tools/mybatis-generator/
+/tools/mybatis-generator/*
+!/tools/mybatis-generator/.gitkeep
