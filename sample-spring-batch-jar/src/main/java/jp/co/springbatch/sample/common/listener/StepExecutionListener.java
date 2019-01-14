@@ -8,9 +8,9 @@ import org.springframework.batch.core.listener.StepExecutionListenerSupport;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StepExecutionLoggingListener extends StepExecutionListenerSupport {
+public class StepExecutionListener extends StepExecutionListenerSupport {
 
-	private static final Logger log = LoggerFactory.getLogger(StepExecutionLoggingListener.class);
+	private static final Logger log = LoggerFactory.getLogger(StepExecutionListener.class);
 
 	@Override
 	public void beforeStep(StepExecution stepExecution) {

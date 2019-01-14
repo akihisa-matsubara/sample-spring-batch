@@ -20,18 +20,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
 import jp.co.springbatch.sample.biz.processor.PersonItemProcessor;
-import jp.co.springbatch.sample.common.listener.JobExecutionLoggingListener;
+import jp.co.springbatch.sample.common.listener.JobExecutionListener;
 import jp.co.springbatch.sample.data.dto.Person;
 
 @Configuration
 @EnableBatchProcessing
-public class ImportUserChunk {
+public class ImportUserJobConfig {
 
 	@Autowired
-	public JobBuilderFactory jobBuilderFactory;
+	public JobBuilderFactory jobs;
 
 	@Autowired
-	public StepBuilderFactory stepBuilderFactory;
+	public StepBuilderFactory steps;
 
 	// tag::readerwriterprocessor[]
 	@Bean
@@ -66,18 +66,18 @@ public class ImportUserChunk {
 
 	// tag::jobstep[]
 	@Bean
-	public Job importUserJobChunk(JobExecutionLoggingListener listener, Step chunkStep) {
-		return jobBuilderFactory.get("importUserJobChunk")
+	public Job importUserJob(JobExecutionListener listener, Step importUserStep) {
+		return jobs.get("importUserJob")
 				.incrementer(new RunIdIncrementer())
 				.listener(listener)
-				.flow(chunkStep)
+				.flow(importUserStep)
 				.end()
 				.build();
 	}
 
 	@Bean
-	public Step chunkStep(JdbcBatchItemWriter<Person> writer) {
-		return stepBuilderFactory.get("chunkStep")
+	public Step importUserStep(JdbcBatchItemWriter<Person> writer) {
+		return steps.get("importUserStep")
 				.<Person, Person> chunk(10)
 				.reader(reader())
 				.processor(processor())

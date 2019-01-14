@@ -14,15 +14,15 @@ import org.springframework.stereotype.Component;
 import jp.co.springbatch.sample.data.dto.Person;
 
 @Component
-public class JobExecutionLoggingListener extends JobExecutionListenerSupport {
+public class JobExecutionListener extends JobExecutionListenerSupport {
 
-	private static final Logger log = LoggerFactory.getLogger(JobExecutionLoggingListener.class);
+	private static final Logger log = LoggerFactory.getLogger(JobExecutionListener.class);
 	private static final SimpleDateFormat DATE_TIMESTAMP_MILLISEC = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
 	private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	public JobExecutionLoggingListener(JdbcTemplate jdbcTemplate) {
+	public JobExecutionListener(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
