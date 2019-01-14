@@ -1,1 +1,7 @@
-spring.batch.job.enabled: false
+# 環境設定値（共通）
+# 環境別の設定を有効にする場合は実行時にProfileを指定します。
+# -Dspring.profiles.active=prod
+spring:
+  batch:
+    job:
+      enabled: false
