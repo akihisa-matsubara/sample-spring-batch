@@ -22,6 +22,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<!-- The main class to start by executing java -jar -->
 		<start-class>jp.co.springbatch.sample.SampleApplication</start-class>
+		<!-- MyBatis Generator -->
+		<mybatis.generator.configurationFile>${basedir}/tools/mybatis-generator/generatorConfig.xml</mybatis.generator.configurationFile>
+		<mybatis.generator.overwrite>true</mybatis.generator.overwrite>
 	</properties>
 
 	<dependencies>
@@ -29,10 +32,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-batch</artifactId>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.springframework.boot</groupId> -->
-		<!-- <artifactId>spring-boot-starter-jersey</artifactId> -->
-		<!-- </dependency> -->
 		<!-- <dependency> -->
 		<!-- <groupId>org.flywaydb</groupId> -->
 		<!-- <artifactId>flyway-core</artifactId> -->

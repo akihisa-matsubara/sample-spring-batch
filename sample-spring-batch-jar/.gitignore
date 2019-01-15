@@ -1,4 +1,4 @@
 /target/
 !/tools/mybatis-generator/
 /tools/mybatis-generator/*
-!/tools/mybatis-generator/.gitkeep
+!/tools/mybatis-generator/generatorConfig.xml
