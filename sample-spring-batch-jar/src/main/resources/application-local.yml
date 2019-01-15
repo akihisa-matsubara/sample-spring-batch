@@ -1,1 +1,13 @@
 # 環境設定値（ローカル）
+spring:
+  datasource:
+    driver-class-name: com.ibm.db2.jcc.DB2Driver
+    url: jdbc:db2://localhost:50000/mydb
+    username: db2admin
+    password: db2admin
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc: debug

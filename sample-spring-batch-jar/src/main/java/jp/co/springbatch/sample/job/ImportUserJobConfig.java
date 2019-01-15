@@ -19,9 +19,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-import jp.co.springbatch.sample.biz.processor.PersonItemProcessor;
+import jp.co.springbatch.sample.biz.processor.CustomerItemProcessor;
 import jp.co.springbatch.sample.common.listener.JobExecutionListener;
-import jp.co.springbatch.sample.data.dto.Person;
+import jp.co.springbatch.sample.data.dto.Customer;
 
 @Configuration
 @EnableBatchProcessing
@@ -35,30 +35,30 @@ public class ImportUserJobConfig {
 
 	// tag::readerwriterprocessor[]
 	@Bean
-	public FlatFileItemReader<Person> reader() {
-		return new FlatFileItemReaderBuilder<Person>()
-				.name("personItemReader")
-				.resource(new ClassPathResource("sample-data.csv"))
+	public FlatFileItemReader<Customer> reader() {
+		return new FlatFileItemReaderBuilder<Customer>()
+				.name("customerItemReader")
+				.resource(new ClassPathResource("customer-data.csv"))
 				.delimited()
-				.names(new String[] { "firstName", "lastName" })
-				.fieldSetMapper(new BeanWrapperFieldSetMapper<Person>() {
+				.names(new String[] { "name", "address", "tel" })
+				.fieldSetMapper(new BeanWrapperFieldSetMapper<Customer>() {
 					{
-						setTargetType(Person.class);
+						setTargetType(Customer.class);
 					}
 				})
 				.build();
 	}
 
 	@Bean
-	public PersonItemProcessor processor() {
-		return new PersonItemProcessor();
+	public CustomerItemProcessor processor() {
+		return new CustomerItemProcessor();
 	}
 
 	@Bean
-	public JdbcBatchItemWriter<Person> writer(DataSource dataSource) {
-		return new JdbcBatchItemWriterBuilder<Person>()
+	public JdbcBatchItemWriter<Customer> writer(DataSource dataSource) {
+		return new JdbcBatchItemWriterBuilder<Customer>()
 				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
-				.sql("INSERT INTO people (first_name, last_name) VALUES (:firstName, :lastName)")
+				.sql("INSERT INTO TBS_CUSTOMER (NAME, ADDRESS, TEL) VALUES (:name, :address, :tel)")
 				.dataSource(dataSource)
 				.build();
 	}
@@ -76,9 +76,9 @@ public class ImportUserJobConfig {
 	}
 
 	@Bean
-	public Step importUserStep(JdbcBatchItemWriter<Person> writer) {
+	public Step importUserStep(JdbcBatchItemWriter<Customer> writer) {
 		return steps.get("importUserStep")
-				.<Person, Person> chunk(10)
+				.<Customer, Customer> chunk(10)
 				.reader(reader())
 				.processor(processor())
 				.writer(writer)
