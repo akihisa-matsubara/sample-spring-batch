@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.ibm.db2.jcc.DB2Driver
-    url: jdbc:db2://localhost:50000/mydb
+    url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
     username: db2admin
     password: db2admin
 

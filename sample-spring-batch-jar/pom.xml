@@ -6,7 +6,7 @@
 
 	<groupId>jp.co.springbatch.sample</groupId>
 	<artifactId>sample-spring-batch-jar</artifactId>
-	<version>0.1.0</version>
+	<version>1.0.0</version>
 	<name>sample-spring-batch-jar</name>
 	<packaging>jar</packaging>
 
@@ -20,8 +20,6 @@
 		<java.version>1.8</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<!-- The main class to start by executing java -jar -->
-		<start-class>jp.co.springbatch.sample.SampleApplication</start-class>
 		<!-- MyBatis Generator -->
 		<mybatis.generator.configurationFile>${basedir}/tools/mybatis-generator/generatorConfig.xml</mybatis.generator.configurationFile>
 		<mybatis.generator.overwrite>true</mybatis.generator.overwrite>
@@ -32,10 +30,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-batch</artifactId>
 		</dependency>
-		<!-- <dependency> -->
-		<!-- <groupId>org.flywaydb</groupId> -->
-		<!-- <artifactId>flyway-core</artifactId> -->
-		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -86,6 +80,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<!-- include system scope jar -->
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>

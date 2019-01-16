@@ -1,21 +1,12 @@
 # 環境設定値（共通）
-# 環境別の設定を有効にする場合は実行時にProfileを指定します。
-# -Dspring.profiles.active=prod
 spring:
   batch:
     initialize-schema: never
     job:
       enabled: true
 
-  datasource:
-    driver-class-name: com.ibm.db2.jcc.DB2Driver
-    url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
-    username: db2admin
-    password: db2admin
-
 logging:
   level:
     org:
       springframework:
         jdbc: debug
-      
