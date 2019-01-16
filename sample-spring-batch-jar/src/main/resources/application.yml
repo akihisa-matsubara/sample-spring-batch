@@ -1,5 +1,7 @@
 # 環境設定値（共通）
 spring:
+#  main:
+#    web-environment: false
   batch:
     initialize-schema: never
     job:
