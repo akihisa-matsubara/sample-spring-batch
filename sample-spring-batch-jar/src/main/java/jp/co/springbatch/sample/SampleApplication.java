@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@ImportResource("applicationContext.xml")
 public class SampleApplication {
 
     public static void main(String[] args) throws Exception {

@@ -19,13 +19,11 @@ public class OutputLog implements Tasklet {
 	private static final Logger log = LoggerFactory.getLogger(OutputLog.class);
 
 	@Autowired
-//	private TbsCustomerDao tbsCustomerDao;
 	private TbsCustomerMapper tbsCustomerMapper;
 
 	@Override
 	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 		log.info("Output Log Logic..."); // サンプルでは未実装
-//		TbsCustomer result = tbsCustomerDao.findById(new Long(3));
 		TbsCustomer result = tbsCustomerMapper.selectByPrimaryKey(3);
 		log.info("select result: " + result);
 
@@ -40,7 +38,6 @@ public class OutputLog implements Tasklet {
 
 	private boolean isCheckOK() {
 		return true;
-		//		return false;
 	}
 
 }
