@@ -42,7 +42,6 @@ public class OutputLogJobConfig {
 				.incrementer(new RunIdIncrementer())
 				.listener(listener)
 				.start(outputLogStep).on(ExitStatus.COMPLETED.getExitCode()).to(outputTriggerFileStep)
-				.from(outputLogStep).on(ExitStatus.FAILED.getExitCode()).end()
 				.end()
 				.build();
 	}

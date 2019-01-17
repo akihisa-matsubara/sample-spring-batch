@@ -38,5 +38,5 @@ sample:
 
   file:
     trigger-file:
-      path: target/test-outputs
+      path: data/test-outputs
       name: SAMPLE.YYYYMMDD.TRG
