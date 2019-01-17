@@ -27,7 +27,7 @@ public class SampleRestServiceImpl implements SampleRestService {
 
 	private final RestTemplate restTemplate;
 
-	@Value("${sample.sample-rest-service.customers-api}")
+	@Value("${sample.service.sample-rest-service.customers-api}")
 	private String url;
 
 	public SampleRestServiceImpl(RestTemplateBuilder restTemplateBuilder) {

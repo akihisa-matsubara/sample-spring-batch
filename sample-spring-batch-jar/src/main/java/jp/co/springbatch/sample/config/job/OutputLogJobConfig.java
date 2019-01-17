@@ -8,11 +8,12 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import jp.co.springbatch.sample.biz.tasklet.OutputLog;
-import jp.co.springbatch.sample.biz.tasklet.OutputTriggerFile;
+import jp.co.springbatch.sample.biz.tasklet.OutputLogTasklet;
+import jp.co.springbatch.sample.biz.tasklet.OutputTriggerFileTasklet;
 import jp.co.springbatch.sample.common.listener.JobExecutionListener;
 
 @Configuration
@@ -26,10 +27,13 @@ public class OutputLogJobConfig {
 	public StepBuilderFactory steps;
 
 	@Autowired
-	private OutputLog outputLog;
+	private OutputLogTasklet outputLogTasklet;
 
-	@Autowired
-	private OutputTriggerFile outputTriggerFile;
+	@Value("${sample.file.trigger-file.path}")
+	private String triggerFilePath;
+
+	@Value("${sample.file.trigger-file.name}")
+	private String triggerFileName;
 
 	// tag::jobstep[]
 	@Bean
@@ -46,15 +50,23 @@ public class OutputLogJobConfig {
 	@Bean
 	public Step outputLogStep() {
 		return steps.get("outputLogStep")
-				.tasklet(outputLog)
+				.tasklet(outputLogTasklet)
 				.build();
 	}
 
 	@Bean
 	public Step outputTriggerFileStep() {
 		return steps.get("outputTriggerFileStep")
-				.tasklet(outputTriggerFile)
+				.tasklet(outputTriggerFileTasklet())
 				.build();
+	}
+
+	@Bean
+	public OutputTriggerFileTasklet outputTriggerFileTasklet() {
+		OutputTriggerFileTasklet tasklet = new OutputTriggerFileTasklet();
+		tasklet.setFilePath(triggerFilePath);
+		tasklet.setFileName(triggerFileName);
+		return tasklet;
 	}
 	// end::jobstep[]
 }

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,8 +18,8 @@ public class SpringBootServiceImpl implements SpringBootService {
 
 	private final RestTemplate restTemplate;
 
-	@Value("${sample.spring-boot-service.random-api}")
-	private String uri;
+	@Value("${sample.service.spring-boot-service.random-api}")
+	private String url;
 
 	public SpringBootServiceImpl(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
@@ -26,9 +27,9 @@ public class SpringBootServiceImpl implements SpringBootService {
 
 	@Override
 	public QuoteDto getRandomQuotation() {
-		QuoteDto quote = restTemplate.getForObject(uri, QuoteDto.class);
-		log.info("SpringBootService random get result:" + quote);
-		return quote;
+		ResponseEntity<QuoteDto> response = restTemplate.getForEntity(url, QuoteDto.class);
+		log.info("SpringBootService get random response: httpStatus=[{}], quote=[{}]", response.getStatusCode(), response.getBody());
+		return response.getBody();
 	}
 
 }

@@ -1,6 +1,8 @@
+/data/test-outputs/*
+!/data/test-outputs/.gitkeep
+/log/*
+!/log/.gitkeep
 /target/
 !/tools/mybatis-generator/
 /tools/mybatis-generator/*
 !/tools/mybatis-generator/generatorConfig.xml
-/log/*
-!/log/.gitkeep

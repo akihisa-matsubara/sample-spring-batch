@@ -14,9 +14,9 @@ import jp.co.springbatch.sample.data.entity.primary.TbsCustomer;
 import jp.co.springbatch.sample.data.entity.primary.TbsCustomerMapper;
 
 @Component
-public class OutputLog implements Tasklet {
+public class OutputLogTasklet implements Tasklet {
 
-	private static final Logger log = LoggerFactory.getLogger(OutputLog.class);
+	private static final Logger log = LoggerFactory.getLogger(OutputLogTasklet.class);
 
 	@Autowired
 	private TbsCustomerMapper tbsCustomerMapper;

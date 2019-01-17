@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import jp.co.springbatch.sample.integration.service.SpringBootService;
 
 @Component
-public class CallSpringBootService implements Tasklet {
+public class CallSpringBootServiceTasklet implements Tasklet {
 
 	@Autowired
 	private SpringBootService service;

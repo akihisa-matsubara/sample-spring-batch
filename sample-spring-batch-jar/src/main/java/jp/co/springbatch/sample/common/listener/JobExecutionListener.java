@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import jp.co.springbatch.sample.data.dto.Customer;
+import jp.co.springbatch.sample.data.dto.CustomerFileDto;
 
 @Component
 public class JobExecutionListener extends JobExecutionListenerSupport {
@@ -33,11 +33,10 @@ public class JobExecutionListener extends JobExecutionListenerSupport {
 
 	@Override
 	public void afterJob(JobExecution jobExecution) {
+		log.info("!!! JOB FINISHED! Time to verify the results");
 		if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
-			log.info("!!! JOB FINISHED! Time to verify the results");
-
 			jdbcTemplate.query("SELECT name, address, tel FROM TBS_CUSTOMER",
-					(rs, row) -> new Customer(
+					(rs, row) -> new CustomerFileDto(
 							rs.getString(1),
 							rs.getString(2),
 							rs.getString(3)))

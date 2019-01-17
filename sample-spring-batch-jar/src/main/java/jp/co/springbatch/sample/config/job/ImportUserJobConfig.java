@@ -1,5 +1,7 @@
 package jp.co.springbatch.sample.config.job;
 
+import java.io.IOException;
+
 import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
@@ -12,6 +14,7 @@ import org.springframework.batch.item.database.BeanPropertyItemSqlParameterSourc
 import org.springframework.batch.item.database.JdbcBatchItemWriter;
 import org.springframework.batch.item.database.builder.JdbcBatchItemWriterBuilder;
 import org.springframework.batch.item.file.FlatFileItemReader;
+import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ import org.springframework.core.io.ClassPathResource;
 
 import jp.co.springbatch.sample.biz.processor.CustomerItemProcessor;
 import jp.co.springbatch.sample.common.listener.JobExecutionListener;
-import jp.co.springbatch.sample.data.dto.Customer;
+import jp.co.springbatch.sample.data.dto.CustomerFileDto;
 
 @Configuration
 @EnableBatchProcessing
@@ -35,15 +38,15 @@ public class ImportUserJobConfig {
 
 	// tag::readerwriterprocessor[]
 	@Bean
-	public FlatFileItemReader<Customer> reader() {
-		return new FlatFileItemReaderBuilder<Customer>()
+	public FlatFileItemReader<CustomerFileDto> reader() {
+		return new FlatFileItemReaderBuilder<CustomerFileDto>()
 				.name("customerItemReader")
 				.resource(new ClassPathResource("customer-data.csv"))
 				.delimited()
 				.names(new String[] { "name", "address", "tel" })
-				.fieldSetMapper(new BeanWrapperFieldSetMapper<Customer>() {
+				.fieldSetMapper(new BeanWrapperFieldSetMapper<CustomerFileDto>() {
 					{
-						setTargetType(Customer.class);
+						setTargetType(CustomerFileDto.class);
 					}
 				})
 				.build();
@@ -55,8 +58,8 @@ public class ImportUserJobConfig {
 	}
 
 	@Bean
-	public JdbcBatchItemWriter<Customer> writer(DataSource dataSource) {
-		return new JdbcBatchItemWriterBuilder<Customer>()
+	public JdbcBatchItemWriter<CustomerFileDto> writer(DataSource dataSource) {
+		return new JdbcBatchItemWriterBuilder<CustomerFileDto>()
 				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
 				.sql("INSERT INTO TBS_CUSTOMER (NAME, ADDRESS, TEL) VALUES (:name, :address, :tel)")
 				.dataSource(dataSource)
@@ -76,12 +79,16 @@ public class ImportUserJobConfig {
 	}
 
 	@Bean
-	public Step importUserStep(JdbcBatchItemWriter<Customer> writer) {
+	public Step importUserStep(JdbcBatchItemWriter<CustomerFileDto> writer) {
 		return steps.get("importUserStep")
-				.<Customer, Customer> chunk(10)
+				.<CustomerFileDto, CustomerFileDto> chunk(10)
 				.reader(reader())
 				.processor(processor())
 				.writer(writer)
+				.faultTolerant()
+				.skipLimit(10)
+				.skip(FlatFileParseException.class)
+				.noSkip(IOException.class)
 				.build();
 	}
 	// end::jobstep[]

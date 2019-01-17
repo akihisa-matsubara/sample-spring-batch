@@ -13,6 +13,8 @@ logging:
 
 ### アプリ設定 ###
 sample:
+  system-date: 20190101 # Override
+
   datasource:
     primary:
       driver-class-name: com.ibm.db2.jcc.DB2Driver
@@ -26,9 +28,15 @@ sample:
       username: db2admin
       password: db2admin
       
-  sample-rest-service:
-    base-url: http://localhost:9080/sample-rest-service-webapi/api/v1
-    customers-api: ${sample.sample-rest-service.base-url}/customers
-  spring-boot-service:
-    base-url: http://gturnquist-quoters.cfapps.io/api
-    random-api: ${sample.spring-boot-service.base-url}/random
+  service:
+    sample-rest-service:
+      base-url: http://localhost:9080/sample-rest-service-webapi/api/v1
+      customers-api: ${sample.service.sample-rest-service.base-url}/customers
+    spring-boot-service:
+      base-url: http://gturnquist-quoters.cfapps.io/api
+      random-api: ${sample.service.spring-boot-service.base-url}/random
+
+  file:
+    trigger-file:
+      path: target/test-outputs
+      name: SAMPLE.YYYYMMDD.TRG
