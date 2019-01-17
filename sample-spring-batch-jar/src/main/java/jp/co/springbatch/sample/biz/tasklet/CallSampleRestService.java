@@ -29,7 +29,7 @@ public class CallSampleRestService implements Tasklet {
 			getCustomer(customers.get(0).getId().toString());
 		}
 
-		// 2件INSERT→UPDATE→DELETE
+		// 2件INSERT→UPDATE→DELETE ※GET時にPKでOrderされていることが前提
 		createCustomers();
 
 		updateCustomers();
