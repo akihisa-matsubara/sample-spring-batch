@@ -17,8 +17,8 @@ public class RandomSpringBootQuotationServiceImpl implements RandomSpringBootQuo
 
 	private final RestTemplate restTemplate;
 
-	@Value("${sample.random-spring-boot-quotation-service.url}")
-	private String url;
+	@Value("${sample.random-spring-boot-quotation-service.uri}")
+	private String uri;
 
 	public RandomSpringBootQuotationServiceImpl(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
@@ -26,7 +26,7 @@ public class RandomSpringBootQuotationServiceImpl implements RandomSpringBootQuo
 
 	@Override
 	public Quote getQuotation() {
-		Quote quote = restTemplate.getForObject(url, Quote.class);
+		Quote quote = restTemplate.getForObject(uri, Quote.class);
 		log.info("RandomSpringBootQuotationService result:" + quote);
 		return quote;
 	}

@@ -2,10 +2,11 @@
 ### FW設定 ###
 spring:
   datasource:
-    driver-class-name: com.ibm.db2.jcc.DB2Driver
-    url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
-    username: db2admin
-    password: db2admin
+    mydb:
+      driver-class-name: com.ibm.db2.jcc.DB2Driver
+      url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
+      username: db2admin
+      password: db2admin
 
 ### ログ設定 ###
 logging:
@@ -13,11 +14,11 @@ logging:
   file.max-size: 20MB
   file.max-history: 0
   level:
-    org:
-      springframework:
-        jdbc: debug
+#    root: debug
+    org.springframework.jdbc: debug
+    jp.co.springbatch.sample: debug
 
 ### アプリ設定 ###
 sample:
   random-spring-boot-quotation-service:
-    url: http://gturnquist-quoters.cfapps.io/api/random
+    uri: http://gturnquist-quoters.cfapps.io/api/random

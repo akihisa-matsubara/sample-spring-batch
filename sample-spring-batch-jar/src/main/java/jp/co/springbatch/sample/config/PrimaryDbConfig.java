@@ -25,7 +25,7 @@ public class PrimaryDbConfig {
 
 	@Bean
 	@Primary
-	@ConfigurationProperties(prefix = "spring.datasource")
+	@ConfigurationProperties(prefix = "spring.datasource.mydb")
 	public DataSourceProperties primaryDataSourceProperties() {
 		return new DataSourceProperties();
 	}
