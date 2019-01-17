@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.common.config;
+package jp.co.springbatch.sample.config;
 
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.explore.JobExplorer;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class SampleBatchConfig {
+public class SampleJobRepositoryConfig {
 
 	/**
 	 * in-memoryジョブリポジトリを使用する

@@ -1,5 +1,6 @@
-package jp.co.springbatch.sample.job;
+package jp.co.springbatch.sample.config.job;
 
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -10,12 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import jp.co.springbatch.sample.biz.tasklet.CallRestService;
+import jp.co.springbatch.sample.biz.tasklet.OutputLog;
+import jp.co.springbatch.sample.biz.tasklet.OutputTriggerFile;
 import jp.co.springbatch.sample.common.listener.JobExecutionListener;
 
 @Configuration
 @EnableBatchProcessing
-public class CallRestServiceJobConfig {
+public class OutputLogJobConfig {
 
 	@Autowired
 	public JobBuilderFactory jobs;
@@ -24,22 +26,34 @@ public class CallRestServiceJobConfig {
 	public StepBuilderFactory steps;
 
 	@Autowired
-	private CallRestService callRestService;
+	private OutputLog outputLog;
+
+	@Autowired
+	private OutputTriggerFile outputTriggerFile;
 
 	// tag::jobstep[]
 	@Bean
-	public Job callRestServiceJob(JobExecutionListener listener, Step callRestServiceStep) throws Exception {
-		return jobs.get("callRestServiceJob")
+	public Job outputLogJob(JobExecutionListener listener, Step outputLogStep, Step outputTriggerFileStep) throws Exception {
+		return jobs.get("outputLogJob")
 				.incrementer(new RunIdIncrementer())
 				.listener(listener)
-				.start(callRestServiceStep)
+				.start(outputLogStep).on(ExitStatus.COMPLETED.getExitCode()).to(outputTriggerFileStep)
+				.from(outputLogStep).on(ExitStatus.FAILED.getExitCode()).end()
+				.end()
 				.build();
 	}
 
 	@Bean
-	public Step callRestServiceStep() {
-		return steps.get("callRestServiceStep")
-				.tasklet(callRestService)
+	public Step outputLogStep() {
+		return steps.get("outputLogStep")
+				.tasklet(outputLog)
+				.build();
+	}
+
+	@Bean
+	public Step outputTriggerFileStep() {
+		return steps.get("outputTriggerFileStep")
+				.tasklet(outputTriggerFile)
 				.build();
 	}
 	// end::jobstep[]

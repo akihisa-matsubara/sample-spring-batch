@@ -1,4 +1,6 @@
 # 環境設定値（共通）
+# 小文字のkebab caseで定義すること
+### FW設定 ###
 spring:
 #  main:
 #    web-environment: false
@@ -6,9 +8,10 @@ spring:
     initialize-schema: never
     job:
       enabled: true
+  main:
+    banner-mode: "off"
 
-logging:
-  level:
-    org:
-      springframework:
-        jdbc: debug
+### アプリ設定 ###
+sample:
+  # yyyyMMdd
+  system-date: 

@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.data.dto;
+package jp.co.springbatch.sample.integration.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

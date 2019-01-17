@@ -1,4 +1,5 @@
-# 環境設定値（ローカル）
+# 環境設定値（開発）
+### FW設定 ###
 spring:
   datasource:
     driver-class-name: com.ibm.db2.jcc.DB2Driver
@@ -6,8 +7,14 @@ spring:
     username: db2admin
     password: db2admin
 
+### ログ設定 ###
 logging:
   level:
     org:
       springframework:
         jdbc: debug
+
+### アプリ設定 ###
+sample:
+  random-spring-boot-quotation-service:
+    url: http://gturnquist-quoters.cfapps.io/api/random

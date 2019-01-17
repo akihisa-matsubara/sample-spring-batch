@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.job;
+package jp.co.springbatch.sample.config.job;
 
 import javax.sql.DataSource;
 
