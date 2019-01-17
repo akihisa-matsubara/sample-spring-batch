@@ -2,11 +2,10 @@
 ### FW設定 ###
 spring:
   datasource:
-    mydb:
-      driver-class-name: com.ibm.db2.jcc.DB2Driver
-      url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
-      username: db2admin
-      password: db2admin
+    driver-class-name: com.ibm.db2.jcc.DB2Driver
+    url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
+    username: db2admin
+    password: db2admin
 
 ### ログ設定 ###
 logging:

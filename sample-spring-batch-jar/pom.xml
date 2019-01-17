@@ -50,6 +50,7 @@
 		</dependency>
 
 		<!-- HyperSQL Database Engine -->
+		<!-- Not Use -->
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
