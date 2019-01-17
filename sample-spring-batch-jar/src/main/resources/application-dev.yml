@@ -1,11 +1,5 @@
 # 環境設定値（開発）
 ### FW設定 ###
-spring:
-  datasource:
-    driver-class-name: com.ibm.db2.jcc.DB2Driver
-    url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
-    username: db2admin
-    password: db2admin
 
 ### ログ設定 ###
 logging:
@@ -19,6 +13,19 @@ logging:
 
 ### アプリ設定 ###
 sample:
+  datasource:
+    primary:
+      driver-class-name: com.ibm.db2.jcc.DB2Driver
+      url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
+      username: db2admin
+      password: db2admin
+    # 複数データソース定義する場合の例、名称については"secondary"ではなく理解しやすい名称を付けること
+    secondary:
+      driver-class-name: com.ibm.db2.jcc.DB2Driver
+      url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
+      username: db2admin
+      password: db2admin
+      
   sample-rest-service:
     base-url: http://localhost:9080/sample-rest-service-webapi/api/v1
     customers-api: ${sample.sample-rest-service.base-url}/customers

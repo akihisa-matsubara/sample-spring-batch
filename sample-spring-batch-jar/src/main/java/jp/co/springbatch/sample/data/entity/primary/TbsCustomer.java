@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.data.entity.myschema;
+package jp.co.springbatch.sample.data.entity.primary;
 
 import lombok.ToString;
 

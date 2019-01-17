@@ -17,34 +17,33 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.zaxxer.hikari.HikariDataSource;
+
 @Configuration
 @MapperScan(basePackages = PrimaryDbConfig.BASE_PACKAGES, sqlSessionTemplateRef = "primarySqlSessionTemplate")
 public class PrimaryDbConfig {
-	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.entity";
-	public static final String MAPPER_XML_PATH = "classpath*:jp/co/springbatch/sample/data/entity/**/*.xml";
+	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.entity.primary";
+	public static final String MAPPER_XML_PATH = "classpath*:jp/co/springbatch/sample/data/entity/primary/*.xml";
 
 	@Bean
 	@Primary
-	@ConfigurationProperties(prefix = "spring.datasource")
+	@ConfigurationProperties(prefix = "sample.datasource.primary")
 	public DataSourceProperties primaryDataSourceProperties() {
 		return new DataSourceProperties();
 	}
 
 	@Bean
 	@Primary
-	public DataSource primaryDataSource(
-			@Qualifier("primaryDataSourceProperties") DataSourceProperties properties) {
-		return properties.initializeDataSourceBuilder().build();
+	public HikariDataSource primaryDataSource() {
+		return primaryDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
 	}
 
 	@Bean
-	@Primary
 	public PlatformTransactionManager primaryTxManager(DataSource primaryDataSource) {
 		return new DataSourceTransactionManager(primaryDataSource);
 	}
 
 	@Bean
-	@Primary
 	public SqlSessionFactory primarySqlSessionFactory(@Qualifier("primaryDataSource") DataSource primaryDataSource) throws Exception {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(primaryDataSource);
