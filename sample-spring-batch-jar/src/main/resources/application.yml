@@ -2,14 +2,13 @@
 # 小文字のkebab caseで定義すること
 ### FW設定 ###
 spring:
-#  main:
-#    web-environment: false
   batch:
     initialize-schema: never
     job:
       enabled: true
   main:
     banner-mode: "off"
+    web-application-type: none
 
 ### アプリ設定 ###
 sample:

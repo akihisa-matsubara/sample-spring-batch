@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class ValueDto {
 
     private Long id;
+
     private String quote;
 
 }

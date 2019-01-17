@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class QuoteDto {
 
     private String type;
+
     private ValueDto value;
 
 }
