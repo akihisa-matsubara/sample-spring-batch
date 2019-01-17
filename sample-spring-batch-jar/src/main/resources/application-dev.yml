@@ -9,6 +9,9 @@ spring:
 
 ### ログ設定 ###
 logging:
+  file: log/${spring.batch.job.names}_debug.log
+  file.max-size: 20MB
+  file.max-history: 0
   level:
     org:
       springframework:

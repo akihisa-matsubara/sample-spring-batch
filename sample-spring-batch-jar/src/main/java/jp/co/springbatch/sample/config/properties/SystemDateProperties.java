@@ -10,6 +10,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SystemDateProperties {
+
 	@Value("${sample.system-date}")
     private String systemDate;
+
 }

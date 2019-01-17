@@ -2,3 +2,5 @@
 !/tools/mybatis-generator/
 /tools/mybatis-generator/*
 !/tools/mybatis-generator/generatorConfig.xml
+/log/*
+!/log/.gitkeep
