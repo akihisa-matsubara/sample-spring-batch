@@ -3,9 +3,9 @@ package jp.co.springbatch.sample.common.util;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 import jp.co.springbatch.sample.config.properties.SystemDateProperties;
 

@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import jp.co.springbatch.sample.biz.tasklet.CallRestService;
+import jp.co.springbatch.sample.biz.tasklet.CallSampleRestService;
+import jp.co.springbatch.sample.biz.tasklet.CallSpringBootService;
 import jp.co.springbatch.sample.common.listener.JobExecutionListener;
 
 @Configuration
@@ -24,22 +25,33 @@ public class CallRestServiceJobConfig {
 	public StepBuilderFactory steps;
 
 	@Autowired
-	private CallRestService callRestService;
+	private CallSpringBootService callSpringBootService;
+
+	@Autowired
+	private CallSampleRestService callSampleRestService;
 
 	// tag::jobstep[]
 	@Bean
-	public Job callRestServiceJob(JobExecutionListener listener, Step callRestServiceStep) throws Exception {
+	public Job callRestServiceJob(JobExecutionListener listener, Step callSpringBootServiceStep, Step callSampleRestServiceStep) throws Exception {
 		return jobs.get("callRestServiceJob")
 				.incrementer(new RunIdIncrementer())
 				.listener(listener)
-				.start(callRestServiceStep)
+				.start(callSpringBootServiceStep)
+				.next(callSampleRestServiceStep)
 				.build();
 	}
 
 	@Bean
-	public Step callRestServiceStep() {
-		return steps.get("callRestServiceStep")
-				.tasklet(callRestService)
+	public Step callSpringBootServiceStep() {
+		return steps.get("callSpringBootServiceStep")
+				.tasklet(callSpringBootService)
+				.build();
+	}
+
+	@Bean
+	public Step callSampleRestServiceStep() {
+		return steps.get("callSampleRestServiceStep")
+				.tasklet(callSampleRestService)
 				.build();
 	}
 	// end::jobstep[]

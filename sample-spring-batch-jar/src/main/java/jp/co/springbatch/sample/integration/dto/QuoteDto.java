@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Value {
+public class QuoteDto {
 
-    private Long id;
-    private String quote;
+    private String type;
+    private ValueDto value;
 
 }

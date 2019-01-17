@@ -10,9 +10,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Quote {
+public class CustomerDto {
 
-    private String type;
-    private Value value;
+	private Long id;
+
+	private String name;
+
+	private String address;
+
+	private String tel;
 
 }

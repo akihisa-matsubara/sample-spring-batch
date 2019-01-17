@@ -19,5 +19,9 @@ logging:
 
 ### アプリ設定 ###
 sample:
-  random-spring-boot-quotation-service:
-    uri: http://gturnquist-quoters.cfapps.io/api/random
+  sample-rest-service:
+    base-url: http://localhost:9080/sample-rest-service-webapi/api/v1
+    customers-api: ${sample.sample-rest-service.base-url}/customers
+  spring-boot-service:
+    base-url: http://gturnquist-quoters.cfapps.io/api
+    random-api: ${sample.spring-boot-service.base-url}/random
