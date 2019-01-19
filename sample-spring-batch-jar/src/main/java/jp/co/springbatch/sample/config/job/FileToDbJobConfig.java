@@ -28,13 +28,39 @@ import jp.co.springbatch.sample.data.dto.CustomerFileDto;
 
 @Configuration
 @EnableBatchProcessing
-public class ImportUserJobConfig {
+public class FileToDbJobConfig {
 
 	@Autowired
 	public JobBuilderFactory jobs;
 
 	@Autowired
 	public StepBuilderFactory steps;
+
+	// tag::jobstep[]
+	@Bean
+	public Job fileToDbJob(JobExecutionListener listener, Step importUserStep) {
+		return jobs.get("fileToDbJob")
+				.incrementer(new RunIdIncrementer())
+				.listener(listener)
+				.flow(importUserStep)
+				.end()
+				.build();
+	}
+
+	@Bean
+	public Step importUserStep(JdbcBatchItemWriter<CustomerFileDto> writer) {
+		return steps.get("importUserStep")
+				.<CustomerFileDto, CustomerFileDto> chunk(10)
+				.reader(reader())
+				.processor(processor())
+				.writer(writer)
+				.faultTolerant()
+				.skipLimit(10)
+				.skip(FlatFileParseException.class)
+				.noSkip(IOException.class)
+				.build();
+	}
+	// end::jobstep[]
 
 	// tag::readerwriterprocessor[]
 	@Bean
@@ -66,30 +92,4 @@ public class ImportUserJobConfig {
 				.build();
 	}
 	// end::readerwriterprocessor[]
-
-	// tag::jobstep[]
-	@Bean
-	public Job importUserJob(JobExecutionListener listener, Step importUserStep) {
-		return jobs.get("importUserJob")
-				.incrementer(new RunIdIncrementer())
-				.listener(listener)
-				.flow(importUserStep)
-				.end()
-				.build();
-	}
-
-	@Bean
-	public Step importUserStep(JdbcBatchItemWriter<CustomerFileDto> writer) {
-		return steps.get("importUserStep")
-				.<CustomerFileDto, CustomerFileDto> chunk(10)
-				.reader(reader())
-				.processor(processor())
-				.writer(writer)
-				.faultTolerant()
-				.skipLimit(10)
-				.skip(FlatFileParseException.class)
-				.noSkip(IOException.class)
-				.build();
-	}
-	// end::jobstep[]
 }

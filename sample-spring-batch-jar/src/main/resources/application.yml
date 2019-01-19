@@ -1,6 +1,6 @@
-# 環境設定値（共通）
-# 小文字のkebab caseで定義すること
-### FW設定 ###
+# -----------------------------------------------------------------------------
+# Spring boot configurations
+# -----------------------------------------------------------------------------
 spring:
   batch:
     initialize-schema: never
@@ -10,7 +10,21 @@ spring:
     banner-mode: "off"
     web-application-type: none
 
-### アプリ設定 ###
+# -----------------------------------------------------------------------------
+# Sample Application configurations
+# -----------------------------------------------------------------------------
 sample:
   # yyyyMMdd
   system-date: 
+
+  file:
+    trigger-file:
+      name: SAMPLE.YYYYMMDD.TRG
+
+  service:
+    sample-rest-service:
+      customers-api: ${sample.service.sample-rest-service.base-url}/customers
+
+    spring-boot-service:
+      base-url: http://gturnquist-quoters.cfapps.io/api
+      random-api: ${sample.service.spring-boot-service.base-url}/random

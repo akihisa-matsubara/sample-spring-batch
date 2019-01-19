@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import jp.co.springbatch.sample.biz.tasklet.CallSampleRestServiceTasklet;
-import jp.co.springbatch.sample.biz.tasklet.CallSpringBootServiceTasklet;
+import jp.co.springbatch.sample.biz.tasklet.SampleRestServiceClientTasklet;
+import jp.co.springbatch.sample.biz.tasklet.SpringBootServiceClientTasklet;
 import jp.co.springbatch.sample.common.listener.JobExecutionListener;
 
 @Configuration
@@ -25,10 +25,10 @@ public class CallRestServiceJobConfig {
 	public StepBuilderFactory steps;
 
 	@Autowired
-	private CallSpringBootServiceTasklet callSpringBootServiceTasklet;
+	private SpringBootServiceClientTasklet callSpringBootServiceTasklet;
 
 	@Autowired
-	private CallSampleRestServiceTasklet callSampleRestServiceTasklet;
+	private SampleRestServiceClientTasklet callSampleRestServiceTasklet;
 
 	// tag::jobstep[]
 	@Bean

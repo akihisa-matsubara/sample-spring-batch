@@ -21,8 +21,8 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @MapperScan(basePackages = SecondaryDbConfig.BASE_PACKAGES, sqlSessionTemplateRef = "secondarySqlSessionTemplate")
 public class SecondaryDbConfig {
-	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.entity.secondary";
-	public static final String MAPPER_XML_PATH = "classpath*:jp/co/springbatch/sample/data/entity/secondary/*.xml";
+	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.secondary.entity";
+	public static final String MAPPER_XML_PATH = "classpath*:jp/co/springbatch/sample/data/secondary/mapper/*.xml";
 
 	@Bean
 	@ConfigurationProperties(prefix = "sample.datasource.secondary")
@@ -41,7 +41,7 @@ public class SecondaryDbConfig {
 	}
 
 	@Bean
-	public SqlSessionFactory secondarySqlSessionFactory(@Qualifier("secondaryDataSource") DataSource secondaryDataSource) throws Exception {
+	public SqlSessionFactory secondarySqlSessionFactory(DataSource secondaryDataSource) throws Exception {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
 		bean.setDataSource(secondaryDataSource);
 		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(MAPPER_XML_PATH));

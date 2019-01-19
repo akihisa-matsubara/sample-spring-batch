@@ -14,7 +14,7 @@ import jp.co.springbatch.sample.integration.dto.CustomerDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
 
 @Component
-public class CallSampleRestServiceTasklet implements Tasklet {
+public class SampleRestServiceClientTasklet implements Tasklet {
 
 	@Autowired
 	private SampleRestService service;

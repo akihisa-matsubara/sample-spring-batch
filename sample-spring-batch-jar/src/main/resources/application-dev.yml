@@ -1,7 +1,7 @@
 # 環境設定値（開発）
-### FW設定 ###
-
-### ログ設定 ###
+# -----------------------------------------------------------------------------
+# logging configurations
+# -----------------------------------------------------------------------------
 logging:
   file: log/${spring.batch.job.names}_debug.log
   file.max-size: 20MB
@@ -11,7 +11,10 @@ logging:
     org.springframework.jdbc: debug
     jp.co.springbatch.sample: debug
 
-### アプリ設定 ###
+
+# -----------------------------------------------------------------------------
+# Sample Application configurations
+# -----------------------------------------------------------------------------
 sample:
   system-date: 20190101 # Override
 
@@ -21,22 +24,17 @@ sample:
       url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
       username: db2admin
       password: db2admin
-    # 複数データソース定義する場合の例、名称については"secondary"ではなく理解しやすい名称を付けること
+
     secondary:
       driver-class-name: com.ibm.db2.jcc.DB2Driver
       url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
       username: db2admin
       password: db2admin
-      
-  service:
-    sample-rest-service:
-      base-url: http://localhost:9080/sample-rest-service-webapi/api/v1
-      customers-api: ${sample.service.sample-rest-service.base-url}/customers
-    spring-boot-service:
-      base-url: http://gturnquist-quoters.cfapps.io/api
-      random-api: ${sample.service.spring-boot-service.base-url}/random
 
   file:
     trigger-file:
       path: data/test-outputs
-      name: SAMPLE.YYYYMMDD.TRG
+
+  service:
+    sample-rest-service:
+      base-url: http://localhost:9080/sample-rest-service-webapi/api/v1

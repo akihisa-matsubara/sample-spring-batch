@@ -6,22 +6,24 @@
 		<commentGenerator>
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
-		<jdbcConnection driverClass="com.ibm.db2.jcc.DB2Driver"
-			connectionURL="jdbc:db2://localhost:50000/mydb" userId="db2admin"
+		<jdbcConnection
+			driverClass="com.ibm.db2.jcc.DB2Driver"
+			connectionURL="jdbc:db2://localhost:50000/mydb"
+			userId="db2admin"
 			password="db2admin" />
 		<javaModelGenerator
-			targetPackage="jp.co.springbatch.sample.data.entity"
+			targetPackage="jp.co.springbatch.sample.data.entity.mydb"
 			targetProject="tools/mybatis-generator/">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true"/>
 		</javaModelGenerator>
 		<sqlMapGenerator
-			targetPackage="jp.co.springbatch.sample.data.entity"
+			targetPackage="jp.co.springbatch.sample.data.primary.mapper"
 			targetProject="tools/mybatis-generator/">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<javaClientGenerator
-			targetPackage="jp.co.springbatch.sample.data.entity"
+			targetPackage="jp.co.springbatch.sample.data.primary.mapper"
 			targetProject="tools/mybatis-generator/" type="XMLMAPPER">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
@@ -30,13 +32,12 @@
 			tableName="%"
 			enableInsert="true"
 			enableSelectByPrimaryKey="true"
-			enableSelectByExample="false"
+			enableSelectByExample="true"
 			enableUpdateByPrimaryKey="true"
-			enableUpdateByExample="false"
+			enableUpdateByExample="true"
 			enableDeleteByPrimaryKey="true"
-			enableDeleteByExample="false"
-			enableCountByExample="false"
-			selectByExampleQueryId="false">
+			enableDeleteByExample="true"
+			enableCountByExample="true">
 			<generatedKey column="id" sqlStatement="DB2" identity="true" />
 			<!-- 変換元TABLEにLONG VARCHARフィールドがある場合は、tableタグ内に要定義 -->
 			<!-- <columnOverride column = "LONG_VARCHAR_FIELD" javaType = "java.lang.String" jdbcType = "VARCHAR" /> -->

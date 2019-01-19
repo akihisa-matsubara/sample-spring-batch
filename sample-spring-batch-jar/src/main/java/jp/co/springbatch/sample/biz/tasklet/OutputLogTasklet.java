@@ -10,8 +10,8 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import jp.co.springbatch.sample.data.entity.primary.TbsCustomer;
-import jp.co.springbatch.sample.data.entity.primary.TbsCustomerMapper;
+import jp.co.springbatch.sample.data.primary.entity.TbsCustomer;
+import jp.co.springbatch.sample.data.primary.mapper.TbsCustomerMapper;
 
 @Component
 public class OutputLogTasklet implements Tasklet {

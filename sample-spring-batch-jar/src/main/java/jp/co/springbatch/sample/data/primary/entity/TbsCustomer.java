@@ -1,8 +1,5 @@
-package jp.co.springbatch.sample.data.entity.primary;
+package jp.co.springbatch.sample.data.primary.entity;
 
-import lombok.ToString;
-
-@ToString
 public class TbsCustomer {
     private Integer id;
 

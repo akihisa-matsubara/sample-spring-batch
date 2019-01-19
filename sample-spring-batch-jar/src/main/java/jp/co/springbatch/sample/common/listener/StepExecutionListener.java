@@ -19,7 +19,7 @@ public class StepExecutionListener extends StepExecutionListenerSupport {
 
 	@Override
 	public ExitStatus afterStep(StepExecution stepExecution) {
-		log.info("step result detail. readCount=[{}], writeCount=[{}], commitCount=[{}], rollbackCount=[{}], skipCount=[read=[{}], process=[{}], write=[{}]], filterCount=[{}]",
+		log.info("detailed results of step execution. readCount=[{}], writeCount=[{}], commitCount=[{}], rollbackCount=[{}], skipCount=[read=[{}], process=[{}], write=[{}]], filterCount=[{}]",
 				stepExecution.getReadCount(),
 				stepExecution.getWriteCount(),
 				stepExecution.getCommitCount(),
