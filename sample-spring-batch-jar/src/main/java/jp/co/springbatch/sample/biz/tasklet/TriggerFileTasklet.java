@@ -66,11 +66,11 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
 
 		switch (operation) {
 		case CHECK_SAVE:
-			Assert.isTrue(!Files.exists(Paths.get(filePath, targetFile)), "trigger file exists.");
+			Assert.isTrue(!Files.exists(Paths.get(filePath, targetFile)), "trigger file exists. trigger file=" + filePath + "/" + targetFile);
 			break;
 
 		case CHECK_DELETE:
-			Assert.isTrue(Files.exists(Paths.get(filePath, targetFile)), "trigger file does not exists.");
+			Assert.isTrue(Files.exists(Paths.get(filePath, targetFile)), "trigger file does not exists. trigger file=" + filePath + "/" + targetFile);
 			break;
 
 		default:

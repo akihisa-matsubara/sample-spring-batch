@@ -20,13 +20,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import com.zaxxer.hikari.HikariDataSource;
 
-import jp.co.springbatch.sample.common.code.ScopeVo;
+import jp.co.springbatch.sample.common.constant.ScopeCode;
 
-@Scope(ScopeVo.SINGLETON)
+@Scope(ScopeCode.SINGLETON)
 @Configuration
 @MapperScan(basePackages = PrimaryDbConfig.BASE_PACKAGES, sqlSessionTemplateRef = "primarySqlSessionTemplate")
 public class PrimaryDbConfig {
-	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.primary.entity";
+
+	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.primary.repository";
 	public static final String MAPPER_XML_PATH = "classpath*:jp/co/springbatch/sample/data/primary/repository/*.xml";
 
 	@Bean
@@ -60,4 +61,5 @@ public class PrimaryDbConfig {
 			@Qualifier("primarySqlSessionFactory") SqlSessionFactory primarySqlSessionFactory) throws Exception {
 		return new SqlSessionTemplate(primarySqlSessionFactory, ExecutorType.BATCH);
 	}
+
 }

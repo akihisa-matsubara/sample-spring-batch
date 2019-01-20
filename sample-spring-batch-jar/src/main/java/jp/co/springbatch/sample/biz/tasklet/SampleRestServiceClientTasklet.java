@@ -1,5 +1,7 @@
 package jp.co.springbatch.sample.biz.tasklet;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import jp.co.springbatch.sample.common.code.ScopeVo;
+import jp.co.springbatch.sample.common.constant.ScopeCode;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
 
-@Scope(ScopeVo.SINGLETON)
+@Scope(ScopeCode.SINGLETON)
 @Component
 public class SampleRestServiceClientTasklet implements Tasklet {
 
@@ -29,7 +31,7 @@ public class SampleRestServiceClientTasklet implements Tasklet {
 		List<CustomerDto> customers = getCustomers();
 
 		if (0 < customers.size()) {
-			getCustomer(customers.get(0).getId().toString());
+			getCustomer(customers.get(0).getCustomerNo());
 		}
 
 		// 2件INSERT→UPDATE→DELETE ※GET時にPKでOrderされていることが前提
@@ -46,26 +48,40 @@ public class SampleRestServiceClientTasklet implements Tasklet {
 		return service.getCustomers();
 	}
 
-	private CustomerDto getCustomer(String id) {
-		return service.getCustomer(id);
+	private CustomerDto getCustomer(String customerNo) {
+		return service.getCustomer(customerNo);
 	}
 
 	private void createCustomers() {
-		List<CustomerDto> newCustomers = new ArrayList<>();
-		CustomerDto newCustomer1 = new CustomerDto();
-		newCustomer1.setName("sample1");
-		newCustomer1.setAddress("address1");
-		newCustomer1.setTel("tel1");
-		newCustomers.add(newCustomer1);
+		try {
+			List<CustomerDto> newCustomers = new ArrayList<>();
+			CustomerDto newCustomer1 = new CustomerDto();
+			newCustomer1.setNameKanji("さんぷるばっち１");
+			newCustomer1.setNameKana("サンプルバッチイチ");
+			newCustomer1.setGender("1");
+			newCustomer1.setBirthday(new SimpleDateFormat("yyyyMMdd").parse("19800505"));
+//			newCustomer1.setBirthday("1980-05-05");
+			newCustomer1.setAddressZip("9999999");
+			newCustomer1.setAddress("埼玉県さんぷる");
+			newCustomers.add(newCustomer1);
 
-		CustomerDto newCustomer2 = new CustomerDto();
-		newCustomer2.setName("sample2");
-		newCustomer2.setAddress("address2");
-		newCustomer2.setTel("tel2");
-		newCustomers.add(newCustomer2);
+			CustomerDto newCustomer2 = new CustomerDto();
+			newCustomer2.setNameKanji("さんぷるばっち２");
+			newCustomer2.setNameKana("サンプルバッチニ");
+			newCustomer2.setGender("2");
+			newCustomer2.setBirthday(new SimpleDateFormat("yyyyMMdd").parse("19831111"));
+//			newCustomer2.setBirthday("1983-11-11");
+			newCustomer2.setAddressZip("9999999");
+			newCustomer2.setAddress("埼玉県さんぷる");
+			newCustomers.add(newCustomer2);
 
-		// createCustomers
-		service.createCustomers(newCustomers);
+			// createCustomers
+			service.createCustomers(newCustomers);
+
+		} catch (ParseException pex) {
+			throw new RuntimeException(pex);
+
+		}
 	}
 
 	private void updateCustomers() {
@@ -75,13 +91,13 @@ public class SampleRestServiceClientTasklet implements Tasklet {
 		List<CustomerDto> updateCustomers = new ArrayList<>();
 
 		CustomerDto updateCustomer1 = customers.get(customers.size() - 2);
+		updateCustomer1.setAddressZip("UPDATE");
 		updateCustomer1.setAddress("UPDATE");
-		updateCustomer1.setTel("UPDATE");
 		updateCustomers.add(updateCustomer1);
 
 		CustomerDto updateCustomer2 = customers.get(customers.size() - 1);
+		updateCustomer2.setAddressZip("UPDATE");
 		updateCustomer2.setAddress("UPDATE");
-		updateCustomer2.setTel("UPDATE");
 		updateCustomers.add(updateCustomer2);
 
 		// updateCustomers
@@ -93,7 +109,7 @@ public class SampleRestServiceClientTasklet implements Tasklet {
 		List<CustomerDto> customers = service.getCustomers();
 
 		// deleteCustomers
-		service.deleteCustomer(customers.get(customers.size() - 2).getId().toString());
-		service.deleteCustomer(customers.get(customers.size() - 1).getId().toString());
+		service.deleteCustomer(customers.get(customers.size() - 2).getCustomerNo());
+		service.deleteCustomer(customers.get(customers.size() - 1).getCustomerNo());
 	}
 }

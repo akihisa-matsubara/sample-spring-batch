@@ -24,15 +24,15 @@ import org.springframework.core.io.FileSystemResource;
 
 import jp.co.springbatch.sample.biz.processor.PostCodeItemProcessor;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
-import jp.co.springbatch.sample.common.code.EncodingVo;
 import jp.co.springbatch.sample.common.code.FileOperationVo;
-import jp.co.springbatch.sample.common.code.ScopeVo;
+import jp.co.springbatch.sample.common.constant.EncodingCode;
+import jp.co.springbatch.sample.common.constant.ScopeCode;
 import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
 import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
 import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
 
-@Scope(ScopeVo.SINGLETON)
+@Scope(ScopeCode.SINGLETON)
 @Configuration
 @EnableBatchProcessing
 public class FileToDbJobConfig {
@@ -129,7 +129,7 @@ public class FileToDbJobConfig {
 				.delimited()
 				.delimiter(",")
 				.names(PostCodeFileDto.FIELD)
-				.encoding(EncodingVo.MS932)
+				.encoding(EncodingCode.MS932)
 				.fieldSetMapper(new BeanWrapperFieldSetMapper<PostCodeFileDto>() {
 					{
 						setTargetType(PostCodeFileDto.class);

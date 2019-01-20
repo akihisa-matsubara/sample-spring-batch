@@ -25,14 +25,15 @@ import jp.co.springbatch.sample.biz.callback.WriteFooterFlatFileCallback;
 import jp.co.springbatch.sample.biz.callback.WriteHeaderFlatFileCallback;
 import jp.co.springbatch.sample.biz.processor.CustomerFamilyItemProcessor;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
-import jp.co.springbatch.sample.common.code.EncodingVo;
 import jp.co.springbatch.sample.common.code.FileOperationVo;
-import jp.co.springbatch.sample.common.code.ScopeVo;
+import jp.co.springbatch.sample.common.constant.EncodingCode;
+import jp.co.springbatch.sample.common.constant.ScopeCode;
 import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
+import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
 import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
 
-@Scope(ScopeVo.SINGLETON)
+@Scope(ScopeCode.SINGLETON)
 @Configuration
 @EnableBatchProcessing
 public class DbToFileJobConfig {
@@ -86,16 +87,17 @@ public class DbToFileJobConfig {
 	}
 
 	@Bean
-	public Step dbToFileStep(FlatFileItemWriter<CustomerFamilyFileDto> dbToFileItemWriter, SqlSessionFactory primarySqlSessionFactory) {
+	public Step dbToFileStep(SqlSessionFactory primarySqlSessionFactory, SampleStepExecutionListener stepExecutionListener) {
 		return steps.get("dbToFileStep")
 				.<CustomerFamilyEntity, CustomerFamilyFileDto> chunk(10)
 				.reader(dbToFileItemReader(primarySqlSessionFactory))
 				.processor(dbToFileItemProcessor())
-				.writer(dbToFileItemWriter)
+				.writer(dbToFileItemWriter())
 				.faultTolerant()
 				.skipLimit(10)
 				.skip(FlatFileParseException.class)
 				.noSkip(IOException.class)
+				.listener(stepExecutionListener)
 				.build();
 	}
 
@@ -146,7 +148,7 @@ public class DbToFileJobConfig {
 				.delimited()
 				.delimiter(",")
 				.names(CustomerFamilyFileDto.FIELD)
-				.encoding(EncodingVo.MS932)
+				.encoding(EncodingCode.MS932)
 				.headerCallback(writeHeaderFlatFileCallback)
 				.footerCallback(writeFooterFlatFileCallback)
 				.build();

@@ -39,7 +39,7 @@
 			enableDeleteByExample="true"
 			enableCountByExample="true">
 			<generatedKey column="id" sqlStatement="DB2" identity="true" />
-			<!-- 変換元TABLEにLONG VARCHARフィールドがある場合は、tableタグ内に要定義 -->
+			<!-- 変換元TABLEにLONG VARCHARフィールドがある場合は、tableタグ内に定義が必要 -->
 			<!-- <columnOverride column = "LONG_VARCHAR_FIELD" javaType = "java.lang.String" jdbcType = "VARCHAR" /> -->
 		</table>
 	</context>

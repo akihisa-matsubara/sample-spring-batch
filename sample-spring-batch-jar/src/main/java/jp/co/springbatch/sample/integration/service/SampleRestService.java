@@ -5,6 +5,7 @@ import java.util.List;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 
 public interface SampleRestService {
+
 	CustomerDto getCustomer(String id);
 
 	List<CustomerDto> getCustomers();
@@ -14,4 +15,5 @@ public interface SampleRestService {
 	int updateCustomers(List<CustomerDto> customers);
 
 	void deleteCustomer(String id);
+
 }

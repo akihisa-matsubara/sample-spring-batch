@@ -10,12 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import jp.co.springbatch.sample.common.code.ScopeVo;
+import jp.co.springbatch.sample.common.constant.ScopeCode;
 import jp.co.springbatch.sample.config.properties.SystemDateProperties;
 
-@Scope(ScopeVo.SINGLETON)
+@Scope(ScopeCode.SINGLETON)
 @Component
 public class SampleDateUtils {
+
 	private static final SimpleDateFormat DATE_FORMAT_YYYYMMDD = new SimpleDateFormat("yyyyMMdd");
 	private static final SimpleDateFormat DATE_FORMAT_HHMMSS = new SimpleDateFormat("HHmmss");
 	private static final DateTimeFormatter DATE_TIME_FOMAT_YYYYMMDDHHMMSS = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
@@ -39,4 +40,5 @@ public class SampleDateUtils {
 	public static String getDateString(Date date) {
 		return date == null ? "" : DATE_FORMAT_YYYYMMDD.format(date);
 	}
+
 }

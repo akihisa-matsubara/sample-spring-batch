@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class CustomerFamilyFileDto {
+
 	public static final String[] FIELD = new String[] {
 			"customerNo",
 			"customerNameKanji",

@@ -1,5 +1,7 @@
 package jp.co.springbatch.sample.integration.dto;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -13,12 +15,19 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerDto {
 
-	private Long id;
+	private String customerNo;
 
-	private String name;
+	private String nameKanji;
+
+	private String nameKana;
+
+	private String gender;
+
+//	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date birthday;
+
+	private String addressZip;
 
 	private String address;
-
-	private String tel;
 
 }

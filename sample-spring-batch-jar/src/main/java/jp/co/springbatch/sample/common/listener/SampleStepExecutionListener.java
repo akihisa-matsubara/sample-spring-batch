@@ -8,9 +8,9 @@ import org.springframework.batch.core.listener.StepExecutionListenerSupport;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import jp.co.springbatch.sample.common.code.ScopeVo;
+import jp.co.springbatch.sample.common.constant.ScopeCode;
 
-@Scope(ScopeVo.SINGLETON)
+@Scope(ScopeCode.SINGLETON)
 @Component
 public class SampleStepExecutionListener extends StepExecutionListenerSupport {
 
@@ -35,4 +35,5 @@ public class SampleStepExecutionListener extends StepExecutionListenerSupport {
 				stepExecution.getFilterCount());
 		return stepExecution.getExitStatus();
 	}
+
 }

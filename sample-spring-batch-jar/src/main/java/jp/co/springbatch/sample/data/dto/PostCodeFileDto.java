@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class PostCodeFileDto {
+
 	public static final String[] FIELD = new String[] {
 			"postCode",
 			"prefectureNameKana",

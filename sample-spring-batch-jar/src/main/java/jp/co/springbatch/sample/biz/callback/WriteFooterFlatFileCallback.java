@@ -7,9 +7,9 @@ import org.springframework.batch.item.file.FlatFileFooterCallback;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import jp.co.springbatch.sample.common.code.ScopeVo;
+import jp.co.springbatch.sample.common.constant.ScopeCode;
 
-@Scope(ScopeVo.SINGLETON)
+@Scope(ScopeCode.SINGLETON)
 @Component
 public class WriteFooterFlatFileCallback implements FlatFileFooterCallback {
 

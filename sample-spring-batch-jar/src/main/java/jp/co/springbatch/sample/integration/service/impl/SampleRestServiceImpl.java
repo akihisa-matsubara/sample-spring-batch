@@ -18,11 +18,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import jp.co.springbatch.sample.common.code.ScopeVo;
+import jp.co.springbatch.sample.common.constant.ScopeCode;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
 
-@Scope(ScopeVo.SINGLETON)
+@Scope(ScopeCode.SINGLETON)
 @Service
 public class SampleRestServiceImpl implements SampleRestService {
 
@@ -63,8 +63,8 @@ public class SampleRestServiceImpl implements SampleRestService {
 	 */
 
 	@Override
-	public CustomerDto getCustomer(String id) {
-		ResponseEntity<CustomerDto> response = restTemplate.getForEntity(url + "/{customerId}", CustomerDto.class, id);
+	public CustomerDto getCustomer(String customerNo) {
+		ResponseEntity<CustomerDto> response = restTemplate.getForEntity(url + "/{customerNo}", CustomerDto.class, customerNo);
 		log.info("SampleRestService get customer response: httpStatus=[{}], customer=[{}]", response.getStatusCode(), response.getBody());
 		return response.getBody();
 	}
@@ -83,9 +83,11 @@ public class SampleRestServiceImpl implements SampleRestService {
 		RequestEntity<List<CustomerDto>> requestEntity = null;
 		try {
 			requestEntity = RequestEntity.post(new URI(url)).contentType(MediaType.APPLICATION_JSON).body(customers);
+
 		} catch (URISyntaxException use) {
 			log.error(ExceptionUtils.getStackTrace(use));
 			throw new RuntimeException(use);
+
 		}
 
 		ResponseEntity<Object> response = restTemplate.exchange(requestEntity, Object.class);
@@ -97,9 +99,11 @@ public class SampleRestServiceImpl implements SampleRestService {
 		RequestEntity<List<CustomerDto>> requestEntity = null;
 		try {
 			requestEntity = RequestEntity.put(new URI(url)).contentType(MediaType.APPLICATION_JSON).body(customers);
+
 		} catch (URISyntaxException use) {
 			log.error(ExceptionUtils.getStackTrace(use));
 			throw new RuntimeException(use);
+
 		}
 
 		ResponseEntity<Integer> response = restTemplate.exchange(requestEntity, Integer.class);
@@ -107,13 +111,13 @@ public class SampleRestServiceImpl implements SampleRestService {
 				response.getStatusCode(),
 				response.getBody(), customers);
 
-		return 0;
+		return response.getBody();
 	}
 
 	@Override
-	public void deleteCustomer(String id) {
-		restTemplate.delete(url + "/{customerId}", id);
-		log.info("SampleRestService delete customer response: customerId=[{}]", id);
+	public void deleteCustomer(String customerNo) {
+		restTemplate.delete(url + "/{customerNo}", customerNo);
+		log.info("SampleRestService delete customer response: customerNo=[{}]", customerNo);
 	}
 
 }

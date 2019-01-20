@@ -8,6 +8,7 @@ logging:
   file.max-history: 0
   level:
 #    root: debug
+    org.springframework.web.client.RestTemplate: debug
     org.springframework.jdbc: debug
     jp.co.springbatch.sample: debug
 
@@ -38,13 +39,13 @@ sample:
       data-file:
         path: data/test-outputs
       trigger-file:
-        path: data/test-inputs
+        path: data/test-outputs
 
     file-to-db:
       data-file:
         path: data/test-inputs
       trigger-file:
-        path: data/test-outputs
+        path: data/test-inputs
 
   service:
     sample-rest-service:

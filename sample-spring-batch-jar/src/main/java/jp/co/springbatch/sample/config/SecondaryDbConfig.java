@@ -19,13 +19,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import com.zaxxer.hikari.HikariDataSource;
 
-import jp.co.springbatch.sample.common.code.ScopeVo;
+import jp.co.springbatch.sample.common.constant.ScopeCode;
 
-@Scope(ScopeVo.SINGLETON)
+@Scope(ScopeCode.SINGLETON)
 @Configuration
 @MapperScan(basePackages = SecondaryDbConfig.BASE_PACKAGES, sqlSessionTemplateRef = "secondarySqlSessionTemplate")
 public class SecondaryDbConfig {
-	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.secondary.entity";
+
+	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.secondary.repository";
 	public static final String MAPPER_XML_PATH = "classpath*:jp/co/springbatch/sample/data/secondary/repository/*.xml";
 
 	@Bean
@@ -57,4 +58,5 @@ public class SecondaryDbConfig {
 			@Qualifier("secondarySqlSessionFactory") SqlSessionFactory secondarySqlSessionFactory) throws Exception {
 		return new SqlSessionTemplate(secondarySqlSessionFactory, ExecutorType.BATCH);
 	}
+
 }
