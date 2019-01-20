@@ -13,9 +13,9 @@ import jp.co.springbatch.sample.common.code.ScopeVo;
 
 @Scope(ScopeVo.SINGLETON)
 @Component
-public class JobExecutionListener extends JobExecutionListenerSupport {
+public class SampleJobExecutionListener extends JobExecutionListenerSupport {
 
-	private static final Logger log = LoggerFactory.getLogger(JobExecutionListener.class);
+	private static final Logger log = LoggerFactory.getLogger(SampleJobExecutionListener.class);
 	private static final SimpleDateFormat DATE_TIMESTAMP_MILLISEC = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
 	@Override

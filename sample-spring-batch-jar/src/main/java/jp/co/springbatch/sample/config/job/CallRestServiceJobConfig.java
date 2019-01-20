@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Scope;
 import jp.co.springbatch.sample.biz.tasklet.SampleRestServiceClientTasklet;
 import jp.co.springbatch.sample.biz.tasklet.SpringBootServiceClientTasklet;
 import jp.co.springbatch.sample.common.code.ScopeVo;
-import jp.co.springbatch.sample.common.listener.JobExecutionListener;
+import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
 
 @Scope(ScopeVo.SINGLETON)
 @Configuration
@@ -22,10 +22,10 @@ import jp.co.springbatch.sample.common.listener.JobExecutionListener;
 public class CallRestServiceJobConfig {
 
 	@Autowired
-	public JobBuilderFactory jobs;
+	private JobBuilderFactory jobs;
 
 	@Autowired
-	public StepBuilderFactory steps;
+	private StepBuilderFactory steps;
 
 	@Autowired
 	private SpringBootServiceClientTasklet callSpringBootServiceTasklet;
@@ -35,10 +35,12 @@ public class CallRestServiceJobConfig {
 
 	/** job configurations */
 	@Bean
-	public Job callRestServiceJob(JobExecutionListener listener, Step callSpringBootServiceStep, Step callSampleRestServiceStep) throws Exception {
+	public Job callRestServiceJob(SampleJobExecutionListener jobExecutionListener,
+			Step callSpringBootServiceStep,
+			Step callSampleRestServiceStep) throws Exception {
 		return jobs.get("callRestServiceJob")
 				.incrementer(new RunIdIncrementer())
-				.listener(listener)
+				.listener(jobExecutionListener)
 				.start(callSpringBootServiceStep)
 				.next(callSampleRestServiceStep)
 				.build();

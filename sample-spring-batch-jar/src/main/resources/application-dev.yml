@@ -35,6 +35,9 @@ sample:
     db-to-file:
       path: data/test-outputs/dbToFile.csv
 
+    file-to-db:
+      path: data/test-inputs/fileToDb.csv
+
     trigger-file:
       path: data/test-outputs
 

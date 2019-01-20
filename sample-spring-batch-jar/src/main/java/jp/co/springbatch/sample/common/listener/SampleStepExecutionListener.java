@@ -12,9 +12,9 @@ import jp.co.springbatch.sample.common.code.ScopeVo;
 
 @Scope(ScopeVo.SINGLETON)
 @Component
-public class StepExecutionListener extends StepExecutionListenerSupport {
+public class SampleStepExecutionListener extends StepExecutionListenerSupport {
 
-	private static final Logger log = LoggerFactory.getLogger(StepExecutionListener.class);
+	private static final Logger log = LoggerFactory.getLogger(SampleStepExecutionListener.class);
 
 	@Override
 	public void beforeStep(StepExecution stepExecution) {

@@ -21,12 +21,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 
+import jp.co.springbatch.sample.biz.callback.WriteFooterFlatFileCallback;
+import jp.co.springbatch.sample.biz.callback.WriteHeaderFlatFileCallback;
 import jp.co.springbatch.sample.biz.processor.CustomerFamilyItemProcessor;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
 import jp.co.springbatch.sample.common.code.EncodingVo;
 import jp.co.springbatch.sample.common.code.FileOperationVo;
 import jp.co.springbatch.sample.common.code.ScopeVo;
-import jp.co.springbatch.sample.common.listener.JobExecutionListener;
+import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
 import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
 import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
 
@@ -36,10 +38,16 @@ import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
 public class DbToFileJobConfig {
 
 	@Autowired
-	public JobBuilderFactory jobs;
+	private JobBuilderFactory jobs;
 
 	@Autowired
-	public StepBuilderFactory steps;
+	private StepBuilderFactory steps;
+
+	@Autowired
+	private WriteHeaderFlatFileCallback writeHeaderFlatFileCallback;
+
+	@Autowired
+	private WriteFooterFlatFileCallback writeFooterFlatFileCallback;
 
 	@Value("${sample.file.db-to-file.path}")
 	private String dbToFilePath;
@@ -52,14 +60,14 @@ public class DbToFileJobConfig {
 
 	/** job configurations */
 	@Bean
-	public Job dbToFileJob(JobExecutionListener listener,
-			Step dbToFileCheckTriggerFileTasklet,
+	public Job dbToFileJob(SampleJobExecutionListener jobExecutionListener,
+			Step dbToFileCheckTriggerFileStep,
 			Step dbToFileStep,
 			Step dbToFileOutputTriggerFileStep) throws Exception {
 		return jobs.get("dbToFileJob")
 				.incrementer(new RunIdIncrementer())
-				.listener(listener)
-				.start(dbToFileCheckTriggerFileTasklet)
+				.listener(jobExecutionListener)
+				.start(dbToFileCheckTriggerFileStep)
 				.next(dbToFileStep)
 				.on(ExitStatus.COMPLETED.getExitCode()).to(dbToFileOutputTriggerFileStep)
 				.end()
@@ -67,6 +75,13 @@ public class DbToFileJobConfig {
 	}
 
 	/** step configurations */
+	@Bean
+	public Step dbToFileCheckTriggerFileStep() {
+		return steps.get("dbToFileCheckTriggerFileStep")
+				.tasklet(dbToFileCheckTriggerFileTasklet())
+				.build();
+	}
+
 	@Bean
 	public Step dbToFileStep(FlatFileItemWriter<CustomerFamilyFileDto> dbToFileItemWriter, SqlSessionFactory primarySqlSessionFactory) {
 		return steps.get("dbToFileStep")
@@ -82,19 +97,19 @@ public class DbToFileJobConfig {
 	}
 
 	@Bean
+	public Step dbToFileOutputTriggerFileStep() {
+		return steps.get("dbToFileOutputTriggerFileStep")
+				.tasklet(dbToFileOutputTriggerFileTasklet())
+				.build();
+	}
+
+	@Bean
 	public TriggerFileTasklet dbToFileCheckTriggerFileTasklet() {
 		TriggerFileTasklet tasklet = new TriggerFileTasklet();
 		tasklet.setOperation(FileOperationVo.CHECK_SAVE);
 		tasklet.setFilePath(triggerFilePath);
 		tasklet.setFileName(triggerFileName);
 		return tasklet;
-	}
-
-	@Bean
-	public Step dbToFileOutputTriggerFileStep() {
-		return steps.get("dbToFileOutputTriggerFileStep")
-				.tasklet(dbToFileOutputTriggerFileTasklet())
-				.build();
 	}
 
 	@Bean
@@ -129,6 +144,8 @@ public class DbToFileJobConfig {
 				.delimiter(",")
 				.names(CustomerFamilyFileDto.FIELD)
 				.encoding(EncodingVo.MS932)
+				.headerCallback(writeHeaderFlatFileCallback)
+				.footerCallback(writeFooterFlatFileCallback)
 				.build();
 	}
 }
