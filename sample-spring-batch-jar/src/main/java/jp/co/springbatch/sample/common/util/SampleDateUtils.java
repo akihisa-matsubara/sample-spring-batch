@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import jp.co.springbatch.sample.common.config.properties.SystemDateProperties;
 import jp.co.springbatch.sample.common.constant.ScopeCode;
-import jp.co.springbatch.sample.config.properties.SystemDateProperties;
 
 @Scope(ScopeCode.SINGLETON)
 @Component

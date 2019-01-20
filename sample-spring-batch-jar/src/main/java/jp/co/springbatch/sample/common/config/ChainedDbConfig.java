@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.config;
+package jp.co.springbatch.sample.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

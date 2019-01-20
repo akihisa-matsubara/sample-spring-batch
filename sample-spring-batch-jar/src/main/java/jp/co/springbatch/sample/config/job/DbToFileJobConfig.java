@@ -21,9 +21,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 
-import jp.co.springbatch.sample.biz.callback.WriteFooterFlatFileCallback;
-import jp.co.springbatch.sample.biz.callback.WriteHeaderFlatFileCallback;
-import jp.co.springbatch.sample.biz.processor.CustomerFamilyItemProcessor;
+import jp.co.springbatch.sample.biz.chunk.processor.CustomerFamilyItemProcessor;
+import jp.co.springbatch.sample.biz.chunk.writer.callback.WriteFooterFlatFileCallback;
+import jp.co.springbatch.sample.biz.chunk.writer.callback.WriteHeaderFlatFileCallback;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
 import jp.co.springbatch.sample.common.code.FileOperationVo;
 import jp.co.springbatch.sample.common.constant.EncodingCode;

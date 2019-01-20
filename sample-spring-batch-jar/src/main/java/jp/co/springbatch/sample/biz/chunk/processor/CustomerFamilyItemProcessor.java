@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.biz.processor;
+package jp.co.springbatch.sample.biz.chunk.processor;
 
 import org.springframework.batch.item.ItemProcessor;
 

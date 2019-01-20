@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.config;
+package jp.co.springbatch.sample.common.config;
 
 import javax.sql.DataSource;
 
@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
@@ -23,40 +24,42 @@ import jp.co.springbatch.sample.common.constant.ScopeCode;
 
 @Scope(ScopeCode.SINGLETON)
 @Configuration
-@MapperScan(basePackages = SecondaryDbConfig.BASE_PACKAGES, sqlSessionTemplateRef = "secondarySqlSessionTemplate")
-public class SecondaryDbConfig {
+@MapperScan(basePackages = PrimaryDbConfig.BASE_PACKAGES, sqlSessionTemplateRef = "primarySqlSessionTemplate")
+public class PrimaryDbConfig {
 
-	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.secondary.repository";
-	public static final String MAPPER_XML_PATH = "classpath*:jp/co/springbatch/sample/data/secondary/repository/*.xml";
+	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.primary.repository";
+	public static final String MAPPER_XML_PATH = "classpath*:jp/co/springbatch/sample/data/primary/repository/*.xml";
 
 	@Bean
-	@ConfigurationProperties(prefix = "sample.datasource.secondary")
-	public DataSourceProperties secondaryDataSourceProperties() {
+	@Primary
+	@ConfigurationProperties(prefix = "sample.datasource.primary")
+	public DataSourceProperties primaryDataSourceProperties() {
 		return new DataSourceProperties();
 	}
 
 	@Bean
-	public HikariDataSource secondaryDataSource() {
-		return secondaryDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
+	@Primary
+	public HikariDataSource primaryDataSource() {
+		return primaryDataSourceProperties().initializeDataSourceBuilder().type(HikariDataSource.class).build();
 	}
 
 	@Bean
-	public PlatformTransactionManager secondaryTxManager(DataSource secondaryDataSource) {
-		return new DataSourceTransactionManager(secondaryDataSource);
+	public PlatformTransactionManager primaryTxManager(DataSource primaryDataSource) {
+		return new DataSourceTransactionManager(primaryDataSource);
 	}
 
 	@Bean
-	public SqlSessionFactory secondarySqlSessionFactory(DataSource secondaryDataSource) throws Exception {
+	public SqlSessionFactory primarySqlSessionFactory(DataSource primaryDataSource) throws Exception {
 		SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-		bean.setDataSource(secondaryDataSource);
+		bean.setDataSource(primaryDataSource);
 		bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(MAPPER_XML_PATH));
 		return (SqlSessionFactory) bean.getObject();
 	}
 
 	@Bean
-	public SqlSessionTemplate secondarySqlSessionTemplate(
-			@Qualifier("secondarySqlSessionFactory") SqlSessionFactory secondarySqlSessionFactory) throws Exception {
-		return new SqlSessionTemplate(secondarySqlSessionFactory, ExecutorType.BATCH);
+	public SqlSessionTemplate primarySqlSessionTemplate(
+			@Qualifier("primarySqlSessionFactory") SqlSessionFactory primarySqlSessionFactory) throws Exception {
+		return new SqlSessionTemplate(primarySqlSessionFactory, ExecutorType.BATCH);
 	}
 
 }

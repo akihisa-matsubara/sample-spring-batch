@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.biz.callback;
+package jp.co.springbatch.sample.biz.chunk.writer.callback;
 
 import java.io.IOException;
 import java.io.Writer;

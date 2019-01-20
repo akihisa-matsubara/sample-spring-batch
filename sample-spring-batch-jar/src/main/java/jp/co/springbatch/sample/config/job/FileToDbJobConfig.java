@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import jp.co.springbatch.sample.biz.processor.PostCodeItemProcessor;
+import jp.co.springbatch.sample.biz.chunk.processor.PostCodeItemProcessor;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
 import jp.co.springbatch.sample.common.code.FileOperationVo;
 import jp.co.springbatch.sample.common.constant.EncodingCode;

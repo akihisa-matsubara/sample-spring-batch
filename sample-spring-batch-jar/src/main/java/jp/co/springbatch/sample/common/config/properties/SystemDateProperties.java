@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.config.properties;
+package jp.co.springbatch.sample.common.config.properties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
