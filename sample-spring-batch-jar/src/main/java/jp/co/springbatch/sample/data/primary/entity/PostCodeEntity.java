@@ -1,5 +1,6 @@
 package jp.co.springbatch.sample.data.primary.entity;
 
+import jp.co.springbatch.sample.common.data.entity.DbBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

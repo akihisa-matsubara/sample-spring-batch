@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.common.config;
+package jp.co.springbatch.sample.config.database;
 
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.explore.JobExplorer;

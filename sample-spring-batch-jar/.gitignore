@@ -3,6 +3,3 @@
 /log/*
 !/log/.gitkeep
 /target/
-!/tools/mybatis-generator/
-/tools/mybatis-generator/*
-!/tools/mybatis-generator/generatorConfig.xml

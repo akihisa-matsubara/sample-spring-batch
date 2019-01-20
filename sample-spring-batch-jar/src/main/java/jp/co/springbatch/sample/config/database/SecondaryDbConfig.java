@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.common.config;
+package jp.co.springbatch.sample.config.database;
 
 import javax.sql.DataSource;
 

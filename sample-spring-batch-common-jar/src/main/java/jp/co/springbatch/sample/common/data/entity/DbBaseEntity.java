@@ -1,4 +1,4 @@
-package jp.co.springbatch.sample.data.primary.entity;
+package jp.co.springbatch.sample.common.data.entity;
 
 import java.time.LocalDateTime;
 

@@ -17,7 +17,8 @@ logging:
 # Sample Application configurations
 # -----------------------------------------------------------------------------
 sample:
-  system-date: 20190101 # Override
+  common:
+    system-date: 20190101 # Override
 
   datasource:
     # encoding UTF-8 (default)

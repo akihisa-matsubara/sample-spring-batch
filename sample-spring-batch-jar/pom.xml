@@ -4,16 +4,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>jp.co.springbatch.sample</groupId>
 	<artifactId>sample-spring-batch-jar</artifactId>
-	<version>1.0.0</version>
 	<name>sample-spring-batch-jar</name>
 	<packaging>jar</packaging>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.2.RELEASE</version>
+		<groupId>jp.co.springbatch.sample</groupId>
+		<artifactId>sample-spring-batch-parent</artifactId>
+		<version>1.0.0</version>
 	</parent>
 
 	<properties>
@@ -26,52 +24,10 @@
 	</properties>
 
 	<dependencies>
-		<!-- Spring Boot -->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-batch</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<!-- for Rest Client -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<!-- for multiple -->
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-commons</artifactId>
-		</dependency>
-
-		<!-- Spring Boot devtools (not used in batch) -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<!-- MyBatis -->
-		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>1.3.2</version>
-		</dependency>
-
-		<!-- OSS Library -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-		</dependency>
-
-		<!-- provided scope -->
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
+			<groupId>jp.co.springbatch.sample</groupId>
+			<artifactId>sample-spring-batch-common-jar</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 
 		<!-- system scope -->
@@ -80,22 +36,9 @@
 			<artifactId>db2jcc4</artifactId>
 			<version>11.1</version>
 			<scope>system</scope>
-			<systemPath>${basedir}/lib/db2jcc4.jar</systemPath>
-		</dependency>
-
-		<!-- test scope -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.batch</groupId>
-			<artifactId>spring-batch-test</artifactId>
-			<scope>test</scope>
+			<systemPath>${basedir}/../lib/db2jcc4.jar</systemPath>
 		</dependency>
 	</dependencies>
-
 
 	<build>
 		<finalName>sample-spring-batch</finalName>
@@ -107,11 +50,6 @@
 					<!-- include system scope jar -->
 					<includeSystemScope>true</includeSystemScope>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.mybatis.generator</groupId>
-				<artifactId>mybatis-generator-maven-plugin</artifactId>
-				<version>1.3.7</version>
 			</plugin>
 		</plugins>
 	</build>
