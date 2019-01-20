@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import lombok.Data;
 
+// sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @Data
 public class DbBaseEntity {
 

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+// sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

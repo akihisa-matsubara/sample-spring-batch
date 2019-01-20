@@ -8,6 +8,7 @@ import jp.co.springbatch.sample.common.code.ScopeVo;
 import lombok.Getter;
 import lombok.Setter;
 
+// sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @Scope(ScopeVo.SINGLETON)
 @Component
 @Getter

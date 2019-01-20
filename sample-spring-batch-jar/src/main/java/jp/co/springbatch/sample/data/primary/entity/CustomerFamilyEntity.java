@@ -4,6 +4,7 @@ import java.util.Date;
 
 import lombok.Data;
 
+// sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @Data
 public class CustomerFamilyEntity {
 
