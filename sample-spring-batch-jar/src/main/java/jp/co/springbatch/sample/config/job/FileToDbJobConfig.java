@@ -84,7 +84,7 @@ public class FileToDbJobConfig {
 	public Step fileToDbStep(PlatformTransactionManager primaryTxManager,
 			SqlSessionFactory primarySqlSessionFactory,
 			SampleStepExecutionListener stepExecutionListener) {
-		return steps.get("importUserStep")
+		return steps.get("fileToDbStep")
 				.<PostCodeFileDto, PostCodeEntity> chunk(10)
 				.reader(fileToDbItemReader())
 				.processor(fileToDbItemProcessor())
