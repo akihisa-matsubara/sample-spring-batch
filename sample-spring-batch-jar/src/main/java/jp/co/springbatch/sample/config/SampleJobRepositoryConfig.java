@@ -9,7 +9,11 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
+import jp.co.springbatch.sample.common.code.ScopeVo;
+
+@Scope(ScopeVo.SINGLETON)
 @Configuration
 public class SampleJobRepositoryConfig {
 

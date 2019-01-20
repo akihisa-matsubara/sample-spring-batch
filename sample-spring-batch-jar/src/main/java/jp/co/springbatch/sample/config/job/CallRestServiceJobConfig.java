@@ -9,11 +9,14 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 import jp.co.springbatch.sample.biz.tasklet.SampleRestServiceClientTasklet;
 import jp.co.springbatch.sample.biz.tasklet.SpringBootServiceClientTasklet;
+import jp.co.springbatch.sample.common.code.ScopeVo;
 import jp.co.springbatch.sample.common.listener.JobExecutionListener;
 
+@Scope(ScopeVo.SINGLETON)
 @Configuration
 @EnableBatchProcessing
 public class CallRestServiceJobConfig {
@@ -30,7 +33,7 @@ public class CallRestServiceJobConfig {
 	@Autowired
 	private SampleRestServiceClientTasklet callSampleRestServiceTasklet;
 
-	// tag::jobstep[]
+	/** job configurations */
 	@Bean
 	public Job callRestServiceJob(JobExecutionListener listener, Step callSpringBootServiceStep, Step callSampleRestServiceStep) throws Exception {
 		return jobs.get("callRestServiceJob")
@@ -41,6 +44,7 @@ public class CallRestServiceJobConfig {
 				.build();
 	}
 
+	/** step configurations */
 	@Bean
 	public Step callSpringBootServiceStep() {
 		return steps.get("callSpringBootServiceStep")
@@ -54,5 +58,4 @@ public class CallRestServiceJobConfig {
 				.tasklet(callSampleRestServiceTasklet)
 				.build();
 	}
-	// end::jobstep[]
 }

@@ -6,8 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import jp.co.springbatch.sample.common.code.ScopeVo;
+
+@Scope(ScopeVo.SINGLETON)
 @Component
 public class JobExecutionListener extends JobExecutionListenerSupport {
 

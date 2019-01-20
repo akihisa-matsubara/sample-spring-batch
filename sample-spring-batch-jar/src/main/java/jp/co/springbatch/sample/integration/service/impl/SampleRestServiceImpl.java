@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -17,9 +18,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import jp.co.springbatch.sample.common.code.ScopeVo;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
 
+@Scope(ScopeVo.SINGLETON)
 @Service
 public class SampleRestServiceImpl implements SampleRestService {
 
@@ -68,7 +71,9 @@ public class SampleRestServiceImpl implements SampleRestService {
 
 	@Override
 	public List<CustomerDto> getCustomers() {
-		ResponseEntity<List<CustomerDto>> response = restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<CustomerDto>>(){});
+		ResponseEntity<List<CustomerDto>> response = restTemplate.exchange(url, HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<CustomerDto>>() {
+				});
 		log.info("SampleRestService get customers response: httpStatus=[{}], customers=[{}]", response.getStatusCode(), response.getBody());
 		return response.getBody();
 	}
@@ -98,7 +103,9 @@ public class SampleRestServiceImpl implements SampleRestService {
 		}
 
 		ResponseEntity<Integer> response = restTemplate.exchange(requestEntity, Integer.class);
-		log.info("SampleRestService update customers: httpStatus=[{}], updateCount=[{}], customers=[{}]", response.getStatusCode(), response.getBody(), customers);
+		log.info("SampleRestService update customers: httpStatus=[{}], updateCount=[{}], customers=[{}]",
+				response.getStatusCode(),
+				response.getBody(), customers);
 
 		return 0;
 	}

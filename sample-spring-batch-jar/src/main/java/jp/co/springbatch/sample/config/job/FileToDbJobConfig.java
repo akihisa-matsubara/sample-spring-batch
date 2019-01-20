@@ -20,12 +20,14 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.ClassPathResource;
 
-import jp.co.springbatch.sample.biz.processor.CustomerItemProcessor;
+import jp.co.springbatch.sample.common.code.ScopeVo;
 import jp.co.springbatch.sample.common.listener.JobExecutionListener;
-import jp.co.springbatch.sample.data.dto.CustomerFileDto;
+import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
 
+@Scope(ScopeVo.SINGLETON)
 @Configuration
 @EnableBatchProcessing
 public class FileToDbJobConfig {
@@ -36,7 +38,7 @@ public class FileToDbJobConfig {
 	@Autowired
 	public StepBuilderFactory steps;
 
-	// tag::jobstep[]
+	/** job configurations */
 	@Bean
 	public Job fileToDbJob(JobExecutionListener listener, Step importUserStep) {
 		return jobs.get("fileToDbJob")
@@ -47,12 +49,13 @@ public class FileToDbJobConfig {
 				.build();
 	}
 
+	/** step configurations */
 	@Bean
-	public Step importUserStep(JdbcBatchItemWriter<CustomerFileDto> writer) {
+	public Step importUserStep(JdbcBatchItemWriter<CustomerFamilyFileDto> writer) {
 		return steps.get("importUserStep")
-				.<CustomerFileDto, CustomerFileDto> chunk(10)
+				.<CustomerFamilyFileDto, CustomerFamilyFileDto> chunk(10)
 				.reader(reader())
-				.processor(processor())
+//				.processor(processor())
 				.writer(writer)
 				.faultTolerant()
 				.skipLimit(10)
@@ -60,36 +63,34 @@ public class FileToDbJobConfig {
 				.noSkip(IOException.class)
 				.build();
 	}
-	// end::jobstep[]
 
-	// tag::readerwriterprocessor[]
+	/** reader processor writer configurations */
 	@Bean
-	public FlatFileItemReader<CustomerFileDto> reader() {
-		return new FlatFileItemReaderBuilder<CustomerFileDto>()
+	public FlatFileItemReader<CustomerFamilyFileDto> reader() {
+		return new FlatFileItemReaderBuilder<CustomerFamilyFileDto>()
 				.name("customerItemReader")
 				.resource(new ClassPathResource("customer-data.csv"))
 				.delimited()
 				.names(new String[] { "name", "address", "tel" })
-				.fieldSetMapper(new BeanWrapperFieldSetMapper<CustomerFileDto>() {
+				.fieldSetMapper(new BeanWrapperFieldSetMapper<CustomerFamilyFileDto>() {
 					{
-						setTargetType(CustomerFileDto.class);
+						setTargetType(CustomerFamilyFileDto.class);
 					}
 				})
 				.build();
 	}
 
-	@Bean
-	public CustomerItemProcessor processor() {
-		return new CustomerItemProcessor();
-	}
+//	@Bean
+//	public CustomerItemProcessor processor() {
+//		return new CustomerItemProcessor();
+//	}
 
 	@Bean
-	public JdbcBatchItemWriter<CustomerFileDto> writer(DataSource dataSource) {
-		return new JdbcBatchItemWriterBuilder<CustomerFileDto>()
+	public JdbcBatchItemWriter<CustomerFamilyFileDto> writer(DataSource dataSource) {
+		return new JdbcBatchItemWriterBuilder<CustomerFamilyFileDto>()
 				.itemSqlParameterSourceProvider(new BeanPropertyItemSqlParameterSourceProvider<>())
 				.sql("INSERT INTO TBS_CUSTOMER (NAME, ADDRESS, TEL) VALUES (:name, :address, :tel)")
 				.dataSource(dataSource)
 				.build();
 	}
-	// end::readerwriterprocessor[]
 }

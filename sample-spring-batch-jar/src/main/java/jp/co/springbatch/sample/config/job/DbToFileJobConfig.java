@@ -1,5 +1,7 @@
 package jp.co.springbatch.sample.config.job;
 
+import java.io.IOException;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.core.ExitStatus;
@@ -9,17 +11,26 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.item.ItemReader;
+import org.springframework.batch.item.file.FlatFileItemWriter;
+import org.springframework.batch.item.file.FlatFileParseException;
+import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+import org.springframework.core.io.FileSystemResource;
 
-import jp.co.springbatch.sample.biz.tasklet.OutputLogTasklet;
+import jp.co.springbatch.sample.biz.processor.CustomerFamilyItemProcessor;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
+import jp.co.springbatch.sample.common.code.EncodingVo;
+import jp.co.springbatch.sample.common.code.FileOperationVo;
+import jp.co.springbatch.sample.common.code.ScopeVo;
 import jp.co.springbatch.sample.common.listener.JobExecutionListener;
-import jp.co.springbatch.sample.data.primary.entity.TbsCustomer;
+import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
+import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
 
+@Scope(ScopeVo.SINGLETON)
 @Configuration
 @EnableBatchProcessing
 public class DbToFileJobConfig {
@@ -30,8 +41,8 @@ public class DbToFileJobConfig {
 	@Autowired
 	public StepBuilderFactory steps;
 
-	@Autowired
-	private OutputLogTasklet outputLogTasklet;
+	@Value("${sample.file.db-to-file.path}")
+	private String dbToFilePath;
 
 	@Value("${sample.file.trigger-file.path}")
 	private String triggerFilePath;
@@ -39,48 +50,85 @@ public class DbToFileJobConfig {
 	@Value("${sample.file.trigger-file.name}")
 	private String triggerFileName;
 
-	// tag::jobstep[]
+	/** job configurations */
 	@Bean
-	public Job dbToFileJob(JobExecutionListener listener, Step outputLogStep, Step outputTriggerFileStep) throws Exception {
+	public Job dbToFileJob(JobExecutionListener listener,
+			Step dbToFileCheckTriggerFileTasklet,
+			Step dbToFileStep,
+			Step dbToFileOutputTriggerFileStep) throws Exception {
 		return jobs.get("dbToFileJob")
 				.incrementer(new RunIdIncrementer())
 				.listener(listener)
-				.start(outputLogStep).on(ExitStatus.COMPLETED.getExitCode()).to(outputTriggerFileStep)
+				.start(dbToFileCheckTriggerFileTasklet)
+				.next(dbToFileStep)
+				.on(ExitStatus.COMPLETED.getExitCode()).to(dbToFileOutputTriggerFileStep)
 				.end()
 				.build();
 	}
 
+	/** step configurations */
 	@Bean
-	public Step outputLogStep() {
-		return steps.get("outputLogStep")
-				.tasklet(outputLogTasklet)
+	public Step dbToFileStep(FlatFileItemWriter<CustomerFamilyFileDto> dbToFileItemWriter, SqlSessionFactory primarySqlSessionFactory) {
+		return steps.get("dbToFileStep")
+				.<CustomerFamilyEntity, CustomerFamilyFileDto> chunk(10)
+				.reader(dbToFileItemReader(primarySqlSessionFactory))
+				.processor(dbToFileItemProcessor())
+				.writer(dbToFileItemWriter)
+				.faultTolerant()
+				.skipLimit(10)
+				.skip(FlatFileParseException.class)
+				.noSkip(IOException.class)
 				.build();
 	}
 
 	@Bean
-	public Step outputTriggerFileStep() {
-		return steps.get("outputTriggerFileStep")
-				.tasklet(outputTriggerFileTasklet())
-				.build();
-	}
-
-	@Bean
-	public TriggerFileTasklet outputTriggerFileTasklet() {
+	public TriggerFileTasklet dbToFileCheckTriggerFileTasklet() {
 		TriggerFileTasklet tasklet = new TriggerFileTasklet();
+		tasklet.setOperation(FileOperationVo.CHECK_SAVE);
 		tasklet.setFilePath(triggerFilePath);
 		tasklet.setFileName(triggerFileName);
 		return tasklet;
 	}
-	// end::jobstep[]
 
-	// tag::readerwriterprocessor[]
 	@Bean
-	public ItemReader<TbsCustomer> myBatisCursorItemReader(SqlSessionFactory primarySqlSessionFactory) {
-	    MyBatisCursorItemReader<TbsCustomer> reader = new MyBatisCursorItemReader<>();
-	    reader.setSqlSessionFactory(primarySqlSessionFactory);
-	    reader.setQueryId("dbaccess.mybatis.SampleMapper.selectStatusAbyCursor");
-	    return reader;
+	public Step dbToFileOutputTriggerFileStep() {
+		return steps.get("dbToFileOutputTriggerFileStep")
+				.tasklet(dbToFileOutputTriggerFileTasklet())
+				.build();
 	}
 
-	// end::readerwriterprocessor[]
+	@Bean
+	public TriggerFileTasklet dbToFileOutputTriggerFileTasklet() {
+		TriggerFileTasklet tasklet = new TriggerFileTasklet();
+		tasklet.setOperation(FileOperationVo.SAVE);
+		tasklet.setFilePath(triggerFilePath);
+		tasklet.setFileName(triggerFileName);
+		return tasklet;
+	}
+
+	/** reader processor writer configurations */
+	@Bean
+	public MyBatisCursorItemReader<CustomerFamilyEntity> dbToFileItemReader(SqlSessionFactory primarySqlSessionFactory) {
+		MyBatisCursorItemReader<CustomerFamilyEntity> reader = new MyBatisCursorItemReader<>();
+		reader.setSqlSessionFactory(primarySqlSessionFactory);
+		reader.setQueryId("jp.co.springbatch.sample.data.primary.repository.CustomerFamilyRepository.selectAll");
+		return reader;
+	}
+
+	@Bean
+	public CustomerFamilyItemProcessor dbToFileItemProcessor() {
+		return new CustomerFamilyItemProcessor();
+	}
+
+	@Bean
+	public FlatFileItemWriter<CustomerFamilyFileDto> dbToFileItemWriter() {
+		return new FlatFileItemWriterBuilder<CustomerFamilyFileDto>()
+				.name("dbToFileItemWriter")
+				.resource(new FileSystemResource(dbToFilePath))
+				.delimited()
+				.delimiter(",")
+				.names(CustomerFamilyFileDto.FIELD)
+				.encoding(EncodingVo.MS932)
+				.build();
+	}
 }

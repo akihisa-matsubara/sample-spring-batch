@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ValueDto {
 
-    private Long id;
+	private Long id;
 
-    private String quote;
+	private String quote;
 
 }

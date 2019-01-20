@@ -13,17 +13,21 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import com.zaxxer.hikari.HikariDataSource;
 
+import jp.co.springbatch.sample.common.code.ScopeVo;
+
+@Scope(ScopeVo.SINGLETON)
 @Configuration
 @MapperScan(basePackages = PrimaryDbConfig.BASE_PACKAGES, sqlSessionTemplateRef = "primarySqlSessionTemplate")
 public class PrimaryDbConfig {
 	public static final String BASE_PACKAGES = "jp.co.springbatch.sample.data.primary.entity";
-	public static final String MAPPER_XML_PATH = "classpath*:jp/co/springbatch/sample/data/primary/mapper/*.xml";
+	public static final String MAPPER_XML_PATH = "classpath*:jp/co/springbatch/sample/data/primary/repository/*.xml";
 
 	@Bean
 	@Primary

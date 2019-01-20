@@ -8,11 +8,14 @@ import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import jp.co.springbatch.sample.common.code.ScopeVo;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
 
+@Scope(ScopeVo.SINGLETON)
 @Component
 public class SampleRestServiceClientTasklet implements Tasklet {
 

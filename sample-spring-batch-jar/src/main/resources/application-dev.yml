@@ -32,6 +32,9 @@ sample:
       password: db2admin
 
   file:
+    db-to-file:
+      path: data/test-outputs/dbToFile.csv
+
     trigger-file:
       path: data/test-outputs
 
