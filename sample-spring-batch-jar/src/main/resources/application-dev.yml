@@ -35,13 +35,16 @@ sample:
 
   file:
     db-to-file:
-      path: data/test-outputs/dbToFile.csv
+      data-file:
+        path: data/test-outputs
+      trigger-file:
+        path: data/test-inputs
 
     file-to-db:
-      path: data/test-inputs/fileToDb.csv
-
-    trigger-file:
-      path: data/test-outputs
+      data-file:
+        path: data/test-inputs
+      trigger-file:
+        path: data/test-outputs
 
   service:
     sample-rest-service:

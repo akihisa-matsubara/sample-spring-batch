@@ -49,13 +49,16 @@ public class DbToFileJobConfig {
 	@Autowired
 	private WriteFooterFlatFileCallback writeFooterFlatFileCallback;
 
-	@Value("${sample.file.db-to-file.path}")
-	private String dbToFilePath;
+	@Value("${sample.file.db-to-file.data-file.path}")
+	private String dataFilePath;
 
-	@Value("${sample.file.trigger-file.path}")
+	@Value("${sample.file.db-to-file.data-file.name}")
+	private String dataFileName;
+
+	@Value("${sample.file.db-to-file.trigger-file.path}")
 	private String triggerFilePath;
 
-	@Value("${sample.file.trigger-file.name}")
+	@Value("${sample.file.db-to-file.trigger-file.name}")
 	private String triggerFileName;
 
 	/** job configurations */
@@ -139,7 +142,7 @@ public class DbToFileJobConfig {
 	public FlatFileItemWriter<CustomerFamilyFileDto> dbToFileItemWriter() {
 		return new FlatFileItemWriterBuilder<CustomerFamilyFileDto>()
 				.name("dbToFileItemWriter")
-				.resource(new FileSystemResource(dbToFilePath))
+				.resource(new FileSystemResource(dataFilePath + "/" + dataFileName))
 				.delimited()
 				.delimiter(",")
 				.names(CustomerFamilyFileDto.FIELD)

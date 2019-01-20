@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -22,7 +23,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 
 import jp.co.springbatch.sample.biz.processor.PostCodeItemProcessor;
+import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
 import jp.co.springbatch.sample.common.code.EncodingVo;
+import jp.co.springbatch.sample.common.code.FileOperationVo;
 import jp.co.springbatch.sample.common.code.ScopeVo;
 import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
 import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
@@ -40,22 +43,42 @@ public class FileToDbJobConfig {
 	@Autowired
 	private StepBuilderFactory steps;
 
-	@Value("${sample.file.file-to-db.path}")
-	private String fileToDbPath;
+	@Value("${sample.file.file-to-db.data-file.path}")
+	private String dataFilePath;
+
+	@Value("${sample.file.file-to-db.data-file.name}")
+	private String dataFileName;
+
+	@Value("${sample.file.file-to-db.trigger-file.path}")
+	private String triggerFilePath;
+
+	@Value("${sample.file.file-to-db.trigger-file.name}")
+	private String triggerFileName;
 
 	/** job configurations */
 	@Bean
 	public Job fileToDbJob(SampleJobExecutionListener jobExecutionListener,
-			Step fileToDbStep) {
+			Step fileToDbCheckTriggerFileStep,
+			Step fileToDbStep,
+			Step fileToDbDeleteTriggerFileStep) {
 		return jobs.get("fileToDbJob")
 				.incrementer(new RunIdIncrementer())
 				.listener(jobExecutionListener)
-				.flow(fileToDbStep)
+				.start(fileToDbCheckTriggerFileStep)
+				.next(fileToDbStep)
+				.on(ExitStatus.COMPLETED.getExitCode()).to(fileToDbDeleteTriggerFileStep)
 				.end()
 				.build();
 	}
 
 	/** step configurations */
+	@Bean
+	public Step fileToDbCheckTriggerFileStep() {
+		return steps.get("fileToDbCheckTriggerFileStep")
+				.tasklet(fileToDbCheckTriggerFileTasklet())
+				.build();
+	}
+
 	@Bean
 	public Step fileToDbStep(SqlSessionFactory primarySqlSessionFactory, SampleStepExecutionListener stepExecutionListener) {
 		return steps.get("importUserStep")
@@ -71,12 +94,37 @@ public class FileToDbJobConfig {
 				.build();
 	}
 
+	@Bean
+	public Step fileToDbDeleteTriggerFileStep() {
+		return steps.get("fileToDbDeleteTriggerFileStep")
+				.tasklet(fileToDbDeleteTriggerFileTasklet())
+				.build();
+	}
+
+	@Bean
+	public TriggerFileTasklet fileToDbCheckTriggerFileTasklet() {
+		TriggerFileTasklet tasklet = new TriggerFileTasklet();
+		tasklet.setOperation(FileOperationVo.CHECK_DELETE);
+		tasklet.setFilePath(triggerFilePath);
+		tasklet.setFileName(triggerFileName);
+		return tasklet;
+	}
+
+	@Bean
+	public TriggerFileTasklet fileToDbDeleteTriggerFileTasklet() {
+		TriggerFileTasklet tasklet = new TriggerFileTasklet();
+		tasklet.setOperation(FileOperationVo.DELETE);
+		tasklet.setFilePath(triggerFilePath);
+		tasklet.setFileName(triggerFileName);
+		return tasklet;
+	}
+
 	/** reader processor writer configurations */
 	@Bean
 	public FlatFileItemReader<PostCodeFileDto> fileToDbItemReader() {
 		return new FlatFileItemReaderBuilder<PostCodeFileDto>()
 				.name("fileToDbItemReader")
-				.resource(new FileSystemResource(fileToDbPath))
+				.resource(new FileSystemResource(dataFilePath + "/" + dataFileName))
 				.linesToSkip(1)
 				.delimited()
 				.delimiter(",")

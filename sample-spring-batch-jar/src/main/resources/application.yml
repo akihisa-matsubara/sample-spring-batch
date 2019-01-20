@@ -14,12 +14,21 @@ spring:
 # Sample Application configurations
 # -----------------------------------------------------------------------------
 sample:
-  # yyyyMMdd
+  # format yyyyMMdd
   system-date: 
 
   file:
-    trigger-file:
-      name: SAMPLE.YYYYMMDD.TRG
+    db-to-file:
+      data-file:
+        name: dbToFile.csv
+      trigger-file:
+        name: SAMPLE.YYYYMMDD.TRG
+    
+    file-to-db:
+      data-file:
+        name: fileToDb.csv
+      trigger-file:
+        name: SAMPLE.YYYYMMDD.TRG
 
   service:
     sample-rest-service:
