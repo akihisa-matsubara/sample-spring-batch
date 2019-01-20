@@ -33,6 +33,7 @@ public class SampleStepExecutionListener extends StepExecutionListenerSupport {
 				stepExecution.getProcessSkipCount(),
 				stepExecution.getWriteSkipCount(),
 				stepExecution.getFilterCount());
+
 		return stepExecution.getExitStatus();
 	}
 

@@ -1,7 +1,5 @@
 package jp.co.springbatch.sample.biz.tasklet;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.util.SampleDateUtils;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
 
@@ -53,35 +52,27 @@ public class SampleRestServiceClientTasklet implements Tasklet {
 	}
 
 	private void createCustomers() {
-		try {
-			List<CustomerDto> newCustomers = new ArrayList<>();
-			CustomerDto newCustomer1 = new CustomerDto();
-			newCustomer1.setNameKanji("さんぷるばっち１");
-			newCustomer1.setNameKana("サンプルバッチイチ");
-			newCustomer1.setGender("1");
-			newCustomer1.setBirthday(new SimpleDateFormat("yyyyMMdd").parse("19800505"));
-//			newCustomer1.setBirthday("1980-05-05");
-			newCustomer1.setAddressZip("9999999");
-			newCustomer1.setAddress("埼玉県さんぷる");
-			newCustomers.add(newCustomer1);
+		List<CustomerDto> newCustomers = new ArrayList<>();
+		CustomerDto newCustomer1 = new CustomerDto();
+		newCustomer1.setNameKanji("さんぷるばっち１");
+		newCustomer1.setNameKana("サンプルバッチイチ");
+		newCustomer1.setGender("1");
+		newCustomer1.setBirthday(SampleDateUtils.parseDate("19800505"));
+		newCustomer1.setAddressZip("9999999");
+		newCustomer1.setAddress("埼玉県さんぷる");
+		newCustomers.add(newCustomer1);
 
-			CustomerDto newCustomer2 = new CustomerDto();
-			newCustomer2.setNameKanji("さんぷるばっち２");
-			newCustomer2.setNameKana("サンプルバッチニ");
-			newCustomer2.setGender("2");
-			newCustomer2.setBirthday(new SimpleDateFormat("yyyyMMdd").parse("19831111"));
-//			newCustomer2.setBirthday("1983-11-11");
-			newCustomer2.setAddressZip("9999999");
-			newCustomer2.setAddress("埼玉県さんぷる");
-			newCustomers.add(newCustomer2);
+		CustomerDto newCustomer2 = new CustomerDto();
+		newCustomer2.setNameKanji("さんぷるばっち２");
+		newCustomer2.setNameKana("サンプルバッチニ");
+		newCustomer2.setGender("2");
+		newCustomer2.setBirthday(SampleDateUtils.parseDate("19831111"));
+		newCustomer2.setAddressZip("9999999");
+		newCustomer2.setAddress("埼玉県さんぷる");
+		newCustomers.add(newCustomer2);
 
-			// createCustomers
-			service.createCustomers(newCustomers);
-
-		} catch (ParseException pex) {
-			throw new RuntimeException(pex);
-
-		}
+		// createCustomers
+		service.createCustomers(newCustomers);
 	}
 
 	private void updateCustomers() {

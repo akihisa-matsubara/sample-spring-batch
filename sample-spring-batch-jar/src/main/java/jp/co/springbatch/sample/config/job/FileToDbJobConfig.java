@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import jp.co.springbatch.sample.biz.processor.PostCodeItemProcessor;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
@@ -80,7 +81,9 @@ public class FileToDbJobConfig {
 	}
 
 	@Bean
-	public Step fileToDbStep(SqlSessionFactory primarySqlSessionFactory, SampleStepExecutionListener stepExecutionListener) {
+	public Step fileToDbStep(PlatformTransactionManager primaryTxManager,
+			SqlSessionFactory primarySqlSessionFactory,
+			SampleStepExecutionListener stepExecutionListener) {
 		return steps.get("importUserStep")
 				.<PostCodeFileDto, PostCodeEntity> chunk(10)
 				.reader(fileToDbItemReader())
@@ -91,6 +94,7 @@ public class FileToDbJobConfig {
 				.skip(FlatFileParseException.class)
 				.noSkip(IOException.class)
 				.listener(stepExecutionListener)
+				.transactionManager(primaryTxManager)
 				.build();
 	}
 

@@ -17,11 +17,7 @@ import jp.co.springbatch.sample.common.constant.ScopeCode;
 @Configuration
 public class SampleJobRepositoryConfig {
 
-	/**
-	 * in-memoryジョブリポジトリを使用する
-	 *
-	 * @return
-	 */
+	// in-memoryジョブリポジトリを使用する
 	@Bean
 	DefaultBatchConfigurer batchConfigurer() {
 		return new DefaultBatchConfigurer() {

@@ -87,7 +87,8 @@ public class DbToFileJobConfig {
 	}
 
 	@Bean
-	public Step dbToFileStep(SqlSessionFactory primarySqlSessionFactory, SampleStepExecutionListener stepExecutionListener) {
+	public Step dbToFileStep(SqlSessionFactory primarySqlSessionFactory,
+			SampleStepExecutionListener stepExecutionListener) {
 		return steps.get("dbToFileStep")
 				.<CustomerFamilyEntity, CustomerFamilyFileDto> chunk(10)
 				.reader(dbToFileItemReader(primarySqlSessionFactory))
