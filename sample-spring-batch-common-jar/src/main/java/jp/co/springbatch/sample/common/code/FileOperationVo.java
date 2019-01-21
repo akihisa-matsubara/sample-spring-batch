@@ -9,14 +9,15 @@ import lombok.Getter;
 @Getter
 public enum FileOperationVo implements CodeVo {
 
-  /** 保存チェック処理. */
-  CHECK_SAVE("CHECK_SAVE", "保存チェック処理"),
+  /** 作成チェック処理. */
+  CHECK_CREATE("CHECK_SAVE", "作成チェック処理"),
   /** 削除チェック処理. */
   CHECK_DELETE("CHECK_DELETE", "削除チェック処理"),
-  /** 保存処理. */
-  SAVE("SAVE", "保存処理"),
+  /** 作成処理. */
+  CREATE("CREATE", "作成処理"),
   /** 削除処理. */
-  DELETE("DELETE", "削除処理");
+  DELETE("DELETE", "削除処理")
+  ;
 
   /** コード. */
   private String code;

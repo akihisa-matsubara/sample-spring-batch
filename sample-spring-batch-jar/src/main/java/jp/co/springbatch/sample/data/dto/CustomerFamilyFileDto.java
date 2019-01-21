@@ -4,42 +4,56 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 顧客家族FileDto.
+ */
 // sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class CustomerFamilyFileDto {
 
-	public static final String[] FIELD = new String[] {
-			"customerNo",
-			"customerNameKanji",
-			"customerNameKana",
-			"customerGender",
-			"customerBirthday",
-			"familyNo",
-			"familyNameKanji",
-			"familyNameKana",
-			"familyGender",
-			"familyBirthday" };
+  /** フィールド定義. */
+  public static final String[] FIELD = new String[] {
+      "customerNo",
+      "customerNameKanji",
+      "customerNameKana",
+      "customerGender",
+      "customerBirthday",
+      "familyNo",
+      "familyNameKanji",
+      "familyNameKana",
+      "familyGender",
+      "familyBirthday"};
 
-	private String customerNo;
+  /** 顧客番号. */
+  private String customerNo;
 
-	private String customerNameKanji;
+  /** 顧客氏名漢字. */
+  private String customerNameKanji;
 
-	private String customerNameKana;
+  /** 顧客氏名カナ. */
+  private String customerNameKana;
 
-	private String customerGender;
+  /** 顧客性別. */
+  private String customerGender;
 
-	private String customerBirthday;
+  /** 顧客生年月日. */
+  private String customerBirthday;
 
-	private String familyNo;
+  /** 家族番号. */
+  private String familyNo;
 
-	private String familyNameKanji;
+  /** 家族氏名漢字. */
+  private String familyNameKanji;
 
-	private String familyNameKana;
+  /** 家族氏名カナ. */
+  private String familyNameKana;
 
-	private String familyGender;
+  /** 家族性別. */
+  private String familyGender;
 
-	private String familyBirthday;
+  /** 家族生年月日. */
+  private String familyBirthday;
 
 }

@@ -1,7 +1,6 @@
 package jp.co.springbatch.sample.config.job;
 
 import java.io.IOException;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.springframework.batch.core.ExitStatus;
@@ -22,7 +21,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.transaction.PlatformTransactionManager;
-
 import jp.co.springbatch.sample.biz.chunk.processor.PostCodeItemProcessor;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
 import jp.co.springbatch.sample.common.code.FileOperationVo;
@@ -33,126 +31,189 @@ import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
 import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
 
+/**
+ * File to DBジョブ設定.
+ */
 @Scope(ScopeCode.SINGLETON)
 @Configuration
 @EnableBatchProcessing
 public class FileToDbJobConfig {
 
-	@Autowired
-	private JobBuilderFactory jobs;
+  /** JobBuilderFactory. */
+  @Autowired
+  private JobBuilderFactory jobs;
 
-	@Autowired
-	private StepBuilderFactory steps;
+  /** StepBuilderFactory. */
+  @Autowired
+  private StepBuilderFactory steps;
 
-	@Value("${sample.file.file-to-db.data-file.path}")
-	private String dataFilePath;
+  /** データファイルパス. */
+  @Value("${sample.file.file-to-db.data-file.path}")
+  private String dataFilePath;
 
-	@Value("${sample.file.file-to-db.data-file.name}")
-	private String dataFileName;
+  /** データファイル名. */
+  @Value("${sample.file.file-to-db.data-file.name}")
+  private String dataFileName;
 
-	@Value("${sample.file.file-to-db.trigger-file.path}")
-	private String triggerFilePath;
+  /** トリガーファイルパス. */
+  @Value("${sample.file.file-to-db.trigger-file.path}")
+  private String triggerFilePath;
 
-	@Value("${sample.file.file-to-db.trigger-file.name}")
-	private String triggerFileName;
+  /** トリガーファイル名. */
+  @Value("${sample.file.file-to-db.trigger-file.name}")
+  private String triggerFileName;
 
-	/** job configurations */
-	@Bean
-	public Job fileToDbJob(SampleJobExecutionListener jobExecutionListener,
-			Step fileToDbCheckTriggerFileStep,
-			Step fileToDbStep,
-			Step fileToDbDeleteTriggerFileStep) {
-		return jobs.get("fileToDbJob")
-				.incrementer(new RunIdIncrementer())
-				.listener(jobExecutionListener)
-				.start(fileToDbCheckTriggerFileStep)
-				.next(fileToDbStep)
-				.on(ExitStatus.COMPLETED.getExitCode()).to(fileToDbDeleteTriggerFileStep)
-				.end()
-				.build();
-	}
+  /**********************************************
+   * job configurations.
+   **********************************************/
+  /**
+   * File to DBジョブ.
+   *
+   * @param jobExecutionListener ジョブ実行リスナー
+   * @param fileToDbCheckTriggerFileStep トリガーファイルチェックステップ
+   * @param fileToDbStep File to DBステップ
+   * @param fileToDbDeleteTriggerFileStep トリガーファイル削除ステップ
+   * @return Job File to DBジョブ
+   * @throws Exception 例外
+   */
+  @Bean
+  public Job fileToDbJob(SampleJobExecutionListener jobExecutionListener,
+      Step fileToDbCheckTriggerFileStep,
+      Step fileToDbStep,
+      Step fileToDbDeleteTriggerFileStep) {
+    return jobs.get("fileToDbJob")
+        .incrementer(new RunIdIncrementer())
+        .listener(jobExecutionListener)
+        .start(fileToDbCheckTriggerFileStep)
+        .next(fileToDbStep)
+        .on(ExitStatus.COMPLETED.getExitCode())
+        .to(fileToDbDeleteTriggerFileStep)
+        .end()
+        .build();
+  }
 
-	/** step configurations */
-	@Bean
-	public Step fileToDbCheckTriggerFileStep() {
-		return steps.get("fileToDbCheckTriggerFileStep")
-				.tasklet(fileToDbCheckTriggerFileTasklet())
-				.build();
-	}
+  /**********************************************
+   * step configurations.
+   **********************************************/
+  /**
+   * トリガーファイルチェックステップ.
+   *
+   * @return Step トリガーファイルチェックステップ
+   */
+  @Bean
+  public Step fileToDbCheckTriggerFileStep() {
+    return steps.get("fileToDbCheckTriggerFileStep")
+        .tasklet(fileToDbCheckTriggerFileTasklet())
+        .build();
+  }
 
-	@Bean
-	public Step fileToDbStep(PlatformTransactionManager primaryTxManager,
-			SqlSessionFactory primarySqlSessionFactory,
-			SampleStepExecutionListener stepExecutionListener) {
-		return steps.get("fileToDbStep")
-				.<PostCodeFileDto, PostCodeEntity> chunk(10)
-				.reader(fileToDbItemReader())
-				.processor(fileToDbItemProcessor())
-				.writer(fileToDbItemWriter(primarySqlSessionFactory))
-				.faultTolerant()
-				.skipLimit(10)
-				.skip(FlatFileParseException.class)
-				.noSkip(IOException.class)
-				.listener(stepExecutionListener)
-				.transactionManager(primaryTxManager)
-				.build();
-	}
+  /**
+   * File to DBステップ.
+   *
+   * @param primaryTxManager 主DB用TransactionManager
+   * @param primarySqlSessionFactory 主DB用SqlSessionFactory
+   * @param stepExecutionListener ステップ実行リスナー
+   * @return Step File to DBステップ.
+   */
+  @Bean
+  public Step fileToDbStep(PlatformTransactionManager primaryTxManager,
+      SqlSessionFactory primarySqlSessionFactory,
+      SampleStepExecutionListener stepExecutionListener) {
+    return steps.get("fileToDbStep")
+        .<PostCodeFileDto, PostCodeEntity>chunk(10)
+        .reader(fileToDbItemReader())
+        .processor(fileToDbItemProcessor())
+        .writer(fileToDbItemWriter(primarySqlSessionFactory))
+        .faultTolerant()
+        .skipLimit(10)
+        .skip(FlatFileParseException.class)
+        .noSkip(IOException.class)
+        .listener(stepExecutionListener)
+        .transactionManager(primaryTxManager)
+        .build();
+  }
 
-	@Bean
-	public Step fileToDbDeleteTriggerFileStep() {
-		return steps.get("fileToDbDeleteTriggerFileStep")
-				.tasklet(fileToDbDeleteTriggerFileTasklet())
-				.build();
-	}
+  /**
+   * トリガーファイル削除ステップ.
+   *
+   * @return Step トリガーファイル削除ステップ
+   */
+  @Bean
+  public Step fileToDbDeleteTriggerFileStep() {
+    return steps.get("fileToDbDeleteTriggerFileStep")
+        .tasklet(fileToDbDeleteTriggerFileTasklet())
+        .build();
+  }
 
-	@Bean
-	public TriggerFileTasklet fileToDbCheckTriggerFileTasklet() {
-		TriggerFileTasklet tasklet = new TriggerFileTasklet();
-		tasklet.setOperation(FileOperationVo.CHECK_DELETE);
-		tasklet.setFilePath(triggerFilePath);
-		tasklet.setFileName(triggerFileName);
-		return tasklet;
-	}
+  /**
+   * トリガーファイルチェック処理.
+   *
+   * @return TriggerFileTasklet トリガーファイル処理
+   */
+  @Bean
+  public TriggerFileTasklet fileToDbCheckTriggerFileTasklet() {
+    TriggerFileTasklet tasklet = new TriggerFileTasklet();
+    tasklet.setOperation(FileOperationVo.CHECK_DELETE);
+    tasklet.setFilePath(triggerFilePath);
+    tasklet.setFileName(triggerFileName);
+    return tasklet;
+  }
 
-	@Bean
-	public TriggerFileTasklet fileToDbDeleteTriggerFileTasklet() {
-		TriggerFileTasklet tasklet = new TriggerFileTasklet();
-		tasklet.setOperation(FileOperationVo.DELETE);
-		tasklet.setFilePath(triggerFilePath);
-		tasklet.setFileName(triggerFileName);
-		return tasklet;
-	}
+  /**
+   * トリガーファイル削除処理.
+   *
+   * @return TriggerFileTasklet トリガーファイル削除処理
+   */
+  @Bean
+  public TriggerFileTasklet fileToDbDeleteTriggerFileTasklet() {
+    TriggerFileTasklet tasklet = new TriggerFileTasklet();
+    tasklet.setOperation(FileOperationVo.DELETE);
+    tasklet.setFilePath(triggerFilePath);
+    tasklet.setFileName(triggerFileName);
+    return tasklet;
+  }
 
-	/** reader processor writer configurations */
-	@Bean
-	public FlatFileItemReader<PostCodeFileDto> fileToDbItemReader() {
-		return new FlatFileItemReaderBuilder<PostCodeFileDto>()
-				.name("fileToDbItemReader")
-				.resource(new FileSystemResource(dataFilePath + "/" + dataFileName))
-				.linesToSkip(1)
-				.delimited()
-				.delimiter(",")
-				.names(PostCodeFileDto.FIELD)
-				.encoding(EncodingCode.MS932)
-				.fieldSetMapper(new BeanWrapperFieldSetMapper<PostCodeFileDto>() {
-					{
-						setTargetType(PostCodeFileDto.class);
-					}
-				})
-				.build();
-	}
+  /**********************************************
+   * reader processor writer configurations.
+   **********************************************/
+  /**
+   * File to DB ItemReader.
+   *
+   * @return FlatFileItemReader File to DB ItemReader
+   */
+  @Bean
+  public FlatFileItemReader<PostCodeFileDto> fileToDbItemReader() {
+    return new FlatFileItemReaderBuilder<PostCodeFileDto>().name("fileToDbItemReader")
+        .resource(new FileSystemResource(dataFilePath + "/" + dataFileName)).linesToSkip(1).delimited().delimiter(",")
+        .names(PostCodeFileDto.FIELD).encoding(EncodingCode.MS932).fieldSetMapper(new BeanWrapperFieldSetMapper<PostCodeFileDto>() {
+          {
+            setTargetType(PostCodeFileDto.class);
+          }
+        }).build();
+  }
 
-	@Bean
-	public PostCodeItemProcessor fileToDbItemProcessor() {
-		return new PostCodeItemProcessor();
-	}
+  /**
+   * File to DB ItemProcessor.
+   *
+   * @return PostCodeItemProcessor 郵便番号ItemProcessor
+   */
+  @Bean
+  public PostCodeItemProcessor fileToDbItemProcessor() {
+    return new PostCodeItemProcessor();
+  }
 
-	@Bean
-	public MyBatisBatchItemWriter<PostCodeEntity> fileToDbItemWriter(SqlSessionFactory primarySqlSessionFactory) {
-		MyBatisBatchItemWriter<PostCodeEntity> writer = new MyBatisBatchItemWriter<>();
-		writer.setSqlSessionFactory(primarySqlSessionFactory);
-		writer.setStatementId("jp.co.springbatch.sample.data.primary.repository.PostCodeRepository.insert");
-		return writer;
-	}
+  /**
+   * File to DB ItemWriter.
+   *
+   * @param primarySqlSessionFactory 主DB用SqlSessionFactory
+   * @return MyBatisBatchItemWriter File to DB ItemWriter
+   */
+  @Bean
+  public MyBatisBatchItemWriter<PostCodeEntity> fileToDbItemWriter(SqlSessionFactory primarySqlSessionFactory) {
+    MyBatisBatchItemWriter<PostCodeEntity> writer = new MyBatisBatchItemWriter<>();
+    writer.setSqlSessionFactory(primarySqlSessionFactory);
+    writer.setStatementId("jp.co.springbatch.sample.data.primary.repository.PostCodeRepository.insert");
+    return writer;
+  }
 
 }

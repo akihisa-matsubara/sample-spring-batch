@@ -4,17 +4,24 @@ import jp.co.springbatch.sample.common.data.entity.DbBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * 郵便番号マスタEntity.
+ */
 // sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class PostCodeEntity extends DbBaseEntity {
 
-	private String postCode;
+  /** 郵便番号. */
+  private String postCode;
 
-	private String prefectureName;
+  /** 都道府県名. */
+  private String prefectureName;
 
-	private String cityName;
+  /** 市区町村名. */
+  private String cityName;
 
-	private String townName;
+  /** 町域名. */
+  private String townName;
 
 }

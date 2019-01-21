@@ -1,19 +1,48 @@
 package jp.co.springbatch.sample.integration.service;
 
 import java.util.List;
-
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 
+/**
+ * Sample Rest Serviceインターフェース.
+ */
 public interface SampleRestService {
 
-	CustomerDto getCustomer(String id);
+  /**
+   * API:/customers/{customerNo}, Get.
+   *
+   * @param customerNo 顧客番号
+   * @return CustomerDto 取得結果
+   */
+  CustomerDto getCustomer(String customerNo);
 
-	List<CustomerDto> getCustomers();
+  /**
+   * API:/customers, Get.
+   *
+   * @return {@code List<CustomerDto>} 取得結果
+   */
+  List<CustomerDto> getCustomers();
 
-	void createCustomers(List<CustomerDto> customers);
+  /**
+   * API:/customers, Post.
+   *
+   * @param customers 顧客Dtoリスト
+   */
+  void createCustomers(List<CustomerDto> customers);
 
-	int updateCustomers(List<CustomerDto> customers);
+  /**
+   * API:/customers, Put.
+   *
+   * @param customers 顧客Dtoリスト
+   * @return 更新件数
+   */
+  int updateCustomers(List<CustomerDto> customers);
 
-	void deleteCustomer(String id);
+  /**
+   * API:/customers/{customerNo}, Delete.
+   *
+   * @param customerNo 顧客番号
+   */
+  void deleteCustomer(String customerNo);
 
 }

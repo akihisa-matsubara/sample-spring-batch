@@ -27,16 +27,16 @@
   </sql>
   <select id="selectAll" parameterType="jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity" resultMap="BaseResultMap">
     SELECT
-	    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List" />
     FROM
-    	T_CUSTOMER CST
-   	LEFT JOIN
-   	 	T_CUSTOMER_FAMILY_RELATION CFR
-   	ON
-   		CST.CUSTOMER_NO = CFR.CUSTOMER_NO
-   	LEFT JOIN
-   		T_FAMILY FML
-   	ON
-   		CFR.FAMILY_NO = FML.FAMILY_NO
+      T_CUSTOMER CST
+    LEFT JOIN
+      T_CUSTOMER_FAMILY_RELATION CFR
+    ON
+      CST.CUSTOMER_NO = CFR.CUSTOMER_NO
+    LEFT JOIN
+      T_FAMILY FML
+    ON
+      CFR.FAMILY_NO = FML.FAMILY_NO
   </select>
 </mapper>

@@ -7,22 +7,36 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import jp.co.springbatch.sample.common.constant.ScopeCode;
 import jp.co.springbatch.sample.integration.service.SpringBootService;
 
+/**
+ * Spring Boot Service Client.
+ */
 @Scope(ScopeCode.SINGLETON)
 @Component
 public class SpringBootServiceClientTasklet implements Tasklet {
 
-	@Autowired
-	private SpringBootService service;
+  /**
+   * Spring Boot Service.
+   */
+  @Autowired
+  private SpringBootService service;
 
-	@Override
-	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-		service.getRandomQuotation();
+  /**
+   * 実行.
+   * API:/random, Get
+   *
+   * @param contribution StepContribution
+   * @param chunkContext ChunkContext
+   * @return RepeatStatus 結果ステータス
+   * @throws Exception 例外
+   */
+  @Override
+  public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+    service.getRandomQuotation();
 
-		return RepeatStatus.FINISHED;
-	}
+    return RepeatStatus.FINISHED;
+  }
 
 }
