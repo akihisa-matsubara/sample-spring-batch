@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.springbatch.sample.data.primary.repository.PostCodeRepository">
-  <resultMap id="BaseResultMap" type="jp.co.springbatch.sample.data.primary.entity.PostCodeEntity">
-    <id column="POST_CODE" jdbcType="CHAR" property="postCode" />
-    <result column="PREFECTURE_NAME" jdbcType="VARCHAR" property="prefectureName" />
-    <result column="CITY_NAME" jdbcType="VARCHAR" property="cityName" />
-    <result column="TOWN_NAME" jdbcType="VARCHAR" property="townName" />
-    <result column="VERSION" jdbcType="INTEGER" property="version" />
-    <result column="CREATION_USER_ID" jdbcType="VARCHAR" property="creationUserId" />
-    <result column="CREATION_DATE" jdbcType="TIMESTAMP" property="creationDate" />
-    <result column="UPDATED_USER_ID" jdbcType="VARCHAR" property="updatedUserId" />
-    <result column="UPDATED_DATE" jdbcType="TIMESTAMP" property="updatedDate" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    POST_CODE,
-    PREFECTURE_NAME,
-    CITY_NAME,
-    TOWN_NAME,
-    VERSION,
-    CREATION_USER_ID,
-    CREATION_DATE,
-    UPDATED_USER_ID,
-    UPDATED_DATE
-  </sql>
-  <insert id="insert" parameterType="jp.co.springbatch.sample.data.primary.entity.PostCodeEntity">
-    INSERT INTO
-      M_POST_CODE
-    VALUES (
-      #{postCode,jdbcType=CHAR},
-      #{prefectureName,jdbcType=VARCHAR},
-      #{cityName,jdbcType=VARCHAR},
-      #{townName,jdbcType=VARCHAR},
-      #{version,jdbcType=INTEGER},
-      #{creationUserId,jdbcType=VARCHAR},
-      #{creationDate,jdbcType=TIMESTAMP},
-      #{updatedUserId,jdbcType=VARCHAR},
-      #{updatedDate,jdbcType=TIMESTAMP}
-    )
-  </insert>
+    <resultMap id="BaseResultMap" type="jp.co.springbatch.sample.data.primary.entity.PostCodeEntity">
+        <id column="POST_CODE" jdbcType="CHAR" property="postCode" />
+        <result column="PREFECTURE_NAME" jdbcType="VARCHAR" property="prefectureName" />
+        <result column="CITY_NAME" jdbcType="VARCHAR" property="cityName" />
+        <result column="TOWN_NAME" jdbcType="VARCHAR" property="townName" />
+        <result column="VERSION" jdbcType="INTEGER" property="version" />
+        <result column="CREATION_USER_ID" jdbcType="VARCHAR" property="creationUserId" />
+        <result column="CREATION_DATE" jdbcType="TIMESTAMP" property="creationDate" />
+        <result column="UPDATED_USER_ID" jdbcType="VARCHAR" property="updatedUserId" />
+        <result column="UPDATED_DATE" jdbcType="TIMESTAMP" property="updatedDate" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        POST_CODE,
+        PREFECTURE_NAME,
+        CITY_NAME,
+        TOWN_NAME,
+        VERSION,
+        CREATION_USER_ID,
+        CREATION_DATE,
+        UPDATED_USER_ID,
+        UPDATED_DATE
+    </sql>
+    <insert id="insert" parameterType="jp.co.springbatch.sample.data.primary.entity.PostCodeEntity">
+        INSERT INTO
+            M_POST_CODE
+        VALUES (
+            #{postCode,jdbcType=CHAR},
+            #{prefectureName,jdbcType=VARCHAR},
+            #{cityName,jdbcType=VARCHAR},
+            #{townName,jdbcType=VARCHAR},
+            #{version,jdbcType=INTEGER},
+            #{creationUserId,jdbcType=VARCHAR},
+            #{creationDate,jdbcType=TIMESTAMP},
+            #{updatedUserId,jdbcType=VARCHAR},
+            #{updatedDate,jdbcType=TIMESTAMP}
+        )
+    </insert>
 </mapper>

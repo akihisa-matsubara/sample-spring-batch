@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.springbatch.sample.data.primary.repository.CustomerFamilyRepository">
-  <resultMap id="BaseResultMap" type="jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity">
-    <id column="CUSTOMER_NO" jdbcType="CHAR" property="customerNo" />
-    <result column="CUSTOMER_NAME_KANJI" jdbcType="VARCHAR" property="customerNameKanji" />
-    <result column="CUSTOMER_NAME_KANA" jdbcType="VARCHAR" property="customerNameKana" />
-    <result column="CUSTOMER_GENDER" jdbcType="CHAR" property="customerGender" />
-    <result column="CUSTOMER_BIRTHDAY" jdbcType="DATE" property="customerBirthday" />
-    <result column="FAMILY_NO" jdbcType="CHAR" property="familyNo" />
-    <result column="FAMILY_NAME_KANJI" jdbcType="VARCHAR" property="familyNameKanji" />
-    <result column="FAMILY_NAME_KANA" jdbcType="VARCHAR" property="familyNameKana" />
-    <result column="FAMILY_GENDER" jdbcType="CHAR" property="familyGender" />
-    <result column="FAMILY_BIRTHDAY" jdbcType="DATE" property="familyBirthday" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    CST.CUSTOMER_NO,
-    CST.NAME_KANJI AS CUSTOMER_NAME_KANJI,
-    CST.NAME_KANA AS CUSTOMER_NAME_KANA,
-    CST.GENDER AS CUSTOMER_GENDER,
-    CST.BIRTHDAY AS CUSTOMER_BIRTHDAY,
-    FML.FAMILY_NO,
-    FML.NAME_KANJI AS FAMILY_NAME_KANJI,
-    FML.NAME_KANA AS FAMILY_NAME_KANA,
-    FML.GENDER AS FAMILY_GENDER,
-    FML.BIRTHDAY AS FAMILY_BIRTHDAY
-  </sql>
-  <select id="selectAll" parameterType="jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity" resultMap="BaseResultMap">
-    SELECT
-    <include refid="Base_Column_List" />
-    FROM
-      T_CUSTOMER CST
-    LEFT JOIN
-      T_CUSTOMER_FAMILY_RELATION CFR
-    ON
-      CST.CUSTOMER_NO = CFR.CUSTOMER_NO
-    LEFT JOIN
-      T_FAMILY FML
-    ON
-      CFR.FAMILY_NO = FML.FAMILY_NO
-  </select>
+    <resultMap id="BaseResultMap" type="jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity">
+        <id column="CUSTOMER_NO" jdbcType="CHAR" property="customerNo" />
+        <result column="CUSTOMER_NAME_KANJI" jdbcType="VARCHAR" property="customerNameKanji" />
+        <result column="CUSTOMER_NAME_KANA" jdbcType="VARCHAR" property="customerNameKana" />
+        <result column="CUSTOMER_GENDER" jdbcType="CHAR" property="customerGender" />
+        <result column="CUSTOMER_BIRTHDAY" jdbcType="DATE" property="customerBirthday" />
+        <result column="FAMILY_NO" jdbcType="CHAR" property="familyNo" />
+        <result column="FAMILY_NAME_KANJI" jdbcType="VARCHAR" property="familyNameKanji" />
+        <result column="FAMILY_NAME_KANA" jdbcType="VARCHAR" property="familyNameKana" />
+        <result column="FAMILY_GENDER" jdbcType="CHAR" property="familyGender" />
+        <result column="FAMILY_BIRTHDAY" jdbcType="DATE" property="familyBirthday" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        CST.CUSTOMER_NO,
+        CST.NAME_KANJI AS CUSTOMER_NAME_KANJI,
+        CST.NAME_KANA AS CUSTOMER_NAME_KANA,
+        CST.GENDER AS CUSTOMER_GENDER,
+        CST.BIRTHDAY AS CUSTOMER_BIRTHDAY,
+        FML.FAMILY_NO,
+        FML.NAME_KANJI AS FAMILY_NAME_KANJI,
+        FML.NAME_KANA AS FAMILY_NAME_KANA,
+        FML.GENDER AS FAMILY_GENDER,
+        FML.BIRTHDAY AS FAMILY_BIRTHDAY
+    </sql>
+    <select id="selectAll" parameterType="jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM
+            T_CUSTOMER CST
+        LEFT JOIN
+            T_CUSTOMER_FAMILY_RELATION CFR
+        ON
+            CST.CUSTOMER_NO = CFR.CUSTOMER_NO
+        LEFT JOIN
+            T_FAMILY FML
+        ON
+            CFR.FAMILY_NO = FML.FAMILY_NO
+    </select>
 </mapper>

@@ -35,6 +35,11 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
    * @return PostCodeEntity 郵便番号マスタEntity
    */
   private PostCodeEntity convert(final PostCodeFileDto postCodeFileDto) {
+    // validate
+//    SpringValidator<PostCodeFileDto> validator = new SpringValidator<>();
+//    validator.setValidator(new LocalValidatorFactoryBean());
+//    validator.validate(postCodeFileDto);
+
     PostCodeEntity entity = new PostCodeEntity();
     entity.setPostCode(postCodeFileDto.getPostCode());
     entity.setPrefectureName(postCodeFileDto.getPrefectureNameKanji());
