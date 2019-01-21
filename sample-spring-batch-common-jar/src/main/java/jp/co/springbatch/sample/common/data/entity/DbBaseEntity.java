@@ -1,21 +1,29 @@
 package jp.co.springbatch.sample.common.data.entity;
 
 import java.time.LocalDateTime;
-
 import lombok.Data;
 
+/**
+ * エンティティベースクラス.
+ * 共通カラムを定義
+ */
 // sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @Data
 public class DbBaseEntity {
 
-	private int version;
+  /** バージョン. */
+  private int version;
 
-	private String creationUserId;
+  /** 作成ユーザーID. */
+  private String creationUserId;
 
-	private LocalDateTime creationDate;
+  /** 作成日時. */
+  private LocalDateTime creationDate;
 
-	private String updatedUserId;
+  /** 更新ユーザーID. */
+  private String updatedUserId;
 
-	private LocalDateTime updatedDate;
+  /** 更新日時. */
+  private LocalDateTime updatedDate;
 
 }
