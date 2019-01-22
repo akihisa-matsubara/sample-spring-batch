@@ -23,16 +23,16 @@ import jp.co.springbatch.sample.common.constant.ScopeConst;
 public class SampleDateUtils {
 
   /** yyyyMMdd形式のフォーマッター. */
-  private static final SimpleDateFormat DATE_FORMAT_YYYYMMDD = new SimpleDateFormat("yyyyMMdd");
+  private static final String DATE_FORMAT_YYYYMMDD = "yyyyMMdd";
 
   /** HHmmssSSS形式のフォーマッター. */
-  private static final SimpleDateFormat DATE_FORMAT_HHMMSS = new SimpleDateFormat("HHmmssSSS");
+  private static final String DATE_FORMAT_HHMMSS_MILLISEC = "HHmmssSSS";
 
   /** yyyy-MM-dd HH:mm:ss.SSS形式のフォーマッター. */
-  private static final SimpleDateFormat DATE_FORMAT_DATETIME = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+  private static final String DATE_FORMAT_DATETIME = "yyyy-MM-dd HH:mm:ss.SSS";
 
   /** yyyyMMddHHmmssSSS形式のフォーマッター. */
-  private static final DateTimeFormatter DATE_TIME_FOMAT_YYYYMMDDHHMMSS = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+  private static final DateTimeFormatter DATE_TIME_FOMAT_YYYYMMDDHHMMSS_MILLISEC = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
 
   /** Logger. */
   private static final Logger log = LoggerFactory.getLogger(SampleDateUtils.class);
@@ -57,7 +57,7 @@ public class SampleDateUtils {
    * @return 現在の日付文字列(yyyyMMdd)
    */
   public static String getNowDateString() {
-    return StringUtils.isEmpty(systemDate) ? DATE_FORMAT_YYYYMMDD.format(new Date()) : systemDate;
+    return StringUtils.isEmpty(systemDate) ? new SimpleDateFormat(DATE_FORMAT_YYYYMMDD).format(new Date()) : systemDate;
   }
 
   /**
@@ -67,7 +67,8 @@ public class SampleDateUtils {
    * @return 現在のLocalDateTime
    */
   public static LocalDateTime getNowLocalDateTime() {
-    return LocalDateTime.parse(getNowDateString() + DATE_FORMAT_HHMMSS.format(new Date()), DATE_TIME_FOMAT_YYYYMMDDHHMMSS);
+    return LocalDateTime.parse(getNowDateString() + new SimpleDateFormat(DATE_FORMAT_HHMMSS_MILLISEC).format(new Date()),
+        DATE_TIME_FOMAT_YYYYMMDDHHMMSS_MILLISEC);
   }
 
   /**
@@ -77,7 +78,7 @@ public class SampleDateUtils {
    * @return フォーマットされた日付文字列(yyyyMMdd).指定された時刻値がnullの場合はnullを返す.
    */
   public static String formatDate(Date date) {
-    return date == null ? "" : DATE_FORMAT_YYYYMMDD.format(date);
+    return date == null ? "" : new SimpleDateFormat(DATE_FORMAT_YYYYMMDD).format(date);
   }
 
   /**
@@ -87,7 +88,7 @@ public class SampleDateUtils {
    * @return フォーマットされた日時文字列(yyyy-MM-dd HH:mm:ss.SSS).指定された時刻値がnullの場合はnullを返す.
    */
   public static String formatDateTime(Date date) {
-    return date == null ? "" : DATE_FORMAT_DATETIME.format(date);
+    return date == null ? "" : new SimpleDateFormat(DATE_FORMAT_DATETIME).format(date);
   }
 
   /**
@@ -99,7 +100,7 @@ public class SampleDateUtils {
    */
   public static Date parseDate(String text) {
     try {
-      return DATE_FORMAT_YYYYMMDD.parse(text);
+      return new SimpleDateFormat(DATE_FORMAT_YYYYMMDD).parse(text);
 
     } catch (ParseException pe) {
       log.error(ExceptionUtils.getStackTrace(pe));

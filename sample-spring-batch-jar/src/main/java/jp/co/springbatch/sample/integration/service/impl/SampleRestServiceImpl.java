@@ -128,6 +128,7 @@ public class SampleRestServiceImpl implements SampleRestService {
     }
 
     ResponseEntity<Integer> response = restTemplate.exchange(requestEntity, Integer.class);
+
     log.info("SampleRestService update customers: httpStatus=[{}], updateCount=[{}], customers=[{}]", response.getStatusCode(),
         response.getBody(), customers);
 

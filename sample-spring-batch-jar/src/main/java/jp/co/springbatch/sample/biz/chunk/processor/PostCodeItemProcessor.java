@@ -46,7 +46,7 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
   public void afterStep() {
     ExecutionContext stepExecutionContext = stepExecution.getExecutionContext();
 
-    if (!stepExecutionContext.containsKey(ExecutionContextConst.ERROR_RECORD_LIST)) {
+    if (stepExecutionContext.get(ExecutionContextConst.ERROR_RECORD_LIST) == null) {
       return;
     }
 
@@ -88,7 +88,7 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
       ExecutionContext stepExecutionContext = stepExecution.getExecutionContext();
 
       List<PostCodeFileDto> errorRecordList = null;
-      if (!stepExecutionContext.containsKey(ExecutionContextConst.ERROR_RECORD_LIST)) {
+      if (stepExecutionContext.get(ExecutionContextConst.ERROR_RECORD_LIST) == null) {
         errorRecordList = new ArrayList<>();
         stepExecutionContext.put(ExecutionContextConst.ERROR_RECORD_LIST, errorRecordList);
 
