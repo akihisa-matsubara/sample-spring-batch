@@ -3,7 +3,7 @@ package jp.co.springbatch.sample.common.constant;
 /**
  * Scope定数.
  */
-public final class ScopeCode {
+public final class ScopeConst {
 
   /** singleton. */
   public static final String SINGLETON = "singleton";

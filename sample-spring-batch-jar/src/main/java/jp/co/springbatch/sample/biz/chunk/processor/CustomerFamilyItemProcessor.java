@@ -31,8 +31,10 @@ public class CustomerFamilyItemProcessor implements ItemProcessor<CustomerFamily
    * @return CustomerFamilyFileDto 顧客家族FileDto
    */
   private CustomerFamilyFileDto convert(final CustomerFamilyEntity customerFamilyEntity) {
-    return new CustomerFamilyFileDto(customerFamilyEntity.getCustomerNo(),
-        customerFamilyEntity.getCustomerNameKanji(), customerFamilyEntity.getCustomerNameKana(),
+    return new CustomerFamilyFileDto(
+        customerFamilyEntity.getCustomerNo(),
+        customerFamilyEntity.getCustomerNameKanji(),
+        customerFamilyEntity.getCustomerNameKana(),
         customerFamilyEntity.getCustomerGender(),
         SampleDateUtils.formatDate(customerFamilyEntity.getCustomerBirthday()),
         customerFamilyEntity.getFamilyNo(), customerFamilyEntity.getFamilyNameKanji(),

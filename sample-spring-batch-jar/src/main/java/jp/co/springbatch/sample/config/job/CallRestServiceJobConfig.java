@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import jp.co.springbatch.sample.biz.tasklet.SampleRestServiceClientTasklet;
 import jp.co.springbatch.sample.biz.tasklet.SpringBootServiceClientTasklet;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
 
 /**
  * Rest Service呼び出しジョブ設定.
  */
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Configuration
 @EnableBatchProcessing
 public class CallRestServiceJobConfig {

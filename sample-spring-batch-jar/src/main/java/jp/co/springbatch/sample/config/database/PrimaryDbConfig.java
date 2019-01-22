@@ -17,12 +17,12 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import com.zaxxer.hikari.HikariDataSource;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 
 /**
  * 主DB用設定.
  */
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Configuration
 @MapperScan(basePackages = PrimaryDbConfig.BASE_PACKAGES, sqlSessionTemplateRef = "primarySqlSessionTemplate")
 public class PrimaryDbConfig {
@@ -59,6 +59,7 @@ public class PrimaryDbConfig {
   /**
    * 主DB用TransactionManager.
    *
+   * @param primaryDataSource 主DB用HikariDataSource
    * @return PlatformTransactionManager 主DB用TransactionManager
    */
   @Bean

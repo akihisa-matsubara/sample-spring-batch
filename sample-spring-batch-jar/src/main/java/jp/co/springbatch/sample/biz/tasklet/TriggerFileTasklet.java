@@ -10,7 +10,6 @@ import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import jp.co.springbatch.sample.common.code.FileOperationVo;
@@ -37,13 +36,10 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
   @Setter
   private String fileName;
 
-  /** 日付ユーティリティー. */
-  @Autowired
-  private SampleDateUtils dateUtils;
-
   /**
    * プロパティ設定後処理.
    *
+   * @throws IllegalArgumentException プロパティがnull値の場合
    * @throws Exception 例外
    */
   @Override
@@ -59,12 +55,14 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
    * @param contribution StepContribution
    * @param chunkContext ChunkContext
    * @return RepeatStatus 結果ステータス
+   * @throws IOException ファイルへの書き込みまたはファイルの作成／削除中に入出力エラーが発生した場合
+   * @throws IllegalStateException トリガーファイルの状態が不正な場合
    * @throws Exception 例外
    */
   @Override
   public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-    String systemDate = dateUtils.getNowDateString();
-    String replaceFileName = fileName.replace("YYYYMMDD", systemDate);
+    String systemDate = SampleDateUtils.getNowDateString();
+    String replaceFileName = fileName.replace("yyyyMMdd", systemDate);
 
     validate(replaceFileName);
 
@@ -78,6 +76,7 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
    * 対象操作に従い、トリガーファイルの状態を検証します
    *
    * @param targetFile 対象ファイル
+   * @throws IllegalStateException トリガーファイルの状態が不正な場合
    */
   private void validate(String targetFile) {
     Path path = Paths.get(filePath);
@@ -85,11 +84,11 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
 
     switch (operation) {
       case CHECK_CREATE:
-        Assert.isTrue(!Files.exists(Paths.get(filePath, targetFile)), "trigger file exists. trigger file=" + filePath + "/" + targetFile);
+        Assert.state(!Files.exists(Paths.get(filePath, targetFile)), "trigger file exists. trigger file=" + filePath + "/" + targetFile);
         break;
 
       case CHECK_DELETE:
-        Assert.isTrue(Files.exists(Paths.get(filePath, targetFile)),
+        Assert.state(Files.exists(Paths.get(filePath, targetFile)),
             "trigger file does not exists. trigger file=" + filePath + "/" + targetFile);
         break;
 

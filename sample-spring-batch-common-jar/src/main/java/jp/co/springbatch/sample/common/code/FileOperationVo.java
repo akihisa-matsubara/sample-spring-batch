@@ -27,6 +27,9 @@ public enum FileOperationVo implements CodeVo {
 
   /**
    * デフォルトコンストラクタ.
+   *
+   * @param code コード
+   * @param decode デコード
    */
   private FileOperationVo(String code, String decode) {
     this.code = code;

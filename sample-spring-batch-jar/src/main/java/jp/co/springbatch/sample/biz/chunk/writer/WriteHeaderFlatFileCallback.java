@@ -3,23 +3,18 @@ package jp.co.springbatch.sample.biz.chunk.writer;
 import java.io.IOException;
 import java.io.Writer;
 import org.springframework.batch.item.file.FlatFileHeaderCallback;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import jp.co.springbatch.sample.common.code.RecodeTypeVo;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 import jp.co.springbatch.sample.common.util.SampleDateUtils;
 
 /**
  * ヘッダーWriterCallback.
  */
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Component
 public class WriteHeaderFlatFileCallback implements FlatFileHeaderCallback {
-
-  /** 日付ユーティリティー. */
-  @Autowired
-  private SampleDateUtils dateUtils;
 
   /**
    * ヘッダー書き込み.
@@ -30,7 +25,7 @@ public class WriteHeaderFlatFileCallback implements FlatFileHeaderCallback {
    */
   @Override
   public void writeHeader(Writer writer) throws IOException {
-    writer.write(RecodeTypeVo.HEADER_RECODE.getCode() + "," + dateUtils.getNowDateString());
+    writer.write(RecodeTypeVo.HEADER_RECODE.getCode() + "," + SampleDateUtils.getNowDateString());
   }
 
 }

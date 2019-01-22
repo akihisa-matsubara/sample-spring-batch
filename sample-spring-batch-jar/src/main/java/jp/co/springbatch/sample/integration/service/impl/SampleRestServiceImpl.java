@@ -14,17 +14,17 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
 
 /**
  * Sample Rest Service実装.
  */
-@Scope(ScopeCode.SINGLETON)
-@Service
+@Scope(ScopeConst.SINGLETON)
+@Component
 public class SampleRestServiceImpl implements SampleRestService {
 
   /** Logger. */
@@ -73,10 +73,7 @@ public class SampleRestServiceImpl implements SampleRestService {
    */
 
   /**
-   * API:/customers/{customerNo}, Get.
-   *
-   * @param customerNo 顧客番号
-   * @return CustomerDto 取得結果
+   * {@inheritDoc}
    */
   @Override
   public CustomerDto getCustomer(String customerNo) {
@@ -86,9 +83,7 @@ public class SampleRestServiceImpl implements SampleRestService {
   }
 
   /**
-   * API:/customers, Get.
-   *
-   * @return {@code List<CustomerDto>} 取得結果
+   * {@inheritDoc}
    */
   @Override
   public List<CustomerDto> getCustomers() {
@@ -99,9 +94,7 @@ public class SampleRestServiceImpl implements SampleRestService {
   }
 
   /**
-   * API:/customers, Post.
-   *
-   * @param customers 顧客Dtoリスト
+   * {@inheritDoc}
    */
   @Override
   public void createCustomers(List<CustomerDto> customers) {
@@ -120,10 +113,7 @@ public class SampleRestServiceImpl implements SampleRestService {
   }
 
   /**
-   * API:/customers, Put.
-   *
-   * @param customers 顧客Dtoリスト
-   * @return 更新件数
+   * {@inheritDoc}
    */
   @Override
   public int updateCustomers(List<CustomerDto> customers) {
@@ -145,9 +135,7 @@ public class SampleRestServiceImpl implements SampleRestService {
   }
 
   /**
-   * API:/customers/{customerNo}, Delete.
-   *
-   * @param customerNo 顧客番号
+   * {@inheritDoc}
    */
   @Override
   public void deleteCustomer(String customerNo) {

@@ -1,6 +1,5 @@
 package jp.co.springbatch.sample.config.job;
 
-import java.io.IOException;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.core.ExitStatus;
@@ -11,7 +10,6 @@ import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.file.FlatFileItemWriter;
-import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,17 +22,19 @@ import jp.co.springbatch.sample.biz.chunk.writer.WriteFooterFlatFileCallback;
 import jp.co.springbatch.sample.biz.chunk.writer.WriteHeaderFlatFileCallback;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
 import jp.co.springbatch.sample.common.code.FileOperationVo;
-import jp.co.springbatch.sample.common.constant.EncodingCode;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.EncodingConst;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
+import jp.co.springbatch.sample.common.handler.SampleExceptionHandler;
 import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
 import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
 import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
+import jp.co.springbatch.sample.data.primary.repository.CustomerFamilyRepository;
 
 /**
  * DB to Fileジョブ設定.
  */
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Configuration
 @EnableBatchProcessing
 public class DbToFileJobConfig {
@@ -120,21 +120,21 @@ public class DbToFileJobConfig {
    *
    * @param primarySqlSessionFactory 主DB用SqlSessionFactory
    * @param stepExecutionListener ステップ実行リスナー
+   * @param sampleExceptionHandler 例外ハンドラー
    * @return Step DB to Fileステップ.
    */
   @Bean
   public Step dbToFileStep(SqlSessionFactory primarySqlSessionFactory,
-      SampleStepExecutionListener stepExecutionListener) {
+      SampleStepExecutionListener stepExecutionListener,
+      SampleExceptionHandler sampleExceptionHandler) {
     return steps.get("dbToFileStep")
         .<CustomerFamilyEntity, CustomerFamilyFileDto>chunk(10)
         .reader(dbToFileItemReader(primarySqlSessionFactory))
         .processor(dbToFileItemProcessor())
         .writer(dbToFileItemWriter())
         .faultTolerant()
-        .skipLimit(10)
-        .skip(FlatFileParseException.class)
-        .noSkip(IOException.class)
         .listener(stepExecutionListener)
+        .exceptionHandler(sampleExceptionHandler)
         .build();
   }
 
@@ -191,7 +191,7 @@ public class DbToFileJobConfig {
   public MyBatisCursorItemReader<CustomerFamilyEntity> dbToFileItemReader(SqlSessionFactory primarySqlSessionFactory) {
     MyBatisCursorItemReader<CustomerFamilyEntity> reader = new MyBatisCursorItemReader<>();
     reader.setSqlSessionFactory(primarySqlSessionFactory);
-    reader.setQueryId("jp.co.springbatch.sample.data.primary.repository.CustomerFamilyRepository.selectAll");
+    reader.setQueryId(CustomerFamilyRepository.SELECT_ALL);
     return reader;
   }
 
@@ -218,7 +218,7 @@ public class DbToFileJobConfig {
         .delimited()
         .delimiter(",")
         .names(CustomerFamilyFileDto.FIELD)
-        .encoding(EncodingCode.MS932)
+        .encoding(EncodingConst.MS932)
         .headerCallback(writeHeaderFlatFileCallback)
         .footerCallback(writeFooterFlatFileCallback)
         .build();

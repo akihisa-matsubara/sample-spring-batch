@@ -7,12 +7,12 @@ import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.listener.StepExecutionListenerSupport;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 
 /**
  * ステップ実行リスナー.
  */
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Component
 public class SampleStepExecutionListener extends StepExecutionListenerSupport {
 

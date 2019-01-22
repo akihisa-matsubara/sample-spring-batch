@@ -9,7 +9,7 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 import jp.co.springbatch.sample.common.util.SampleDateUtils;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
@@ -17,7 +17,7 @@ import jp.co.springbatch.sample.integration.service.SampleRestService;
 /**
  * Sample Rest Service Client.
  */
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Component
 public class SampleRestServiceClientTasklet implements Tasklet {
 

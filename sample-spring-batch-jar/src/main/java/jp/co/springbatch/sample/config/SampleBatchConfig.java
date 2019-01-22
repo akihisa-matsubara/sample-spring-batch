@@ -13,12 +13,12 @@ import org.springframework.batch.core.repository.support.MapJobRepositoryFactory
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 
 /**
  * サンプルバッチ設定.
  */
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Configuration
 public class SampleBatchConfig {
 

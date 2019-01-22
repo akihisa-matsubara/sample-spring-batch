@@ -16,12 +16,12 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import com.zaxxer.hikari.HikariDataSource;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 
 /**
  * 副DB用設定.
  */
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Configuration
 @MapperScan(basePackages = SecondaryDbConfig.BASE_PACKAGES, sqlSessionTemplateRef = "secondarySqlSessionTemplate")
 public class SecondaryDbConfig {
@@ -56,6 +56,7 @@ public class SecondaryDbConfig {
   /**
    * 副DB用TransactionManager.
    *
+   * @param secondaryDataSource 副DB用HikariDataSource
    * @return PlatformTransactionManager 副DB用TransactionManager
    */
   @Bean

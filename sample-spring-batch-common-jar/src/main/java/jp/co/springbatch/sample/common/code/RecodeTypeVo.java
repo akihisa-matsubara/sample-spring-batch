@@ -25,6 +25,9 @@ public enum RecodeTypeVo implements CodeVo {
 
   /**
    * デフォルトコンストラクタ.
+   *
+   * @param code コード
+   * @param decode デコード
    */
   private RecodeTypeVo(String code, String decode) {
     this.code = code;

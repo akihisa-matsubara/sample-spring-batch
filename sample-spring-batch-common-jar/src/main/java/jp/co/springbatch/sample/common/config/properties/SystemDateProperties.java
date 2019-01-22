@@ -3,7 +3,7 @@ package jp.co.springbatch.sample.common.config.properties;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +12,7 @@ import lombok.Setter;
  * テストで任意の日付で動作させたい場合に利用
  */
 // sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Component
 @Getter
 @Setter

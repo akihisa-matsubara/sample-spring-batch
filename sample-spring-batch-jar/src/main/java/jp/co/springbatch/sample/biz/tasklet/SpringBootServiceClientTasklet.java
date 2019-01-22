@@ -7,13 +7,13 @@ import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 import jp.co.springbatch.sample.integration.service.SpringBootService;
 
 /**
  * Spring Boot Service Client.
  */
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Component
 public class SpringBootServiceClientTasklet implements Tasklet {
 

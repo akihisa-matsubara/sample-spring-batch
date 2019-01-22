@@ -13,12 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import jp.co.springbatch.sample.common.config.properties.SystemDateProperties;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 
 /**
  * 日付ユーティリティー.
  */
-@Scope(ScopeCode.SINGLETON)
+@Scope(ScopeConst.SINGLETON)
 @Component
 public class SampleDateUtils {
 
@@ -37,9 +37,18 @@ public class SampleDateUtils {
   /** Logger. */
   private static final Logger log = LoggerFactory.getLogger(SampleDateUtils.class);
 
-  /** システム日付プロパティ. */
+  /** システム日付. */
+  private static String systemDate;
+
+  /**
+   * コンストラクタ.
+   *
+   * @param systemDateProperties システム日付プロパティ
+   */
   @Autowired
-  private SystemDateProperties systemDateProperties;
+  public SampleDateUtils(SystemDateProperties systemDateProperties) {
+    systemDate = systemDateProperties.getSystemDate();
+  }
 
   /**
    * 現在の日付文字列(yyyyMMdd)を取得します.
@@ -47,8 +56,7 @@ public class SampleDateUtils {
    *
    * @return 現在の日付文字列(yyyyMMdd)
    */
-  public String getNowDateString() {
-    String systemDate = systemDateProperties.getSystemDate();
+  public static String getNowDateString() {
     return StringUtils.isEmpty(systemDate) ? DATE_FORMAT_YYYYMMDD.format(new Date()) : systemDate;
   }
 
@@ -58,9 +66,8 @@ public class SampleDateUtils {
    *
    * @return 現在のLocalDateTime
    */
-  public LocalDateTime getNowLocalDateTime() {
-    String systemDate = getNowDateString() + DATE_FORMAT_HHMMSS.format(new Date());
-    return LocalDateTime.parse(systemDate, DATE_TIME_FOMAT_YYYYMMDDHHMMSS);
+  public static LocalDateTime getNowLocalDateTime() {
+    return LocalDateTime.parse(getNowDateString() + DATE_FORMAT_HHMMSS.format(new Date()), DATE_TIME_FOMAT_YYYYMMDDHHMMSS);
   }
 
   /**

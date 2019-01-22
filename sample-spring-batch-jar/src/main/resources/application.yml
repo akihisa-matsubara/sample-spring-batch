@@ -23,13 +23,13 @@ sample:
       data-file:
         name: dbToFile.csv
       trigger-file:
-        name: SAMPLE.YYYYMMDD.TRG
+        name: SAMPLE.yyyyMMdd.TRG
     
     file-to-db:
       data-file:
         name: fileToDb.csv
       trigger-file:
-        name: SAMPLE.YYYYMMDD.TRG
+        name: SAMPLE.yyyyMMdd.TRG
 
   service:
     sample-rest-service:

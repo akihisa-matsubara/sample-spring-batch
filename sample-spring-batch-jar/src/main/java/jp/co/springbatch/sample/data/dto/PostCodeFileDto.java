@@ -1,20 +1,29 @@
 package jp.co.springbatch.sample.data.dto;
 
+import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import org.springframework.batch.item.ItemCountAware;
+import jp.co.springbatch.sample.common.data.dto.ItemDtoBase;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
  * 郵便番号FileDto.
  */
 // sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
+// ExecutionContextへ格納するためにSerializableをimplementsします
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class PostCodeFileDto implements ItemCountAware {
+@Data()
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class PostCodeFileDto extends ItemDtoBase implements Serializable {
+
+  /** serialVersionUID. */
+  private static final long serialVersionUID = 1L;
 
   /** フィールド定義. */
   public static final String[] FIELD = new String[] {
@@ -25,9 +34,6 @@ public class PostCodeFileDto implements ItemCountAware {
       "prefectureNameKanji",
       "cityNameKanji",
       "townNameKanji"};
-
-  /** item件数. */
-  private int itemCount;
 
   /** 郵便番号. */
   @NotNull

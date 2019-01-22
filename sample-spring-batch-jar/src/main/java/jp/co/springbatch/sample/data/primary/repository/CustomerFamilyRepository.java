@@ -10,6 +10,9 @@ import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
 @Mapper
 public interface CustomerFamilyRepository {
 
+  /** sql id: selectAll. */
+  public static final String SELECT_ALL = "jp.co.springbatch.sample.data.primary.repository.CustomerFamilyRepository.selectAll";
+
   /**
    * 全件取得.
    *

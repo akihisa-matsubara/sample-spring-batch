@@ -6,17 +6,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import jp.co.springbatch.sample.common.constant.ScopeCode;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
 import jp.co.springbatch.sample.integration.dto.QuoteDto;
 import jp.co.springbatch.sample.integration.service.SpringBootService;
 
 /**
  * Spring Boot Service実装.
  */
-@Scope(ScopeCode.SINGLETON)
-@Service
+@Scope(ScopeConst.SINGLETON)
+@Component
 public class SpringBootServiceImpl implements SpringBootService {
 
   /** Logger. */
@@ -40,10 +40,7 @@ public class SpringBootServiceImpl implements SpringBootService {
   }
 
   /**
-   * 実行.
-   * API:/random, Get
-   *
-   * @return QuoteDto 取得結果
+   * {@inheritDoc}
    */
   @Override
   public QuoteDto getRandomQuotation() {
