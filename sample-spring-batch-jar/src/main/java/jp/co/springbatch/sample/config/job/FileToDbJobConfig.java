@@ -12,11 +12,8 @@ import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
 import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
 import jp.co.springbatch.sample.data.primary.repository.PostCodeRepository;
-
 import java.io.IOException;
-
 import javax.validation.ConstraintViolationException;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.springframework.batch.core.ExitStatus;
@@ -47,17 +44,9 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableBatchProcessing
 public class FileToDbJobConfig {
 
-  /** JobBuilderFactory. */
-  @Autowired
-  private JobBuilderFactory jobs;
-
   /** StepBuilderFactory. */
   @Autowired
   private StepBuilderFactory steps;
-
-  /** ReadSkippedLinesCallback. */
-  @Autowired
-  private ReadSkippedLinesCallback readSkippedLinesCallback;
 
   /** データファイルパス. */
   @Value("${sample.file.file-to-db.data-file.path}")
@@ -81,6 +70,7 @@ public class FileToDbJobConfig {
   /**
    * File to DBジョブ.
    *
+   * @param jobs JobBuilderFactory
    * @param jobExecutionListener ジョブ実行リスナー
    * @param fileToDbCheckTriggerFileStep トリガーファイルチェックステップ
    * @param fileToDbStep File to DBステップ
@@ -89,7 +79,8 @@ public class FileToDbJobConfig {
    * @throws Exception 例外
    */
   @Bean
-  public Job fileToDbJob(SampleJobExecutionListener jobExecutionListener,
+  public Job fileToDbJob(JobBuilderFactory jobs,
+      SampleJobExecutionListener jobExecutionListener,
       Step fileToDbCheckTriggerFileStep,
       Step fileToDbStep,
       Step fileToDbDeleteTriggerFileStep) {
@@ -122,6 +113,7 @@ public class FileToDbJobConfig {
   /**
    * File to DBステップ.
    *
+   * @param readSkippedLinesCallback ReadSkippedLinesCallback
    * @param primarySqlSessionFactory 主DB用SqlSessionFactory
    * @param stepExecutionListener ステップ実行リスナー
    * @param sampleExceptionHandler 例外ハンドラー
@@ -129,13 +121,14 @@ public class FileToDbJobConfig {
    * @return Step File to DBステップ.
    */
   @Bean
-  public Step fileToDbStep(SqlSessionFactory primarySqlSessionFactory,
+  public Step fileToDbStep(ReadSkippedLinesCallback readSkippedLinesCallback,
+      SqlSessionFactory primarySqlSessionFactory,
       SampleStepExecutionListener stepExecutionListener,
       SampleExceptionHandler sampleExceptionHandler,
       PlatformTransactionManager primaryTxManager) {
     return steps.get("fileToDbStep")
         .<PostCodeFileDto, PostCodeEntity>chunk(10)
-        .reader(fileToDbItemReader())
+        .reader(fileToDbItemReader(readSkippedLinesCallback))
         .processor(fileToDbItemProcessor())
         .writer(fileToDbItemWriter(primarySqlSessionFactory))
         .faultTolerant()
@@ -198,17 +191,18 @@ public class FileToDbJobConfig {
   /**
    * File to DB ItemReader.
    *
+   * @param readSkippedLinesCallback ReadSkippedLinesCallback
    * @return FlatFileItemReader File to DB ItemReader
    */
   @Bean
-  public FlatFileItemReader<PostCodeFileDto> fileToDbItemReader() {
+  public FlatFileItemReader<PostCodeFileDto> fileToDbItemReader(ReadSkippedLinesCallback readSkippedLinesCallback) {
     return new FlatFileItemReaderBuilder<PostCodeFileDto>().name("fileToDbItemReader")
         .resource(new FileSystemResource(dataFilePath + "/" + dataFileName))
         .linesToSkip(1) // header line skip
         .skippedLinesCallback(readSkippedLinesCallback)
         .delimited()
         .delimiter(",")
-        .names(PostCodeFileDto.FIELD)
+        .names(PostCodeFileDto.getFields())
         .encoding(EncodingConst.MS932)
         .fieldSetMapper(new BeanWrapperFieldSetMapper<PostCodeFileDto>() {
           {

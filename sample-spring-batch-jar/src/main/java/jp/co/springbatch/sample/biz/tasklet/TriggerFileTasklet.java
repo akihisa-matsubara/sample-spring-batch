@@ -2,14 +2,10 @@ package jp.co.springbatch.sample.biz.tasklet;
 
 import jp.co.springbatch.sample.common.code.FileOperationVo;
 import jp.co.springbatch.sample.common.util.SampleDateUtils;
-
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import lombok.Setter;
-
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
@@ -78,17 +74,15 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
    * @throws IllegalStateException トリガーファイルの状態が不正な場合
    */
   private void validate(String targetFile) {
-    Path path = Paths.get(filePath);
-    Assert.isTrue(Files.isDirectory(path), "not a directory.");
+    Assert.isTrue(Paths.get(filePath).toFile().isDirectory(), "not a directory.");
 
     switch (operation) {
       case CHECK_CREATE:
-        Assert.state(!Files.exists(Paths.get(filePath, targetFile)), "trigger file exists. trigger file=" + filePath + "/" + targetFile);
+        Assert.state(!Paths.get(filePath, targetFile).toFile().exists(), "trigger file exists. trigger file=" + filePath + "/" + targetFile);
         break;
 
       case CHECK_DELETE:
-        Assert.state(Files.exists(Paths.get(filePath, targetFile)),
-            "trigger file does not exists. trigger file=" + filePath + "/" + targetFile);
+        Assert.state(Paths.get(filePath, targetFile).toFile().exists(), "trigger file does not exists. trigger file=" + filePath + "/" + targetFile);
         break;
 
       default:

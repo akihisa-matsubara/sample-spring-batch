@@ -4,10 +4,8 @@ import jp.co.springbatch.sample.common.constant.ScopeConst;
 import jp.co.springbatch.sample.common.util.SampleDateUtils;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
@@ -43,7 +41,7 @@ public class SampleRestServiceClientTasklet implements Tasklet {
 
     List<CustomerDto> customers = getCustomers();
 
-    if (0 < customers.size()) {
+    if (!customers.isEmpty()) {
       getCustomer(customers.get(0).getCustomerNo());
     }
 

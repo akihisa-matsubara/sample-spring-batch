@@ -1,7 +1,6 @@
 package jp.co.springbatch.sample.config;
 
 import jp.co.springbatch.sample.common.constant.ScopeConst;
-
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,10 +50,10 @@ public class SampleBatchConfig {
           this.jobRepository = jobRepositoryFactory.getObject();
           MapJobExplorerFactoryBean jobExplorerFactory = new MapJobExplorerFactoryBean(jobRepositoryFactory);
           this.jobExplorer = jobExplorerFactory.getObject();
-          SimpleJobLauncher jobLauncher = new SimpleJobLauncher();
-          jobLauncher.setJobRepository(jobRepository);
-          jobLauncher.afterPropertiesSet();
-          this.jobLauncher = jobLauncher;
+          SimpleJobLauncher launcher = new SimpleJobLauncher();
+          launcher.setJobRepository(jobRepository);
+          launcher.afterPropertiesSet();
+          this.jobLauncher = launcher;
 
         } catch (Exception e) {
           log.error(ExceptionUtils.getStackTrace(e));

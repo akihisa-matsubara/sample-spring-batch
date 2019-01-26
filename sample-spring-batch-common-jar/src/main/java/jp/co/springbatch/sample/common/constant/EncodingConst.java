@@ -11,4 +11,8 @@ public final class EncodingConst {
   /** Windows日本語(MS932/windows-31j). */
   public static final String MS932 = "MS932";
 
+  private EncodingConst() {
+    // do nothing
+  }
+
 }

@@ -13,7 +13,6 @@ import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
 import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
 import jp.co.springbatch.sample.data.primary.repository.CustomerFamilyRepository;
-
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.core.ExitStatus;
@@ -40,21 +39,9 @@ import org.springframework.core.io.FileSystemResource;
 @EnableBatchProcessing
 public class DbToFileJobConfig {
 
-  /** JobBuilderFactory. */
-  @Autowired
-  private JobBuilderFactory jobs;
-
   /** StepBuilderFactory. */
   @Autowired
   private StepBuilderFactory steps;
-
-  /** ヘッダーWriterCallback. */
-  @Autowired
-  private WriteHeaderFlatFileCallback writeHeaderFlatFileCallback;
-
-  /** フッターWriterCallback. */
-  @Autowired
-  private WriteFooterFlatFileCallback writeFooterFlatFileCallback;
 
   /** データファイルパス. */
   @Value("${sample.file.db-to-file.data-file.path}")
@@ -78,18 +65,19 @@ public class DbToFileJobConfig {
   /**
    * DB to Fileジョブ.
    *
+   * @param jobs JobBuilderFactory
    * @param jobExecutionListener ジョブ実行リスナー
    * @param dbToFileCheckTriggerFileStep トリガーファイルチェックステップ
    * @param dbToFileStep DB to Fileステップ
    * @param dbToFileCreateTriggerFileStep トリガーファイル作成ステップ
    * @return Job DB to Fileジョブ
-   * @throws Exception 例外
    */
   @Bean
-  public Job dbToFileJob(SampleJobExecutionListener jobExecutionListener,
+  public Job dbToFileJob(JobBuilderFactory jobs,
+      SampleJobExecutionListener jobExecutionListener,
       Step dbToFileCheckTriggerFileStep,
       Step dbToFileStep,
-      Step dbToFileCreateTriggerFileStep) throws Exception {
+      Step dbToFileCreateTriggerFileStep) {
     return jobs.get("dbToFileJob")
         .incrementer(new RunIdIncrementer())
         .listener(jobExecutionListener)
@@ -120,19 +108,23 @@ public class DbToFileJobConfig {
    * DB to Fileステップ.
    *
    * @param primarySqlSessionFactory 主DB用SqlSessionFactory
+   * @param writeHeaderFlatFileCallback ヘッダーWriterCallback
+   * @param writeFooterFlatFileCallback フッターWriterCallback
    * @param stepExecutionListener ステップ実行リスナー
    * @param sampleExceptionHandler 例外ハンドラー
    * @return Step DB to Fileステップ.
    */
   @Bean
   public Step dbToFileStep(SqlSessionFactory primarySqlSessionFactory,
+      WriteHeaderFlatFileCallback writeHeaderFlatFileCallback,
+      WriteFooterFlatFileCallback writeFooterFlatFileCallback,
       SampleStepExecutionListener stepExecutionListener,
       SampleExceptionHandler sampleExceptionHandler) {
     return steps.get("dbToFileStep")
         .<CustomerFamilyEntity, CustomerFamilyFileDto>chunk(10)
         .reader(dbToFileItemReader(primarySqlSessionFactory))
         .processor(dbToFileItemProcessor())
-        .writer(dbToFileItemWriter())
+        .writer(dbToFileItemWriter(writeHeaderFlatFileCallback, writeFooterFlatFileCallback))
         .faultTolerant()
         .listener(stepExecutionListener)
         .exceptionHandler(sampleExceptionHandler)
@@ -209,16 +201,19 @@ public class DbToFileJobConfig {
   /**
    * DB to File ItemWriter.
    *
+   * @param writeHeaderFlatFileCallback ヘッダーWriterCallback
+   * @param writeFooterFlatFileCallback フッターWriterCallback
    * @return FlatFileItemWriter DB to File ItemWriter
    */
   @Bean
-  public FlatFileItemWriter<CustomerFamilyFileDto> dbToFileItemWriter() {
+  public FlatFileItemWriter<CustomerFamilyFileDto> dbToFileItemWriter(WriteHeaderFlatFileCallback writeHeaderFlatFileCallback,
+      WriteFooterFlatFileCallback writeFooterFlatFileCallback) {
     return new FlatFileItemWriterBuilder<CustomerFamilyFileDto>()
         .name("dbToFileItemWriter")
         .resource(new FileSystemResource(dataFilePath + "/" + dataFileName))
         .delimited()
         .delimiter(",")
-        .names(CustomerFamilyFileDto.FIELD)
+        .names(CustomerFamilyFileDto.getFields())
         .encoding(EncodingConst.MS932)
         .headerCallback(writeHeaderFlatFileCallback)
         .footerCallback(writeFooterFlatFileCallback)

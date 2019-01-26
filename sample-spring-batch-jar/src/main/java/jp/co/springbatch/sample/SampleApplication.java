@@ -12,9 +12,8 @@ public class SampleApplication {
   /**
    * メイン処理.
    * @param args パラメーター
-   * @throws Exception 例外
    */
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
     System.exit(SpringApplication.exit(SpringApplication.run(SampleApplication.class, args)));
   }
 }

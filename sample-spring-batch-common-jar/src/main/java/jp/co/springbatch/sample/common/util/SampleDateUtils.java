@@ -2,13 +2,12 @@ package jp.co.springbatch.sample.common.util;
 
 import jp.co.springbatch.sample.common.config.properties.SystemDateProperties;
 import jp.co.springbatch.sample.common.constant.ScopeConst;
-
+import jp.co.springbatch.sample.common.exception.SampleApplicationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -48,7 +47,7 @@ public class SampleDateUtils {
    * @param systemDateProperties システム日付プロパティ
    */
   @Autowired
-  public SampleDateUtils(SystemDateProperties systemDateProperties) {
+  private SampleDateUtils(SystemDateProperties systemDateProperties) {
     systemDate = systemDateProperties.getSystemDate();
   }
 
@@ -98,7 +97,7 @@ public class SampleDateUtils {
    *
    * @param text 日付文字列(yyyyMMdd)
    * @return Date 文字列から解析されるDate
-   * @throws RuntimeException 指定された文字列が解析できない場合
+   * @throws SampleApplicationException 指定された文字列が解析できない場合
    */
   public static Date parseDate(String text) {
     try {
@@ -106,7 +105,7 @@ public class SampleDateUtils {
 
     } catch (ParseException pe) {
       log.error(ExceptionUtils.getStackTrace(pe));
-      throw new RuntimeException(pe);
+      throw new SampleApplicationException(pe);
 
     }
   }

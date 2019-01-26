@@ -17,4 +17,8 @@ public final class ScopeConst {
   /** session. */
   public static final String SESSION = "session";
 
+  private ScopeConst() {
+    // do nothing
+  }
+
 }

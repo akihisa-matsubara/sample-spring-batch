@@ -1,11 +1,8 @@
 package jp.co.springbatch.sample.config.database;
 
 import jp.co.springbatch.sample.common.constant.ScopeConst;
-
 import javax.sql.DataSource;
-
 import com.zaxxer.hikari.HikariDataSource;
-
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -79,7 +76,7 @@ public class SecondaryDbConfig {
     SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
     bean.setDataSource(secondaryDataSource);
     bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(MAPPER_XML_PATH));
-    return (SqlSessionFactory) bean.getObject();
+    return bean.getObject();
   }
 
   /**
@@ -87,11 +84,10 @@ public class SecondaryDbConfig {
    *
    * @param secondarySqlSessionFactory 副DB用SqlSessionFactory
    * @return SqlSessionTemplate 副DB用SqlSessionTemplate
-   * @throws Exception 例外
    */
   @Bean
   public SqlSessionTemplate secondarySqlSessionTemplate(
-      @Qualifier("secondarySqlSessionFactory") SqlSessionFactory secondarySqlSessionFactory) throws Exception {
+      @Qualifier("secondarySqlSessionFactory") SqlSessionFactory secondarySqlSessionFactory) {
     return new SqlSessionTemplate(secondarySqlSessionFactory, ExecutorType.BATCH);
   }
 

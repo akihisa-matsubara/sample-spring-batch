@@ -1,7 +1,7 @@
 package jp.co.springbatch.sample.integration.service;
 
+import jp.co.springbatch.sample.common.exception.SampleApplicationException;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
-
 import java.util.List;
 
 /**
@@ -28,6 +28,7 @@ public interface SampleRestService {
    * API:/customers, Post.
    *
    * @param customers 顧客Dtoリスト
+   * @throws SampleApplicationException URI設定が不正な場合
    */
   void createCustomers(List<CustomerDto> customers);
 
@@ -36,6 +37,7 @@ public interface SampleRestService {
    *
    * @param customers 顧客Dtoリスト
    * @return 更新件数
+   * @throws SampleApplicationException URI設定が不正な場合
    */
   int updateCustomers(List<CustomerDto> customers);
 

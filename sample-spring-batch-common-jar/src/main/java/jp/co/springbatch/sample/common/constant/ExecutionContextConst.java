@@ -8,4 +8,8 @@ public final class ExecutionContextConst {
   /** エラーレコードリスト. */
   public static final String ERROR_RECORD_LIST = "error-record-list";
 
+  private ExecutionContextConst() {
+    // do nothing
+  }
+
 }
