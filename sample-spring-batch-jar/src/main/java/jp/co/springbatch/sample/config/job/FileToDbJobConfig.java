@@ -1,6 +1,22 @@
 package jp.co.springbatch.sample.config.job;
 
+import jp.co.springbatch.sample.biz.chunk.processor.PostCodeItemProcessor;
+import jp.co.springbatch.sample.biz.chunk.reader.ReadSkippedLinesCallback;
+import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
+import jp.co.springbatch.sample.common.code.FileOperationVo;
+import jp.co.springbatch.sample.common.constant.EncodingConst;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
+import jp.co.springbatch.sample.common.handler.SampleExceptionHandler;
+import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
+import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
+import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
+import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
+import jp.co.springbatch.sample.data.primary.repository.PostCodeRepository;
+
+import java.io.IOException;
+
 import javax.validation.ConstraintViolationException;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.springframework.batch.core.ExitStatus;
@@ -22,18 +38,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.PlatformTransactionManager;
-import jp.co.springbatch.sample.biz.chunk.processor.PostCodeItemProcessor;
-import jp.co.springbatch.sample.biz.chunk.reader.ReadSkippedLinesCallback;
-import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
-import jp.co.springbatch.sample.common.code.FileOperationVo;
-import jp.co.springbatch.sample.common.constant.EncodingConst;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import jp.co.springbatch.sample.common.handler.SampleExceptionHandler;
-import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
-import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
-import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
-import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
-import jp.co.springbatch.sample.data.primary.repository.PostCodeRepository;
 
 /**
  * File to DBジョブ設定.
@@ -138,6 +142,7 @@ public class FileToDbJobConfig {
         .skip(FlatFileParseException.class)
         .skip(ConstraintViolationException.class)
         .skip(EmptyResultDataAccessException.class) // Insertが空振りした場合、SkipするがRollbackはする
+        .noSkip(IOException.class)
         .noRollback(FlatFileParseException.class)
         .noRollback(ConstraintViolationException.class)
         .skipLimit(Integer.MAX_VALUE) // Unlimited

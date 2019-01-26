@@ -1,9 +1,12 @@
 package jp.co.springbatch.sample.data.dto;
 
+import jp.co.springbatch.sample.common.data.dto.ItemDtoBase;
+
 import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import jp.co.springbatch.sample.common.data.dto.ItemDtoBase;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

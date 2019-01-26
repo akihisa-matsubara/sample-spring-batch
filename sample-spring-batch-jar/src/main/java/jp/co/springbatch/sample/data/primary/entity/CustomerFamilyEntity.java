@@ -1,6 +1,7 @@
 package jp.co.springbatch.sample.data.primary.entity;
 
 import java.util.Date;
+
 import lombok.Data;
 
 /**

@@ -1,7 +1,8 @@
 package jp.co.springbatch.sample.integration.service;
 
-import java.util.List;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
+
+import java.util.List;
 
 /**
  * Sample Rest Serviceインターフェース.

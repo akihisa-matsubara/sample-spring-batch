@@ -1,5 +1,7 @@
 package jp.co.springbatch.sample.config;
 
+import jp.co.springbatch.sample.common.constant.ScopeConst;
+
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +15,6 @@ import org.springframework.batch.core.repository.support.MapJobRepositoryFactory
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
 
 /**
  * サンプルバッチ設定.

@@ -1,5 +1,10 @@
 package jp.co.springbatch.sample.config.job;
 
+import jp.co.springbatch.sample.biz.tasklet.SampleRestServiceClientTasklet;
+import jp.co.springbatch.sample.biz.tasklet.SpringBootServiceClientTasklet;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
+import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -10,10 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import jp.co.springbatch.sample.biz.tasklet.SampleRestServiceClientTasklet;
-import jp.co.springbatch.sample.biz.tasklet.SpringBootServiceClientTasklet;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
 
 /**
  * Rest Service呼び出しジョブ設定.

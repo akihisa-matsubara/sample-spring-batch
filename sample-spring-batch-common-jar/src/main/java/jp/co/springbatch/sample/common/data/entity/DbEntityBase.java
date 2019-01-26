@@ -1,6 +1,7 @@
 package jp.co.springbatch.sample.common.data.entity;
 
 import java.time.LocalDateTime;
+
 import lombok.Data;
 
 /**

@@ -1,7 +1,8 @@
 package jp.co.springbatch.sample.data.primary.repository;
 
-import org.apache.ibatis.annotations.Mapper;
 import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
+
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 郵便番号マスタリポジトリー.

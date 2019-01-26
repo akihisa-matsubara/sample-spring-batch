@@ -1,9 +1,10 @@
 package jp.co.springbatch.sample.biz.chunk.processor;
 
-import org.springframework.batch.item.ItemProcessor;
 import jp.co.springbatch.sample.common.util.SampleDateUtils;
 import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
 import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
+
+import org.springframework.batch.item.ItemProcessor;
 
 /**
  * 顧客家族ItemProcessor.

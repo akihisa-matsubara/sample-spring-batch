@@ -1,13 +1,15 @@
 package jp.co.springbatch.sample.biz.chunk.writer;
 
-import java.io.IOException;
-import java.io.Writer;
-import org.springframework.batch.item.file.FlatFileFooterCallback;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import jp.co.springbatch.sample.common.code.RecodeTypeVo;
 import jp.co.springbatch.sample.common.constant.ScopeConst;
 import jp.co.springbatch.sample.common.util.SampleDateUtils;
+
+import java.io.IOException;
+import java.io.Writer;
+
+import org.springframework.batch.item.file.FlatFileFooterCallback;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  * フッターWriterCallback.

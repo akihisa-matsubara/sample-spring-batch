@@ -1,8 +1,16 @@
 package jp.co.springbatch.sample.biz.chunk.processor;
 
+import jp.co.springbatch.sample.common.constant.ExecutionContextConst;
+import jp.co.springbatch.sample.common.util.SampleBeanValidationUtils;
+import jp.co.springbatch.sample.common.util.SampleDateUtils;
+import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
+import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.validation.ConstraintViolationException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.StepExecution;
@@ -10,11 +18,6 @@ import org.springframework.batch.core.annotation.AfterStep;
 import org.springframework.batch.core.annotation.BeforeStep;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemProcessor;
-import jp.co.springbatch.sample.common.constant.ExecutionContextConst;
-import jp.co.springbatch.sample.common.util.SampleBeanValidationUtils;
-import jp.co.springbatch.sample.common.util.SampleDateUtils;
-import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
-import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
 
 /**
  * 郵便番号ItemProcessor.

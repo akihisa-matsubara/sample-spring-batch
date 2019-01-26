@@ -1,13 +1,14 @@
 package jp.co.springbatch.sample.common.listener;
 
+import jp.co.springbatch.sample.common.constant.ScopeConst;
+import jp.co.springbatch.sample.common.util.SampleDateUtils;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import jp.co.springbatch.sample.common.util.SampleDateUtils;
 
 /**
  * ジョブ実行リスナー.

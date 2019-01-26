@@ -1,11 +1,12 @@
 package jp.co.springbatch.sample.biz.chunk.reader;
 
+import jp.co.springbatch.sample.common.constant.ScopeConst;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.file.LineCallbackHandler;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
 
 /**
  * Read Skipped Line Callback.

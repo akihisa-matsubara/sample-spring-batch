@@ -1,12 +1,15 @@
 package jp.co.springbatch.sample.common.util;
 
+import jp.co.springbatch.sample.common.data.dto.ItemDtoBase;
+
 import java.util.Set;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import jp.co.springbatch.sample.common.data.dto.ItemDtoBase;
 
 /**
  * Bean Validationユーティリティー.

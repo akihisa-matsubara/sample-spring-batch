@@ -1,11 +1,13 @@
 package jp.co.springbatch.sample.common.config.properties;
 
+import jp.co.springbatch.sample.common.constant.ScopeConst;
+
+import lombok.Getter;
+import lombok.Setter;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * システム日付プロパティ.

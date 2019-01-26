@@ -1,5 +1,9 @@
 package jp.co.springbatch.sample.integration.service.impl;
 
+import jp.co.springbatch.sample.common.constant.ScopeConst;
+import jp.co.springbatch.sample.integration.dto.QuoteDto;
+import jp.co.springbatch.sample.integration.service.SpringBootService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,9 +12,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import jp.co.springbatch.sample.integration.dto.QuoteDto;
-import jp.co.springbatch.sample.integration.service.SpringBootService;
 
 /**
  * Spring Boot Service実装.

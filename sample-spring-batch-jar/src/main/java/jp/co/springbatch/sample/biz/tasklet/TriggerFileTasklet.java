@@ -1,27 +1,26 @@
 package jp.co.springbatch.sample.biz.tasklet;
 
+import jp.co.springbatch.sample.common.code.FileOperationVo;
+import jp.co.springbatch.sample.common.util.SampleDateUtils;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import lombok.Setter;
+
 import org.springframework.batch.core.StepContribution;
-import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-import jp.co.springbatch.sample.common.code.FileOperationVo;
-import jp.co.springbatch.sample.common.util.SampleDateUtils;
-import lombok.Setter;
 
 /**
  * トリガーファイル処理.
  */
 //sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
-@StepScope
-@Component
 public class TriggerFileTasklet implements Tasklet, InitializingBean {
 
   /** ファイル操作VO. */

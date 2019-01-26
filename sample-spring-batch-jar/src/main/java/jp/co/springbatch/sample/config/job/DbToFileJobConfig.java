@@ -1,5 +1,19 @@
 package jp.co.springbatch.sample.config.job;
 
+import jp.co.springbatch.sample.biz.chunk.processor.CustomerFamilyItemProcessor;
+import jp.co.springbatch.sample.biz.chunk.writer.WriteFooterFlatFileCallback;
+import jp.co.springbatch.sample.biz.chunk.writer.WriteHeaderFlatFileCallback;
+import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
+import jp.co.springbatch.sample.common.code.FileOperationVo;
+import jp.co.springbatch.sample.common.constant.EncodingConst;
+import jp.co.springbatch.sample.common.constant.ScopeConst;
+import jp.co.springbatch.sample.common.handler.SampleExceptionHandler;
+import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
+import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
+import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
+import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
+import jp.co.springbatch.sample.data.primary.repository.CustomerFamilyRepository;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.core.ExitStatus;
@@ -17,19 +31,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
-import jp.co.springbatch.sample.biz.chunk.processor.CustomerFamilyItemProcessor;
-import jp.co.springbatch.sample.biz.chunk.writer.WriteFooterFlatFileCallback;
-import jp.co.springbatch.sample.biz.chunk.writer.WriteHeaderFlatFileCallback;
-import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
-import jp.co.springbatch.sample.common.code.FileOperationVo;
-import jp.co.springbatch.sample.common.constant.EncodingConst;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import jp.co.springbatch.sample.common.handler.SampleExceptionHandler;
-import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
-import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
-import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
-import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
-import jp.co.springbatch.sample.data.primary.repository.CustomerFamilyRepository;
 
 /**
  * DB to Fileジョブ設定.

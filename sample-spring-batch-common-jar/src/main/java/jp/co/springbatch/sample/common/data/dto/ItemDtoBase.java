@@ -1,7 +1,8 @@
 package jp.co.springbatch.sample.common.data.dto;
 
-import org.springframework.batch.item.ItemCountAware;
 import lombok.Data;
+
+import org.springframework.batch.item.ItemCountAware;
 
 /**
  * ItemDto基底クラス.
