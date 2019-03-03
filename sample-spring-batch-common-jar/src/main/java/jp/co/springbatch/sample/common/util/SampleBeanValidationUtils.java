@@ -16,6 +16,9 @@ public class SampleBeanValidationUtils {
   /** Logger. */
   private static final Logger log = LoggerFactory.getLogger(SampleBeanValidationUtils.class);
 
+  /**
+   * デフォルト・コンストラクター.
+   */
   private SampleBeanValidationUtils() {
     throw new IllegalStateException("Utility class");
   }

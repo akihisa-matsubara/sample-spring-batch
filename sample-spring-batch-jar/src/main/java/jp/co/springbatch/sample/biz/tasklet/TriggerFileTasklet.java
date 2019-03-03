@@ -1,5 +1,6 @@
 package jp.co.springbatch.sample.biz.tasklet;
 
+import jp.co.springbatch.sample.common.code.DateFormatVo;
 import jp.co.springbatch.sample.common.code.FileOperationVo;
 import jp.co.springbatch.sample.common.util.SampleDateUtils;
 import java.io.IOException;
@@ -16,7 +17,6 @@ import org.springframework.util.Assert;
 /**
  * トリガーファイル処理.
  */
-//sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 public class TriggerFileTasklet implements Tasklet, InitializingBean {
 
   /** ファイル操作VO. */
@@ -57,7 +57,7 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
   @Override
   public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
     String systemDate = SampleDateUtils.getNowDateString();
-    String replaceFileName = fileName.replace("yyyyMMdd", systemDate);
+    String replaceFileName = fileName.replace(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode(), systemDate);
 
     validate(replaceFileName);
 

@@ -1,13 +1,11 @@
 package jp.co.springbatch.sample.data.primary.entity;
 
 import java.util.Date;
-
 import lombok.Data;
 
 /**
  * 顧客家族Entity.
  */
-// sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @Data
 public class CustomerFamilyEntity {
 

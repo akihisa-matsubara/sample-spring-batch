@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 /**
  * 顧客家族FileDto.
  */
-// sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @NoArgsConstructor
 @AllArgsConstructor
 @Data

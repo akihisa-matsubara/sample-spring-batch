@@ -5,7 +5,6 @@ import lombok.Getter;
 /**
  * レコード種別VO.
  */
-// sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @Getter
 public enum RecodeTypeVo implements CodeVo {
 

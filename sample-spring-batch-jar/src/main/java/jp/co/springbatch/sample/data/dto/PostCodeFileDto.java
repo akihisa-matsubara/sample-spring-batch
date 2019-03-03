@@ -16,8 +16,6 @@ import lombok.ToString;
 /**
  * 郵便番号FileDto.
  */
-// sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
-// ExecutionContextへ格納するためにSerializableをimplementsします
 @NoArgsConstructor
 @AllArgsConstructor
 @Data()

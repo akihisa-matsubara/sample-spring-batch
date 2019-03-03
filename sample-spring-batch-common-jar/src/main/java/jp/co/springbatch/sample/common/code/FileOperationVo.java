@@ -5,7 +5,6 @@ import lombok.Getter;
 /**
  * ファイル操作VO.
  */
-// sampleではコード簡易化のためLombokを利用しますが、実装ではLombokを利用しないでください
 @Getter
 public enum FileOperationVo implements CodeVo {
 
