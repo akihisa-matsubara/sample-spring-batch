@@ -3,7 +3,7 @@ package jp.co.springbatch.sample.common.code;
 import lombok.Getter;
 
 /**
- * ファイル操作VO.
+ * 日付フォーマットVO.
  */
 @Getter
 public enum DateFormatVo implements CodeVo {
