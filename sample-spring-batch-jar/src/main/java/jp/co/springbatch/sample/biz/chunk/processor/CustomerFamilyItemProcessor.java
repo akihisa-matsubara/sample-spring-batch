@@ -1,9 +1,8 @@
 package jp.co.springbatch.sample.biz.chunk.processor;
 
-import jp.co.springbatch.sample.common.util.SampleDateUtils;
+import jp.co.springbatch.framework.util.SampleDateUtils;
 import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
 import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
-
 import org.springframework.batch.item.ItemProcessor;
 
 /**
@@ -32,15 +31,18 @@ public class CustomerFamilyItemProcessor implements ItemProcessor<CustomerFamily
    * @return CustomerFamilyFileDto 顧客家族FileDto
    */
   private CustomerFamilyFileDto convert(final CustomerFamilyEntity customerFamilyEntity) {
-    return new CustomerFamilyFileDto(
-        customerFamilyEntity.getCustomerNo(),
-        customerFamilyEntity.getCustomerNameKanji(),
-        customerFamilyEntity.getCustomerNameKana(),
-        customerFamilyEntity.getCustomerGender(),
-        SampleDateUtils.formatDate(customerFamilyEntity.getCustomerBirthday()),
-        customerFamilyEntity.getFamilyNo(), customerFamilyEntity.getFamilyNameKanji(),
-        customerFamilyEntity.getFamilyNameKana(), customerFamilyEntity.getFamilyGender(),
-        SampleDateUtils.formatDate(customerFamilyEntity.getFamilyBirthday()));
+    return CustomerFamilyFileDto.builder()
+        .customerNo(customerFamilyEntity.getCustomerNo())
+        .customerNameKanji(customerFamilyEntity.getCustomerNameKanji())
+        .customerNameKana(customerFamilyEntity.getCustomerNameKana())
+        .customerGender(customerFamilyEntity.getCustomerGender())
+        .customerBirthday(SampleDateUtils.formatDate(customerFamilyEntity.getCustomerBirthday()))
+        .familyNo(customerFamilyEntity.getFamilyNo())
+        .familyNameKanji(customerFamilyEntity.getFamilyNameKanji())
+        .familyNameKana(customerFamilyEntity.getFamilyNameKana())
+        .familyGender(customerFamilyEntity.getFamilyGender())
+        .familyBirthday(SampleDateUtils.formatDate(customerFamilyEntity.getFamilyBirthday()))
+        .build();
   }
 
 }

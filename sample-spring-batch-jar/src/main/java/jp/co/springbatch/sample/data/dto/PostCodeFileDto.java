@@ -1,6 +1,6 @@
 package jp.co.springbatch.sample.data.dto;
 
-import jp.co.springbatch.sample.common.data.dto.ItemDtoBase;
+import jp.co.springbatch.framework.data.dto.ItemDtoBase;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;

@@ -1,7 +1,7 @@
 package jp.co.springbatch.sample.biz.tasklet;
 
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import jp.co.springbatch.sample.common.util.SampleDateUtils;
+import jp.co.springbatch.framework.constant.ScopeConst;
+import jp.co.springbatch.framework.util.SampleDateUtils;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
 import java.util.ArrayList;

@@ -3,15 +3,13 @@ package jp.co.springbatch.sample.data.dto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * 顧客家族FileDto.
  */
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 @Data
 public class CustomerFamilyFileDto {
 

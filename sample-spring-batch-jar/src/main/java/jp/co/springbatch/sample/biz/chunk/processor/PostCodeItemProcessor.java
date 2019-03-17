@@ -1,16 +1,15 @@
 package jp.co.springbatch.sample.biz.chunk.processor;
 
-import jp.co.springbatch.sample.common.constant.ExecutionContextConst;
-import jp.co.springbatch.sample.common.util.SampleBeanValidationUtils;
-import jp.co.springbatch.sample.common.util.SampleDateUtils;
+import jp.co.springbatch.framework.code.ExecutionContextVo;
+import jp.co.springbatch.framework.constant.BatchConst;
+import jp.co.springbatch.framework.util.SampleBeanValidationUtils;
+import jp.co.springbatch.framework.util.SampleDateUtils;
+import jp.co.springbatch.sample.code.BatchVo;
 import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
 import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.validation.ConstraintViolationException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.StepExecution;
@@ -49,17 +48,14 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
   public void afterStep() {
     ExecutionContext stepExecutionContext = stepExecution.getExecutionContext();
 
-    if (stepExecutionContext.get(ExecutionContextConst.ERROR_RECORD_LIST) == null) {
+
+    List<PostCodeFileDto> errorRecordList = (List<PostCodeFileDto>)stepExecutionContext.remove(ExecutionContextVo.ERROR_RECORDS.getCode());
+    if (errorRecordList == null) {
       return;
     }
 
-    List<PostCodeFileDto> errorRecordList = (List<PostCodeFileDto>)stepExecutionContext.remove(ExecutionContextConst.ERROR_RECORD_LIST);
-
     // サンプルでは出力先をログにしています
-    for (PostCodeFileDto dto : errorRecordList) {
-      log.warn("validate error record. {}", dto);
-
-    }
+    errorRecordList.forEach(errorRecord -> log.warn("validate error record. {}", errorRecord));
   }
 
   /**
@@ -90,17 +86,17 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
     } catch (ConstraintViolationException cv) {
       ExecutionContext stepExecutionContext = stepExecution.getExecutionContext();
 
-      List<PostCodeFileDto> errorRecordList = null;
-      if (stepExecutionContext.get(ExecutionContextConst.ERROR_RECORD_LIST) == null) {
+      List<PostCodeFileDto> errorRecordList = (List<PostCodeFileDto>) stepExecutionContext.get(ExecutionContextVo.ERROR_RECORDS.getCode());;
+      if (errorRecordList == null) {
         errorRecordList = new ArrayList<>();
-        stepExecutionContext.put(ExecutionContextConst.ERROR_RECORD_LIST, errorRecordList);
+        errorRecordList.add(postCodeFileDto);
+        stepExecutionContext.put(ExecutionContextVo.ERROR_RECORDS.getCode(), errorRecordList);
 
       } else {
-        errorRecordList = (List<PostCodeFileDto>) stepExecutionContext.get(ExecutionContextConst.ERROR_RECORD_LIST);
+        errorRecordList.add(postCodeFileDto);
 
       }
 
-      errorRecordList.add(postCodeFileDto);
       throw cv;
 
     }
@@ -114,20 +110,18 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
    * @return PostCodeEntity 郵便番号マスタEntity
    */
   private PostCodeEntity convert(final PostCodeFileDto postCodeFileDto) {
-    PostCodeEntity entity = new PostCodeEntity();
-    entity.setPostCode(postCodeFileDto.getPostCode());
-    entity.setPrefectureName(postCodeFileDto.getPrefectureNameKanji());
-    entity.setCityName(postCodeFileDto.getCityNameKanji());
-    entity.setTownName(postCodeFileDto.getTownNameKanji());
-
-    // common culomn
-    entity.setVersion(1);
-    entity.setCreationUserId("fileToDb");
-    entity.setCreationDate(SampleDateUtils.getNowLocalDateTime());
-    entity.setUpdatedUserId("fileToDb");
-    entity.setUpdatedDate(SampleDateUtils.getNowLocalDateTime());
-
-    return entity;
+    return PostCodeEntity.builder()
+        .postCode(postCodeFileDto.getPostCode())
+        .prefectureName(postCodeFileDto.getPrefectureNameKanji())
+        .cityName(postCodeFileDto.getCityNameKanji())
+        .townName(postCodeFileDto.getTownNameKanji())
+        // common column
+        .version(BatchConst.VERSION_INITIAL_VALUE)
+        .creationUserId(BatchVo.FILE_TO_DB.getCode())
+        .creationDate(SampleDateUtils.getNowLocalDateTime())
+        .updatedUserId(BatchVo.FILE_TO_DB.getCode())
+        .updatedDate(SampleDateUtils.getNowLocalDateTime())
+        .build();
   }
 
 }

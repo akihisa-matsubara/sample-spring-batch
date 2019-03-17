@@ -1,8 +1,8 @@
 package jp.co.springbatch.sample.biz.tasklet;
 
-import jp.co.springbatch.sample.common.code.DateFormatVo;
-import jp.co.springbatch.sample.common.code.FileOperationVo;
-import jp.co.springbatch.sample.common.util.SampleDateUtils;
+import jp.co.springbatch.framework.code.DateFormatVo;
+import jp.co.springbatch.framework.code.TriggerFileOperationVo;
+import jp.co.springbatch.framework.util.SampleDateUtils;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,9 +19,9 @@ import org.springframework.util.Assert;
  */
 public class TriggerFileTasklet implements Tasklet, InitializingBean {
 
-  /** ファイル操作VO. */
+  /** トリガーファイル操作VO. */
   @Setter
-  private FileOperationVo operation;
+  private TriggerFileOperationVo operation;
 
   /** ファイルパス. */
   @Setter
@@ -77,11 +77,11 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
     Assert.isTrue(Paths.get(filePath).toFile().isDirectory(), "not a directory.");
 
     switch (operation) {
-      case CHECK_CREATE:
+      case CREATE_CHECK:
         Assert.state(!Paths.get(filePath, targetFile).toFile().exists(), "trigger file exists. trigger file=" + filePath + "/" + targetFile);
         break;
 
-      case CHECK_DELETE:
+      case DELETE_CHECK:
         Assert.state(Paths.get(filePath, targetFile).toFile().exists(), "trigger file does not exists. trigger file=" + filePath + "/" + targetFile);
         break;
 
@@ -100,11 +100,11 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
    */
   private void process(String targetFile, String systemDate) throws IOException {
     switch (operation) {
-      case CREATE:
+      case CREATE_PROCCESS:
         Files.write(Paths.get(filePath, targetFile), systemDate.getBytes());
         break;
 
-      case DELETE:
+      case DELETE_PROCCESS:
         Files.delete(Paths.get(filePath, targetFile));
         break;
 

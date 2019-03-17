@@ -10,14 +10,19 @@ spring:
     banner-mode: "off"
     web-application-type: none
 
+
+# -----------------------------------------------------------------------------
+# Framework configurations
+# -----------------------------------------------------------------------------
+framework:
+  # format yyyyMMdd
+  system-date:
+
+
 # -----------------------------------------------------------------------------
 # Sample Application configurations
 # -----------------------------------------------------------------------------
 sample:
-  common:
-    # format yyyyMMdd
-    system-date: 
-
   file:
     db-to-file:
       data-file:

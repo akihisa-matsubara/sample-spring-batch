@@ -1,7 +1,6 @@
 package jp.co.springbatch.sample.config.database;
 
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-
+import jp.co.springbatch.framework.constant.ScopeConst;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;

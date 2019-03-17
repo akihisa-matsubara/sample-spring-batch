@@ -14,12 +14,16 @@ logging:
 
 
 # -----------------------------------------------------------------------------
+# Framework configurations
+# -----------------------------------------------------------------------------
+framework:
+  system-date: 20190101 # Override
+
+
+# -----------------------------------------------------------------------------
 # Sample Application configurations
 # -----------------------------------------------------------------------------
 sample:
-  common:
-    system-date: 20190101 # Override
-
   datasource:
     # encoding UTF-8 (default)
     primary:
@@ -50,4 +54,4 @@ sample:
 
   service:
     sample-rest-service:
-      base-url: http://localhost:9080/sample-rest-service-webapi/api/v1
+      base-url: http://localhost:9080/sample-rest-service-webapi/api/v1/sample

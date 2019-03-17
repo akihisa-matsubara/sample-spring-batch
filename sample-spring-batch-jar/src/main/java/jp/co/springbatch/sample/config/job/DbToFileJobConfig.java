@@ -1,15 +1,15 @@
 package jp.co.springbatch.sample.config.job;
 
+import jp.co.springbatch.framework.code.EncodingVo;
+import jp.co.springbatch.framework.code.TriggerFileOperationVo;
+import jp.co.springbatch.framework.constant.ScopeConst;
+import jp.co.springbatch.framework.handler.SampleExceptionHandler;
+import jp.co.springbatch.framework.listener.SampleJobExecutionListener;
+import jp.co.springbatch.framework.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.biz.chunk.processor.CustomerFamilyItemProcessor;
 import jp.co.springbatch.sample.biz.chunk.writer.WriteFooterFlatFileCallback;
 import jp.co.springbatch.sample.biz.chunk.writer.WriteHeaderFlatFileCallback;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
-import jp.co.springbatch.sample.common.code.FileOperationVo;
-import jp.co.springbatch.sample.common.constant.EncodingConst;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import jp.co.springbatch.sample.common.handler.SampleExceptionHandler;
-import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
-import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
 import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
 import jp.co.springbatch.sample.data.primary.repository.CustomerFamilyRepository;
@@ -151,7 +151,7 @@ public class DbToFileJobConfig {
   @Bean
   public TriggerFileTasklet dbToFileCheckTriggerFileTasklet() {
     TriggerFileTasklet tasklet = new TriggerFileTasklet();
-    tasklet.setOperation(FileOperationVo.CHECK_CREATE);
+    tasklet.setOperation(TriggerFileOperationVo.CREATE_CHECK);
     tasklet.setFilePath(triggerFilePath);
     tasklet.setFileName(triggerFileName);
     return tasklet;
@@ -165,7 +165,7 @@ public class DbToFileJobConfig {
   @Bean
   public TriggerFileTasklet dbToFileCreateTriggerFileTasklet() {
     TriggerFileTasklet tasklet = new TriggerFileTasklet();
-    tasklet.setOperation(FileOperationVo.CREATE);
+    tasklet.setOperation(TriggerFileOperationVo.CREATE_PROCCESS);
     tasklet.setFilePath(triggerFilePath);
     tasklet.setFileName(triggerFileName);
     return tasklet;
@@ -214,7 +214,7 @@ public class DbToFileJobConfig {
         .delimited()
         .delimiter(",")
         .names(CustomerFamilyFileDto.getFields())
-        .encoding(EncodingConst.MS932)
+        .encoding(EncodingVo.MS932.getCode())
         .headerCallback(writeHeaderFlatFileCallback)
         .footerCallback(writeFooterFlatFileCallback)
         .build();

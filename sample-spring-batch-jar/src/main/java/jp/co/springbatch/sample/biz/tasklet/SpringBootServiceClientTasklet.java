@@ -1,6 +1,6 @@
 package jp.co.springbatch.sample.biz.tasklet;
 
-import jp.co.springbatch.sample.common.constant.ScopeConst;
+import jp.co.springbatch.framework.constant.ScopeConst;
 import jp.co.springbatch.sample.integration.service.SpringBootService;
 
 import org.springframework.batch.core.StepContribution;

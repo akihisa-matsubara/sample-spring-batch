@@ -1,13 +1,15 @@
 package jp.co.springbatch.sample.data.primary.entity;
 
-import jp.co.springbatch.sample.common.data.entity.DbEntityBase;
+import jp.co.springbatch.framework.data.entity.DbEntityBase;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 郵便番号マスタEntity.
  */
+@SuperBuilder
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)

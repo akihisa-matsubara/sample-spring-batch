@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 /**
  * Value Dto.
  */
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ValueDto {

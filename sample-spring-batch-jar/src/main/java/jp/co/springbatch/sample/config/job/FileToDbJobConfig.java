@@ -1,14 +1,14 @@
 package jp.co.springbatch.sample.config.job;
 
+import jp.co.springbatch.framework.code.EncodingVo;
+import jp.co.springbatch.framework.code.TriggerFileOperationVo;
+import jp.co.springbatch.framework.constant.ScopeConst;
+import jp.co.springbatch.framework.handler.SampleExceptionHandler;
+import jp.co.springbatch.framework.listener.SampleJobExecutionListener;
+import jp.co.springbatch.framework.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.biz.chunk.processor.PostCodeItemProcessor;
 import jp.co.springbatch.sample.biz.chunk.reader.ReadSkippedLinesCallback;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
-import jp.co.springbatch.sample.common.code.FileOperationVo;
-import jp.co.springbatch.sample.common.constant.EncodingConst;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import jp.co.springbatch.sample.common.handler.SampleExceptionHandler;
-import jp.co.springbatch.sample.common.listener.SampleJobExecutionListener;
-import jp.co.springbatch.sample.common.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
 import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
 import jp.co.springbatch.sample.data.primary.repository.PostCodeRepository;
@@ -165,7 +165,7 @@ public class FileToDbJobConfig {
   @Bean
   public TriggerFileTasklet fileToDbCheckTriggerFileTasklet() {
     TriggerFileTasklet tasklet = new TriggerFileTasklet();
-    tasklet.setOperation(FileOperationVo.CHECK_DELETE);
+    tasklet.setOperation(TriggerFileOperationVo.DELETE_CHECK);
     tasklet.setFilePath(triggerFilePath);
     tasklet.setFileName(triggerFileName);
     return tasklet;
@@ -179,7 +179,7 @@ public class FileToDbJobConfig {
   @Bean
   public TriggerFileTasklet fileToDbDeleteTriggerFileTasklet() {
     TriggerFileTasklet tasklet = new TriggerFileTasklet();
-    tasklet.setOperation(FileOperationVo.DELETE);
+    tasklet.setOperation(TriggerFileOperationVo.DELETE_PROCCESS);
     tasklet.setFilePath(triggerFilePath);
     tasklet.setFileName(triggerFileName);
     return tasklet;
@@ -203,7 +203,7 @@ public class FileToDbJobConfig {
         .delimited()
         .delimiter(",")
         .names(PostCodeFileDto.getFields())
-        .encoding(EncodingConst.MS932)
+        .encoding(EncodingVo.MS932.getCode())
         .fieldSetMapper(new BeanWrapperFieldSetMapper<PostCodeFileDto>() {
           {
             setTargetType(PostCodeFileDto.class);

@@ -1,9 +1,8 @@
 package jp.co.springbatch.sample.biz.chunk.writer;
 
-import jp.co.springbatch.sample.common.code.RecodeTypeVo;
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import jp.co.springbatch.sample.common.util.SampleDateUtils;
-
+import jp.co.springbatch.framework.code.RecodeTypeVo;
+import jp.co.springbatch.framework.constant.ScopeConst;
+import jp.co.springbatch.framework.util.SampleDateUtils;
 import java.io.IOException;
 import java.io.Writer;
 

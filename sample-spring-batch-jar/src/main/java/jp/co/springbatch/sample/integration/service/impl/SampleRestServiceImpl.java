@@ -1,8 +1,12 @@
 package jp.co.springbatch.sample.integration.service.impl;
 
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-import jp.co.springbatch.sample.common.exception.SampleApplicationException;
+import jp.co.springbatch.framework.constant.ScopeConst;
+import jp.co.springbatch.framework.exception.ApplicationException;
+import jp.co.springbatch.framework.integration.dto.IntegerResponseDto;
+import jp.co.springbatch.framework.integration.dto.ObjectResponseDto;
 import jp.co.springbatch.sample.integration.dto.CustomerDto;
+import jp.co.springbatch.sample.integration.dto.CustomerResponseDto;
+import jp.co.springbatch.sample.integration.dto.CustomersResponseDto;
 import jp.co.springbatch.sample.integration.service.SampleRestService;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -78,9 +82,9 @@ public class SampleRestServiceImpl implements SampleRestService {
    */
   @Override
   public CustomerDto getCustomer(String customerNo) {
-    ResponseEntity<CustomerDto> response = restTemplate.getForEntity(url + "/{customerNo}", CustomerDto.class, customerNo);
+    ResponseEntity<CustomerResponseDto> response = restTemplate.getForEntity(url + "/{customerNo}", CustomerResponseDto.class, customerNo);
     log.info("SampleRestService get customer response: httpStatus=[{}], customer=[{}]", response.getStatusCode(), response.getBody());
-    return response.getBody();
+    return response.getBody().getResponse();
   }
 
   /**
@@ -88,10 +92,10 @@ public class SampleRestServiceImpl implements SampleRestService {
    */
   @Override
   public List<CustomerDto> getCustomers() {
-    ResponseEntity<List<CustomerDto>> response =
-        restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<List<CustomerDto>>() {});
+    ResponseEntity<CustomersResponseDto> response =
+        restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<CustomersResponseDto>() {});
     log.info("SampleRestService get customers response: httpStatus=[{}], customers=[{}]", response.getStatusCode(), response.getBody());
-    return response.getBody();
+    return response.getBody().getResponse();
   }
 
   /**
@@ -105,11 +109,11 @@ public class SampleRestServiceImpl implements SampleRestService {
 
     } catch (URISyntaxException use) {
       log.error(ExceptionUtils.getStackTrace(use));
-      throw new SampleApplicationException(use);
+      throw new ApplicationException(use);
 
     }
 
-    ResponseEntity<Object> response = restTemplate.exchange(requestEntity, Object.class);
+    ResponseEntity<ObjectResponseDto> response = restTemplate.exchange(requestEntity, ObjectResponseDto.class);
     log.info("SampleRestService create customers: httpStatus=[{}], customers=[{}]", response.getStatusCode(), customers);
   }
 
@@ -124,16 +128,21 @@ public class SampleRestServiceImpl implements SampleRestService {
 
     } catch (URISyntaxException use) {
       log.error(ExceptionUtils.getStackTrace(use));
-      throw new SampleApplicationException(use);
+      throw new ApplicationException(use);
 
     }
 
-    ResponseEntity<Integer> response = restTemplate.exchange(requestEntity, Integer.class);
+    ResponseEntity<IntegerResponseDto> response = restTemplate.exchange(requestEntity, IntegerResponseDto.class);
+
+    if (response == null || response.getBody() == null) {
+      log.info("SampleRestService update customers: no update.");
+      return 0;
+    }
 
     log.info("SampleRestService update customers: httpStatus=[{}], updateCount=[{}], customers=[{}]", response.getStatusCode(),
         response.getBody(), customers);
 
-    return response.getBody();
+    return response.getBody().getResponse() == null ? 0 : response.getBody().getResponse();
   }
 
   /**

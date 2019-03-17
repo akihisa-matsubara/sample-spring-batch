@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 /**
  * 顧客Dto.
  */
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CustomerDto {

@@ -1,6 +1,6 @@
 package jp.co.springbatch.sample.config.database;
 
-import jp.co.springbatch.sample.common.constant.ScopeConst;
+import jp.co.springbatch.framework.constant.ScopeConst;
 import javax.sql.DataSource;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.ExecutorType;

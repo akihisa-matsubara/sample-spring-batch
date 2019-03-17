@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 /**
  * 引用文Dto.
  */
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class QuoteDto {

@@ -1,7 +1,6 @@
 package jp.co.springbatch.sample.biz.chunk.reader;
 
-import jp.co.springbatch.sample.common.constant.ScopeConst;
-
+import jp.co.springbatch.framework.constant.ScopeConst;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.file.LineCallbackHandler;
