@@ -29,7 +29,7 @@ public class SampleDateUtils {
       DateTimeFormatter.ofPattern(DateFormatVo.YYYYMMDDHHMMSSSSS_NO_DELIMITER.getCode());
 
   /** Logger. */
-  private static final Logger log = LoggerFactory.getLogger(SampleDateUtils.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SampleDateUtils.class);
 
   /** システム日付. */
   private static String systemDate;
@@ -97,7 +97,7 @@ public class SampleDateUtils {
       return new SimpleDateFormat(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode()).parse(text);
 
     } catch (ParseException pe) {
-      log.error(ExceptionUtils.getStackTrace(pe));
+      LOGGER.error(ExceptionUtils.getStackTrace(pe));
       throw new ApplicationException(pe);
 
     }

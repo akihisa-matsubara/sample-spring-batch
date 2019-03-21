@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Scope;
 public class ApplicationConfig {
 
   /** Logger. */
-  private static final Logger log = LoggerFactory.getLogger(ApplicationConfig.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
   /**
    * in-memoryジョブリポジトリ.
@@ -59,7 +59,7 @@ public class ApplicationConfig {
           this.jobLauncher = launcher;
 
         } catch (Exception e) {
-          log.error(ExceptionUtils.getStackTrace(e));
+          LOGGER.error(ExceptionUtils.getStackTrace(e));
 
         }
       }

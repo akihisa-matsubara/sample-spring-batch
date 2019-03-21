@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class ReadSkippedLinesCallback implements LineCallbackHandler {
 
   /** Logger. */
-  private static final Logger log = LoggerFactory.getLogger(ReadSkippedLinesCallback.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ReadSkippedLinesCallback.class);
 
   /**
    * Skip時のコールバック.
@@ -25,7 +25,7 @@ public class ReadSkippedLinesCallback implements LineCallbackHandler {
    */
   @Override
   public void handleLine(String line) {
-    log.debug("skipped line: {}", line);
+    LOGGER.debug("skipped line: {}", line);
   }
 
 }

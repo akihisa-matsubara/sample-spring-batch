@@ -21,7 +21,7 @@ import org.springframework.web.client.RestTemplate;
 public class SpringBootServiceImpl implements SpringBootService {
 
   /** Logger. */
-  private static final Logger log = LoggerFactory.getLogger(SpringBootServiceImpl.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SpringBootServiceImpl.class);
 
   /** RestTemplate. */
   // thread safe
@@ -46,7 +46,7 @@ public class SpringBootServiceImpl implements SpringBootService {
   @Override
   public QuoteDto getRandomQuotation() {
     ResponseEntity<QuoteDto> response = restTemplate.getForEntity(url, QuoteDto.class);
-    log.info("SpringBootService get random response: httpStatus=[{}], quote=[{}]", response.getStatusCode(), response.getBody());
+    LOGGER.info("SpringBootService get random response: httpStatus=[{}], quote=[{}]", response.getStatusCode(), response.getBody());
     return response.getBody();
   }
 

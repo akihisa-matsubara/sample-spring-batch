@@ -14,11 +14,29 @@
         <version>1.0.0</version>
     </parent>
 
+    <properties>
+        <!-- override -->
+        <project.lib.path>${basedir}/../lib</project.lib.path>
+    </properties>
+
     <dependencies>
+        <!-- Spring Boot -->
+        <!-- for multiple datasource -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-commons</artifactId>
+        </dependency>
+        <!-- MyBatis -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- application -->
         <dependency>
             <groupId>jp.co.springbatch.sample</groupId>
             <artifactId>sample-spring-batch-common-jar</artifactId>
-            <version>1.0.0</version>
+            <version>${project.version}</version>
         </dependency>
 
         <!-- system scope -->
@@ -27,7 +45,7 @@
             <artifactId>db2jcc4</artifactId>
             <version>11.1</version>
             <scope>system</scope>
-            <systemPath>${basedir}/../lib/db2jcc4.jar</systemPath>
+            <systemPath>${project.lib.path}/db2jcc4.jar</systemPath>
         </dependency>
     </dependencies>
 

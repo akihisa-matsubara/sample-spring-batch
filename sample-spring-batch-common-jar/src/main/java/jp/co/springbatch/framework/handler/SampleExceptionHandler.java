@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class SampleExceptionHandler implements ExceptionHandler {
 
   /** Logger. */
-  private static final Logger log = LoggerFactory.getLogger(SampleExceptionHandler.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SampleExceptionHandler.class);
 
   /**
    * 例外ハンドラー処理.
@@ -26,7 +26,7 @@ public class SampleExceptionHandler implements ExceptionHandler {
    */
   @Override
   public void handleException(RepeatContext context, Throwable throwable) throws Throwable {
-    log.error("exception handler.");
+    LOGGER.error("exception handler.");
   }
 
 }

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class SampleStepExecutionListener extends StepExecutionListenerSupport {
 
   /** Logger. */
-  private static final Logger log = LoggerFactory.getLogger(SampleStepExecutionListener.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SampleStepExecutionListener.class);
 
   /**
    * ステップ開始時処理.
@@ -32,7 +32,7 @@ public class SampleStepExecutionListener extends StepExecutionListenerSupport {
    */
   @Override
   public ExitStatus afterStep(StepExecution stepExecution) {
-    log.info("detailed results of step execution. readCount=[{}], writeCount=[{}], commitCount=[{}], rollbackCount=[{}], "
+    LOGGER.info("detailed results of step execution. readCount=[{}], writeCount=[{}], commitCount=[{}], rollbackCount=[{}], "
             + "skipCount=[read=[{}], process=[{}], write=[{}]], filterCount=[{}]",
         stepExecution.getReadCount(),
         stepExecution.getWriteCount(),

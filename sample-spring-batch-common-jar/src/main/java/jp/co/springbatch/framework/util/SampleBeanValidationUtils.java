@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 public class SampleBeanValidationUtils {
 
   /** Logger. */
-  private static final Logger log = LoggerFactory.getLogger(SampleBeanValidationUtils.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SampleBeanValidationUtils.class);
 
   /**
    * デフォルトコンストラクタ.
@@ -38,8 +38,8 @@ public class SampleBeanValidationUtils {
     }
 
     // fault
-    constraintViolations.forEach(cv -> log.warn("a validation error occurred. {}", cv.getMessage()));
-    log.warn("{}", bean);
+    constraintViolations.forEach(cv -> LOGGER.warn("a validation error occurred. {}", cv.getMessage()));
+    LOGGER.warn("{}", bean);
 
     throw new ConstraintViolationException(constraintViolations);
   }

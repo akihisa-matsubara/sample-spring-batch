@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 public class SampleJobExecutionListener extends JobExecutionListenerSupport {
 
   /** Logger. */
-  private static final Logger log = LoggerFactory.getLogger(SampleJobExecutionListener.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(SampleJobExecutionListener.class);
 
   /**
    * ジョブ開始時処理.
@@ -32,7 +32,7 @@ public class SampleJobExecutionListener extends JobExecutionListenerSupport {
    */
   @Override
   public void afterJob(JobExecution jobExecution) {
-    log.info(
+    LOGGER.info(
         "detailed results of job execution. jobName=[{}], jobParameter=[{}], "
             + "exitCode=[{}], exitDesctioption=[{}], time=[{}-{}], context=[{}], exceptions=[{}]",
         jobExecution.getJobInstance().getJobName(),
@@ -47,7 +47,7 @@ public class SampleJobExecutionListener extends JobExecutionListenerSupport {
     jobExecution.getStepExecutions().forEach(stepExecution -> {
       Object errorItem = stepExecution.getExecutionContext().get("ERROR_ITEM");
       if (errorItem != null) {
-        log.error("detected error on this item processing. [step:{}] [item:{}]", stepExecution.getStepName(), errorItem);
+        LOGGER.error("detected error on this item processing. [step:{}] [item:{}]", stepExecution.getStepName(), errorItem);
       }
     });
   }

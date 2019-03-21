@@ -24,7 +24,7 @@ import org.springframework.batch.item.ItemProcessor;
 public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, PostCodeEntity> {
 
   /** Logger. */
-  private static final Logger log = LoggerFactory.getLogger(PostCodeItemProcessor.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(PostCodeItemProcessor.class);
 
   /** ステップ実行情報. */
   private StepExecution stepExecution;
@@ -55,7 +55,7 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
     }
 
     // サンプルでは出力先をログにしています
-    errorRecordList.forEach(errorRecord -> log.warn("validate error record. {}", errorRecord));
+    errorRecordList.forEach(errorRecord -> LOGGER.warn("validate error record. {}", errorRecord));
   }
 
   /**
