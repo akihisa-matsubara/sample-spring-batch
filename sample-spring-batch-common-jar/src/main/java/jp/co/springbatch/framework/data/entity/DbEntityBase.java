@@ -1,5 +1,6 @@
 package jp.co.springbatch.framework.data.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
@@ -10,7 +11,10 @@ import lombok.experimental.SuperBuilder;
  */
 @SuperBuilder
 @Data
-public abstract class DbEntityBase {
+public abstract class DbEntityBase implements Serializable {
+
+  /** serialVersionUID. */
+  private static final long serialVersionUID = 7578479167785893500L;
 
   /** バージョン. */
   private int version;

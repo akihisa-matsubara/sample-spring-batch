@@ -15,6 +15,9 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 public class PostCodeEntity extends DbEntityBase {
 
+  /** serialVersionUID. */
+  private static final long serialVersionUID = -3324390606538995849L;
+
   /** 郵便番号. */
   private String postCode;
 

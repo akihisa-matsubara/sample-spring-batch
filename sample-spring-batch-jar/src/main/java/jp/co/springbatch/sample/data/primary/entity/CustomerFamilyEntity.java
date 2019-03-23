@@ -1,13 +1,23 @@
 package jp.co.springbatch.sample.data.primary.entity;
 
+import jp.co.springbatch.framework.data.entity.DbEntityBase;
 import java.util.Date;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 /**
  * 顧客家族Entity.
  */
+@SuperBuilder
 @Data
-public class CustomerFamilyEntity {
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
+public class CustomerFamilyEntity extends DbEntityBase {
+
+  /** serialVersionUID. */
+  private static final long serialVersionUID = -1715084226067248273L;
 
   /** 顧客番号. */
   private String customerNo;
