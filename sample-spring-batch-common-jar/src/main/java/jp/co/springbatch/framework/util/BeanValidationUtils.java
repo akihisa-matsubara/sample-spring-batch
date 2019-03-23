@@ -11,15 +11,15 @@ import org.slf4j.LoggerFactory;
 /**
  * Bean Validationユーティリティー.
  */
-public class SampleBeanValidationUtils {
+public class BeanValidationUtils {
 
   /** Logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(SampleBeanValidationUtils.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(BeanValidationUtils.class);
 
   /**
    * デフォルトコンストラクタ.
    */
-  private SampleBeanValidationUtils() {
+  private BeanValidationUtils() {
     throw new IllegalStateException("Utility class");
   }
 

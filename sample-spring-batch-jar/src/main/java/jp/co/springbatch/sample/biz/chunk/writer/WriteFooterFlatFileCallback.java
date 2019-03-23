@@ -2,7 +2,7 @@ package jp.co.springbatch.sample.biz.chunk.writer;
 
 import jp.co.springbatch.framework.code.RecodeTypeVo;
 import jp.co.springbatch.framework.constant.ScopeConst;
-import jp.co.springbatch.framework.util.SampleDateUtils;
+import jp.co.springbatch.framework.util.SystemDateUtils;
 import java.io.IOException;
 import java.io.Writer;
 
@@ -26,7 +26,7 @@ public class WriteFooterFlatFileCallback implements FlatFileFooterCallback {
    */
   @Override
   public void writeFooter(Writer writer) throws IOException {
-    writer.write(RecodeTypeVo.TRAILER_RECORD.getCode() + "," + SampleDateUtils.getNowDateString());
+    writer.write(RecodeTypeVo.TRAILER_RECORD.getCode() + "," + SystemDateUtils.getNowDateString());
   }
 
 }

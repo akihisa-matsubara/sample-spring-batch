@@ -3,7 +3,7 @@ package jp.co.springbatch.framework.util;
 import static org.junit.Assert.fail;
 import org.junit.Test;
 
-public class SampleDateUtilsTest {
+public class SystemDateUtilsTest {
 
   @Test
   public void test() {

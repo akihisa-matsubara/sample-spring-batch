@@ -1,7 +1,8 @@
 package jp.co.springbatch.framework.listener;
 
+import jp.co.springbatch.framework.code.DateFormatVo;
 import jp.co.springbatch.framework.constant.ScopeConst;
-import jp.co.springbatch.framework.util.SampleDateUtils;
+import jp.co.springbatch.framework.util.DateFormatUtilsExt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.JobExecution;
@@ -39,8 +40,8 @@ public class SampleJobExecutionListener extends JobExecutionListenerSupport {
         jobExecution.getJobParameters(),
         jobExecution.getExitStatus().getExitCode(),
         jobExecution.getExitStatus().getExitDescription(),
-        SampleDateUtils.formatDateTime(jobExecution.getStartTime()),
-        SampleDateUtils.formatDateTime(jobExecution.getEndTime()),
+        DateFormatUtilsExt.format(jobExecution.getStartTime(), DateFormatVo.YYYYMMDDHHMMSSSSS),
+        DateFormatUtilsExt.format(jobExecution.getEndTime(), DateFormatVo.YYYYMMDDHHMMSSSSS),
         jobExecution.getExecutionContext(),
         jobExecution.getFailureExceptions());
 

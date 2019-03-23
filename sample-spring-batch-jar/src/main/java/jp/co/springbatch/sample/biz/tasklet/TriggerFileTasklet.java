@@ -2,7 +2,7 @@ package jp.co.springbatch.sample.biz.tasklet;
 
 import jp.co.springbatch.framework.code.DateFormatVo;
 import jp.co.springbatch.framework.code.TriggerFileOperationVo;
-import jp.co.springbatch.framework.util.SampleDateUtils;
+import jp.co.springbatch.framework.util.SystemDateUtils;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -56,12 +56,11 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
    */
   @Override
   public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-    String systemDate = SampleDateUtils.getNowDateString();
-    String replaceFileName = fileName.replace(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode(), systemDate);
+    String replaceFileName = fileName.replace(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode(), SystemDateUtils.getNowDateString());
 
     validate(replaceFileName);
 
-    process(replaceFileName, systemDate);
+    process(replaceFileName);
 
     return RepeatStatus.FINISHED;
   }
@@ -95,13 +94,12 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
    * 対象操作に従い、トリガーファイルの作成／削除を実施します
    *
    * @param targetFile 対象ファイル
-   * @param systemDate システム日付
    * @throws IOException ファイルへの書き込みまたはファイルの作成／削除中に入出力エラーが発生した場合
    */
-  private void process(String targetFile, String systemDate) throws IOException {
+  private void process(String targetFile) throws IOException {
     switch (operation) {
       case CREATE_PROCCESS:
-        Files.write(Paths.get(filePath, targetFile), systemDate.getBytes());
+        Files.write(Paths.get(filePath, targetFile), SystemDateUtils.getNowDateString().getBytes());
         break;
 
       case DELETE_PROCCESS:

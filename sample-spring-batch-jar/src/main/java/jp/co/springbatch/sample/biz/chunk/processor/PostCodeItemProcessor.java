@@ -2,8 +2,8 @@ package jp.co.springbatch.sample.biz.chunk.processor;
 
 import jp.co.springbatch.framework.code.ExecutionContextVo;
 import jp.co.springbatch.framework.constant.BatchConst;
-import jp.co.springbatch.framework.util.SampleBeanValidationUtils;
-import jp.co.springbatch.framework.util.SampleDateUtils;
+import jp.co.springbatch.framework.util.BeanValidationUtils;
+import jp.co.springbatch.framework.util.SystemDateUtils;
 import jp.co.springbatch.sample.code.BatchVo;
 import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
 import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
@@ -81,9 +81,9 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
   @SuppressWarnings("unchecked")
   private void validate(final PostCodeFileDto postCodeFileDto) {
     try {
-      SampleBeanValidationUtils.validate(postCodeFileDto);
+      BeanValidationUtils.validate(postCodeFileDto);
 
-    } catch (ConstraintViolationException cv) {
+    } catch (ConstraintViolationException cve) {
       ExecutionContext stepExecutionContext = stepExecution.getExecutionContext();
 
       List<PostCodeFileDto> errorRecordList = (List<PostCodeFileDto>) stepExecutionContext.get(ExecutionContextVo.ERROR_RECORDS.getCode());;
@@ -97,7 +97,7 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
 
       }
 
-      throw cv;
+      throw cve;
 
     }
   }
@@ -118,9 +118,9 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
         // common column
         .version(BatchConst.VERSION_INITIAL_VALUE)
         .creationUserId(BatchVo.FILE_TO_DB.getCode())
-        .creationDate(SampleDateUtils.getNowLocalDateTime())
+        .creationDate(SystemDateUtils.getNowLocalDateTime())
         .updatedUserId(BatchVo.FILE_TO_DB.getCode())
-        .updatedDate(SampleDateUtils.getNowLocalDateTime())
+        .updatedDate(SystemDateUtils.getNowLocalDateTime())
         .build();
   }
 

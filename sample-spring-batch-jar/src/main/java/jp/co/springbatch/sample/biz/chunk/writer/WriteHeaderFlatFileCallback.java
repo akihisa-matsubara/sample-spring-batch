@@ -2,7 +2,7 @@ package jp.co.springbatch.sample.biz.chunk.writer;
 
 import jp.co.springbatch.framework.code.RecodeTypeVo;
 import jp.co.springbatch.framework.constant.ScopeConst;
-import jp.co.springbatch.framework.util.SampleDateUtils;
+import jp.co.springbatch.framework.util.SystemDateUtils;
 import java.io.IOException;
 import java.io.Writer;
 
@@ -26,7 +26,7 @@ public class WriteHeaderFlatFileCallback implements FlatFileHeaderCallback {
    */
   @Override
   public void writeHeader(Writer writer) throws IOException {
-    writer.write(RecodeTypeVo.HEADER_RECODE.getCode() + "," + SampleDateUtils.getNowDateString());
+    writer.write(RecodeTypeVo.HEADER_RECODE.getCode() + "," + SystemDateUtils.getNowDateString());
   }
 
 }

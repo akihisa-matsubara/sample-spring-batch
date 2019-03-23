@@ -3,7 +3,7 @@ package jp.co.springbatch.framework.code;
 import lombok.Getter;
 
 /**
- * Execution Context 内で扱うVo.
+ * Execution Context 内で扱うVO.
  */
 
 @Getter

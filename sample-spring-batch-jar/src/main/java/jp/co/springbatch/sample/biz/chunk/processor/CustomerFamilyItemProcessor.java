@@ -1,6 +1,7 @@
 package jp.co.springbatch.sample.biz.chunk.processor;
 
-import jp.co.springbatch.framework.util.SampleDateUtils;
+import jp.co.springbatch.framework.code.DateFormatVo;
+import jp.co.springbatch.framework.util.DateFormatUtilsExt;
 import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
 import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
 import org.springframework.batch.item.ItemProcessor;
@@ -36,12 +37,12 @@ public class CustomerFamilyItemProcessor implements ItemProcessor<CustomerFamily
         .customerNameKanji(customerFamilyEntity.getCustomerNameKanji())
         .customerNameKana(customerFamilyEntity.getCustomerNameKana())
         .customerGender(customerFamilyEntity.getCustomerGender())
-        .customerBirthday(SampleDateUtils.formatDate(customerFamilyEntity.getCustomerBirthday()))
+        .customerBirthday(DateFormatUtilsExt.format(customerFamilyEntity.getCustomerBirthday(), DateFormatVo.YYYYMMDD_NO_DELIMITER))
         .familyNo(customerFamilyEntity.getFamilyNo())
         .familyNameKanji(customerFamilyEntity.getFamilyNameKanji())
         .familyNameKana(customerFamilyEntity.getFamilyNameKana())
         .familyGender(customerFamilyEntity.getFamilyGender())
-        .familyBirthday(SampleDateUtils.formatDate(customerFamilyEntity.getFamilyBirthday()))
+        .familyBirthday(DateFormatUtilsExt.format(customerFamilyEntity.getFamilyBirthday(), DateFormatVo.YYYYMMDD_NO_DELIMITER))
         .build();
   }
 
