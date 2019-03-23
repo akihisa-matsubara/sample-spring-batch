@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
- * 日付ユーティリティー.
+ * システム日付ユーティリティー.
  */
 @Scope(ScopeConst.SINGLETON)
 @Component
