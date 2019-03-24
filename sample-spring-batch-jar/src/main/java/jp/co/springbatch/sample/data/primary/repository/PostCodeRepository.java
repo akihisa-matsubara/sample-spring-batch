@@ -1,7 +1,6 @@
 package jp.co.springbatch.sample.data.primary.repository;
 
 import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
-
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -16,7 +15,7 @@ public interface PostCodeRepository {
   /**
    * 1件挿入.
    *
-   * @param entity 郵便番号マスタEntity
+   * @param entity {@link PostCodeEntity} 郵便番号マスタEntity
    * @return int 挿入件数
    */
   int insert(PostCodeEntity entity);
