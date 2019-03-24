@@ -28,7 +28,7 @@ public class ApplicationConfig {
   /**
    * in-memoryジョブリポジトリ.
    *
-   * @return DefaultBatchConfigurer バッチ設定
+   * @return {@link DefaultBatchConfigurer} バッチ設定
    */
   @Bean
   DefaultBatchConfigurer batchConfigurer() {

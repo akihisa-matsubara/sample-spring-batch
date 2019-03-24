@@ -61,8 +61,8 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
   /**
    * 処理.
    *
-   * @param postCodeFileDto 郵便番号FileDto
-   * @return PostCodeEntity 郵便番号マスタEntity
+   * @param postCodeFileDto {@link PostCodeFileDto} 郵便番号FileDto
+   * @return {@link PostCodeEntity} 郵便番号マスタEntity
    * @throws Exception 例外
    */
   @Override
@@ -75,7 +75,7 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
   /**
    * 検証.
    *
-   * @param postCodeFileDto 郵便番号FileDto
+   * @param postCodeFileDto {@link PostCodeFileDto} 郵便番号FileDto
    * @throws ConstraintViolationException 検証例外が発生した場合
    */
   @SuppressWarnings("unchecked")
@@ -106,8 +106,8 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
    * 郵便番号マスタEntity -> 郵便番号FileDto変換処理.
    * 共通カラムを設定
    *
-   * @param postCodeFileDto 郵便番号FileDto
-   * @return PostCodeEntity 郵便番号マスタEntity
+   * @param postCodeFileDto {@link PostCodeFileDto} 郵便番号FileDto
+   * @return {@link PostCodeEntity} 郵便番号マスタEntity
    */
   private PostCodeEntity convert(final PostCodeFileDto postCodeFileDto) {
     return PostCodeEntity.builder()

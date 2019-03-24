@@ -3,7 +3,6 @@ package jp.co.springbatch.sample.integration.service.impl;
 import jp.co.springbatch.framework.constant.ScopeConst;
 import jp.co.springbatch.sample.integration.dto.QuoteDto;
 import jp.co.springbatch.sample.integration.service.SpringBootService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +33,7 @@ public class SpringBootServiceImpl implements SpringBootService {
   /**
    * コンストラクタ.
    *
-   * @param restTemplateBuilder RestTemplateBuilder
+   * @param restTemplateBuilder {@link RestTemplateBuilder}
    */
   public SpringBootServiceImpl(RestTemplateBuilder restTemplateBuilder) {
     this.restTemplate = restTemplateBuilder.build();

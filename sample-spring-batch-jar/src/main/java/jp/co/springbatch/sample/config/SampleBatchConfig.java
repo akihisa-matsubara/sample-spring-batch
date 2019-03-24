@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 
 /**
  * サンプルバッチ設定.
+ * ・FW側のパッケージ読み込み
  */
 @Scope(ScopeConst.SINGLETON)
 @ComponentScan(basePackages = {BatchConst.FW_PACKAGE})

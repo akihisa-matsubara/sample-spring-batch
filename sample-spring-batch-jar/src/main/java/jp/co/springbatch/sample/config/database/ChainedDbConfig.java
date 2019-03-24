@@ -18,9 +18,9 @@ public class ChainedDbConfig {
    * 複数データソース用TransactionManager.
    * Best Efforts 1PCパターン: 複数データソースをローカルトランザクションで扱い、同じタイミングで逐次コミットを発行
    *
-   * @param primaryTxManager 主TransactionManager
-   * @param secondaryTxManager 副TransactionManager
-   * @return PlatformTransactionManager TransactionManager
+   * @param primaryTxManager 主{@link TransactionManager}
+   * @param secondaryTxManager 副{@link TransactionManager}
+   * @return {@link PlatformTransactionManager} TransactionManager
    */
   @Bean
   public PlatformTransactionManager chainedTxManager(PlatformTransactionManager primaryTxManager,

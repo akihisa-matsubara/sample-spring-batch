@@ -5,7 +5,6 @@ import jp.co.springbatch.framework.constant.ScopeConst;
 import jp.co.springbatch.framework.util.SystemDateUtils;
 import java.io.IOException;
 import java.io.Writer;
-
 import org.springframework.batch.item.file.FlatFileFooterCallback;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -21,7 +20,7 @@ public class WriteFooterFlatFileCallback implements FlatFileFooterCallback {
    * フッター（トレーラレコード）書き込み.
    * 03,yyyyMMdd
    *
-   * @param writer フッターの書き込みに使用するWriter
+   * @param writer {@link Writer} フッターの書き込みに使用するWriter
    * @throws IOException 書き込み中にエラーが発生した場合
    */
   @Override

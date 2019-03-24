@@ -47,9 +47,9 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
   /**
    * 実行.
    *
-   * @param contribution StepContribution
-   * @param chunkContext ChunkContext
-   * @return RepeatStatus 結果ステータス
+   * @param contribution {@link StepContribution}
+   * @param chunkContext {@link ChunkContext}
+   * @return {@link RepeatStatus} 結果ステータス
    * @throws IOException ファイルへの書き込みまたはファイルの作成／削除中に入出力エラーが発生した場合
    * @throws IllegalStateException トリガーファイルの状態が不正な場合
    * @throws Exception 例外

@@ -15,7 +15,7 @@ public class CustomerFamilyItemProcessor implements ItemProcessor<CustomerFamily
    * 処理.
    *
    * @param customerFamilyEntity 顧客家族Entity
-   * @return CustomerFamilyFileDto 顧客家族FileDto
+   * @return {@link CustomerFamilyFileDto} 顧客家族FileDto
    * @throws Exception 例外
    */
   @Override
@@ -29,7 +29,7 @@ public class CustomerFamilyItemProcessor implements ItemProcessor<CustomerFamily
    * java.util.Date -> String (yyyyMMdd)
    *
    * @param customerFamilyEntity 顧客家族Entity
-   * @return CustomerFamilyFileDto 顧客家族FileDto
+   * @return {@link CustomerFamilyFileDto} 顧客家族FileDto
    */
   private CustomerFamilyFileDto convert(final CustomerFamilyEntity customerFamilyEntity) {
     return CustomerFamilyFileDto.builder()

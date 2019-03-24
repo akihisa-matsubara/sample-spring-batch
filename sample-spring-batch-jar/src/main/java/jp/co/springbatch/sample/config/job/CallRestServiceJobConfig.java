@@ -33,11 +33,11 @@ public class CallRestServiceJobConfig {
   /**
    * Rest Service呼び出しジョブ.
    *
-   * @param jobs JobBuilderFactory
-   * @param jobExecutionListener ジョブ実行リスナー
+   * @param jobs {@link JobBuilderFactory}
+   * @param jobExecutionListener {@link SampleJobExecutionListener} ジョブ実行リスナー
    * @param callSpringBootServiceStep Spring Boot Service呼び出しステップ
    * @param callSampleRestServiceStep Sample Rest Service呼び出しステップ
-   * @return Job ジョブ
+   * @return {@link Job} ジョブ
    */
   @Bean
   public Job callRestServiceJob(JobBuilderFactory jobs,
@@ -58,8 +58,8 @@ public class CallRestServiceJobConfig {
   /**
    * Spring Boot Service呼び出しステップ.
    *
-   * @param callSpringBootServiceTasklet Spring Boot Service Client
-   * @return Step Spring Boot Service呼び出しステップ
+   * @param callSpringBootServiceTasklet {@link SpringBootServiceClientTasklet} Spring Boot Service Client
+   * @return {@link Step} Spring Boot Service呼び出しステップ
    */
   @Bean
   public Step callSpringBootServiceStep(SpringBootServiceClientTasklet callSpringBootServiceTasklet) {
@@ -71,8 +71,8 @@ public class CallRestServiceJobConfig {
   /**
    * Sample Rest Service呼び出しステップ.
    *
-   * @param callSampleRestServiceTasklet Sample Rest Service Client
-   * @return Step Sample Rest Service呼び出しステップ
+   * @param callSampleRestServiceTasklet {@link SampleRestServiceClientTasklet} Sample Rest Service Client
+   * @return {@link Step} Sample Rest Service呼び出しステップ
    */
   @Bean
   public Step callSampleRestServiceStep(SampleRestServiceClientTasklet callSampleRestServiceTasklet) {

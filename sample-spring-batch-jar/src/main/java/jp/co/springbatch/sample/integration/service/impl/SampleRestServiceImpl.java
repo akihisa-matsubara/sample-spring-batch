@@ -46,7 +46,7 @@ public class SampleRestServiceImpl implements SampleRestService {
   /**
    * コンストラクタ.
    *
-   * @param restTemplateBuilder RestTemplateBuilder
+   * @param restTemplateBuilder {@link RestTemplateBuilder}
    */
   public SampleRestServiceImpl(RestTemplateBuilder restTemplateBuilder) {
     this.restTemplate = restTemplateBuilder.build();

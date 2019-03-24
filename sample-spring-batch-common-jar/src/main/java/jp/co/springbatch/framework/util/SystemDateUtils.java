@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * システム日付ユーティリティー.
+ * システム日付を変更したい場合は、application.ymlに
+ * framework.system-date: yyyyMMdd形式で設定してください.
  */
 @Scope(ScopeConst.SINGLETON)
 @Component
@@ -21,7 +23,7 @@ public class SystemDateUtils {
   private static String systemDate;
 
   /**
-   * コンストラクタ.
+   * デフォルトコンストラクタ.
    *
    * @param systemDateProperties システム日付プロパティ
    */

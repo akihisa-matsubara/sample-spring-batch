@@ -70,12 +70,12 @@ public class FileToDbJobConfig {
   /**
    * File to DBジョブ.
    *
-   * @param jobs JobBuilderFactory
-   * @param jobExecutionListener ジョブ実行リスナー
+   * @param jobs {@link JobBuilderFactory} JobBuilderFactory
+   * @param jobExecutionListener {@link SampleJobExecutionListener} ジョブ実行リスナー
    * @param fileToDbCheckTriggerFileStep トリガーファイルチェックステップ
    * @param fileToDbStep File to DBステップ
    * @param fileToDbDeleteTriggerFileStep トリガーファイル削除ステップ
-   * @return Job File to DBジョブ
+   * @return {@link Job} File to DBジョブ
    * @throws Exception 例外
    */
   @Bean
@@ -101,7 +101,7 @@ public class FileToDbJobConfig {
   /**
    * トリガーファイルチェックステップ.
    *
-   * @return Step トリガーファイルチェックステップ
+   * @return {@link Step} トリガーファイルチェックステップ
    */
   @Bean
   public Step fileToDbCheckTriggerFileStep() {
@@ -113,12 +113,12 @@ public class FileToDbJobConfig {
   /**
    * File to DBステップ.
    *
-   * @param readSkippedLinesCallback ReadSkippedLinesCallback
-   * @param primarySqlSessionFactory 主DB用SqlSessionFactory
-   * @param stepExecutionListener ステップ実行リスナー
-   * @param sampleExceptionHandler 例外ハンドラー
-   * @param primaryTxManager 主DB用TransactionManager
-   * @return Step File to DBステップ.
+   * @param readSkippedLinesCallback {@link ReadSkippedLinesCallback} ReadSkippedLinesCallback
+   * @param primarySqlSessionFactory {@link SqlSessionFactory} 主DB用SqlSessionFactory
+   * @param stepExecutionListener {@link SampleStepExecutionListener} ステップ実行リスナー
+   * @param sampleExceptionHandler {@link SampleExceptionHandler} 例外ハンドラー
+   * @param primaryTxManager {@link PlatformTransactionManager} 主DB用TransactionManager
+   * @return {@link Step} File to DBステップ.
    */
   @Bean
   public Step fileToDbStep(ReadSkippedLinesCallback readSkippedLinesCallback,
@@ -148,7 +148,7 @@ public class FileToDbJobConfig {
   /**
    * トリガーファイル削除ステップ.
    *
-   * @return Step トリガーファイル削除ステップ
+   * @return {@link Step} トリガーファイル削除ステップ
    */
   @Bean
   public Step fileToDbDeleteTriggerFileStep() {
@@ -160,7 +160,7 @@ public class FileToDbJobConfig {
   /**
    * トリガーファイルチェック処理.
    *
-   * @return TriggerFileTasklet トリガーファイル処理
+   * @return {@link TriggerFileTasklet} トリガーファイル処理
    */
   @Bean
   public TriggerFileTasklet fileToDbCheckTriggerFileTasklet() {
@@ -174,7 +174,7 @@ public class FileToDbJobConfig {
   /**
    * トリガーファイル削除処理.
    *
-   * @return TriggerFileTasklet トリガーファイル削除処理
+   * @return {@link TriggerFileTasklet} トリガーファイル削除処理
    */
   @Bean
   public TriggerFileTasklet fileToDbDeleteTriggerFileTasklet() {
@@ -191,8 +191,8 @@ public class FileToDbJobConfig {
   /**
    * File to DB ItemReader.
    *
-   * @param readSkippedLinesCallback ReadSkippedLinesCallback
-   * @return FlatFileItemReader File to DB ItemReader
+   * @param readSkippedLinesCallback {@link ReadSkippedLinesCallback}
+   * @return {@link FlatFileItemReader} File to DB ItemReader
    */
   @Bean
   public FlatFileItemReader<PostCodeFileDto> fileToDbItemReader(ReadSkippedLinesCallback readSkippedLinesCallback) {
@@ -214,7 +214,7 @@ public class FileToDbJobConfig {
   /**
    * File to DB ItemProcessor.
    *
-   * @return PostCodeItemProcessor 郵便番号ItemProcessor
+   * @return {@link PostCodeItemProcessor} 郵便番号ItemProcessor
    */
   @Bean
   public PostCodeItemProcessor fileToDbItemProcessor() {
@@ -224,8 +224,8 @@ public class FileToDbJobConfig {
   /**
    * File to DB ItemWriter.
    *
-   * @param primarySqlSessionFactory 主DB用SqlSessionFactory
-   * @return MyBatisBatchItemWriter File to DB ItemWriter
+   * @param primarySqlSessionFactory {@link SqlSessionFactory} 主DB用SqlSessionFactory
+   * @return {@link MyBatisBatchItemWriter} File to DB ItemWriter
    */
   @Bean
   public MyBatisBatchItemWriter<PostCodeEntity> fileToDbItemWriter(SqlSessionFactory primarySqlSessionFactory) {

@@ -11,7 +11,7 @@ public interface SpringBootService {
    * 実行.
    * API:/random, Get
    *
-   * @return QuoteDto 取得結果
+   * @return {@link QuoteDto} 取得結果
    */
   QuoteDto getRandomQuotation();
 

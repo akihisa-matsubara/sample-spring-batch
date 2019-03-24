@@ -13,7 +13,7 @@ public interface SampleRestService {
    * API:/customers/{customerNo}, Get.
    *
    * @param customerNo 顧客番号
-   * @return CustomerDto 取得結果
+   * @return {@link CustomerDto} 取得結果
    */
   CustomerDto getCustomer(String customerNo);
 

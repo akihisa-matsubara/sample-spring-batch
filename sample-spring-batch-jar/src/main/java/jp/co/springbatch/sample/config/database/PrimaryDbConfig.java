@@ -36,7 +36,7 @@ public class PrimaryDbConfig {
   /**
    * 主DB用DataSourceProperties.
    *
-   * @return DataSourceProperties 主DB用DataSourceProperties
+   * @return {@link DataSourceProperties} 主DB用DataSourceProperties
    */
   @Bean
   @Primary
@@ -48,7 +48,7 @@ public class PrimaryDbConfig {
   /**
    * 主DB用HikariDataSource.
    *
-   * @return HikariDataSource 主DB用HikariDataSource
+   * @return {@link HikariDataSource} 主DB用HikariDataSource
    */
   @Bean
   @Primary
@@ -59,8 +59,8 @@ public class PrimaryDbConfig {
   /**
    * 主DB用TransactionManager.
    *
-   * @param primaryDataSource 主DB用HikariDataSource
-   * @return PlatformTransactionManager 主DB用TransactionManager
+   * @param primaryDataSource {@link DataSource} 主DB用HikariDataSource
+   * @return {@link PlatformTransactionManager} 主DB用TransactionManager
    */
   @Bean
   public PlatformTransactionManager primaryTxManager(DataSource primaryDataSource) {
@@ -70,8 +70,8 @@ public class PrimaryDbConfig {
   /**
    * 主DB用SqlSessionFactory.
    *
-   * @param primaryDataSource 主DB用HikariDataSource
-   * @return SqlSessionFactory 主DB用SqlSessionFactory
+   * @param primaryDataSource {@link DataSource} 主DB用HikariDataSource
+   * @return {@link SqlSessionFactory} 主DB用SqlSessionFactory
    * @throws Exception 例外
    */
   @Bean
@@ -85,8 +85,8 @@ public class PrimaryDbConfig {
   /**
    * 主DB用SqlSessionTemplate.
    *
-   * @param primarySqlSessionFactory 主DB用SqlSessionFactory
-   * @return SqlSessionTemplate 主DB用SqlSessionTemplate
+   * @param primarySqlSessionFactory {@link SqlSessionFactory} 主DB用SqlSessionFactory
+   * @return {@link SqlSessionTemplate} 主DB用SqlSessionTemplate
    */
   @Bean
   public SqlSessionTemplate primarySqlSessionTemplate(@Qualifier("primarySqlSessionFactory") SqlSessionFactory primarySqlSessionFactory) {

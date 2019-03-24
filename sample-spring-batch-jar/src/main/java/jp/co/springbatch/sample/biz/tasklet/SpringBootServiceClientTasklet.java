@@ -2,7 +2,6 @@ package jp.co.springbatch.sample.biz.tasklet;
 
 import jp.co.springbatch.framework.constant.ScopeConst;
 import jp.co.springbatch.sample.integration.service.SpringBootService;
-
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
@@ -28,9 +27,9 @@ public class SpringBootServiceClientTasklet implements Tasklet {
    * 実行.
    * API:/random, Get
    *
-   * @param contribution StepContribution
-   * @param chunkContext ChunkContext
-   * @return RepeatStatus 結果ステータス
+   * @param contribution {@link StepContribution}
+   * @param chunkContext {@link ChunkContext}
+   * @return {@link RepeatStatus} 結果ステータス
    * @throws Exception 例外
    */
   @Override

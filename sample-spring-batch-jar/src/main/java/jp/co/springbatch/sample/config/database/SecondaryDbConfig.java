@@ -35,7 +35,7 @@ public class SecondaryDbConfig {
   /**
    * 副DB用DataSourceProperties.
    *
-   * @return DataSourceProperties 副DB用DataSourceProperties
+   * @return {@link DataSourceProperties} 副DB用DataSourceProperties
    */
   @Bean
   @ConfigurationProperties(prefix = "sample.datasource.secondary")
@@ -46,7 +46,7 @@ public class SecondaryDbConfig {
   /**
    * 副DB用HikariDataSource.
    *
-   * @return HikariDataSource 副DB用HikariDataSource
+   * @return {@link HikariDataSource} 副DB用HikariDataSource
    */
   @Bean
   public HikariDataSource secondaryDataSource() {
@@ -56,8 +56,8 @@ public class SecondaryDbConfig {
   /**
    * 副DB用TransactionManager.
    *
-   * @param secondaryDataSource 副DB用HikariDataSource
-   * @return PlatformTransactionManager 副DB用TransactionManager
+   * @param secondaryDataSource {@link DataSource} 副DB用HikariDataSource
+   * @return {@link PlatformTransactionManager} 副DB用TransactionManager
    */
   @Bean
   public PlatformTransactionManager secondaryTxManager(DataSource secondaryDataSource) {
@@ -67,8 +67,8 @@ public class SecondaryDbConfig {
   /**
    * 副DB用SqlSessionFactory.
    *
-   * @param secondaryDataSource 副DB用HikariDataSource
-   * @return SqlSessionFactory 副DB用SqlSessionFactory
+   * @param secondaryDataSource {@link DataSource} 副DB用HikariDataSource
+   * @return {@link SqlSessionFactory} 副DB用SqlSessionFactory
    * @throws Exception 例外
    */
   @Bean
@@ -82,8 +82,8 @@ public class SecondaryDbConfig {
   /**
    * 副DB用SqlSessionTemplate.
    *
-   * @param secondarySqlSessionFactory 副DB用SqlSessionFactory
-   * @return SqlSessionTemplate 副DB用SqlSessionTemplate
+   * @param secondarySqlSessionFactory {@link SqlSessionFactory} 副DB用SqlSessionFactory
+   * @return {@link SqlSessionTemplate} 副DB用SqlSessionTemplate
    */
   @Bean
   public SqlSessionTemplate secondarySqlSessionTemplate(

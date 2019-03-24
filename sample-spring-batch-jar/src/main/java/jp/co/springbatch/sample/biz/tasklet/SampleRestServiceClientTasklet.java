@@ -31,9 +31,9 @@ public class SampleRestServiceClientTasklet implements Tasklet {
   /**
    * 実行.
    *
-   * @param contribution StepContribution
-   * @param chunkContext ChunkContext
-   * @return RepeatStatus 結果ステータス
+   * @param contribution {@link StepContribution}
+   * @param chunkContext {@link ChunkContext}
+   * @return {@link RepeatStatus} 結果ステータス
    * @throws Exception 例外
    */
   @Override
@@ -69,7 +69,7 @@ public class SampleRestServiceClientTasklet implements Tasklet {
    * API:/customers/{customerNo}, Get.
    *
    * @param customerNo 顧客番号
-   * @return CustomerDto 取得結果
+   * @return {@link CustomerDto} 取得結果
    */
   private CustomerDto getCustomer(String customerNo) {
     return service.getCustomer(customerNo);
