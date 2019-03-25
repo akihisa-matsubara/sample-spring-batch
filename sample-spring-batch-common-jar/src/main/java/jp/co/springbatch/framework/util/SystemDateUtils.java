@@ -50,7 +50,7 @@ public class SystemDateUtils {
    */
   public static LocalDateTime getNowLocalDateTime() {
     return LocalDateTimeFormatUtils.parse(getNowDateString() + DateFormatUtilsExt.format(new Date(), DateFormatVo.HHMMSSSSS_NO_DELIMITER),
-        DateFormatVo.YYYYMMDDHHMMSSSSS);
+        DateFormatVo.YYYYMMDDTHHMMSSSSS);
   }
 
 }

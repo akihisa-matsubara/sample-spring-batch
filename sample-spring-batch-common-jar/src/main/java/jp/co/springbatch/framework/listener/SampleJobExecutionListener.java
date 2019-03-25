@@ -44,8 +44,8 @@ public class SampleJobExecutionListener extends JobExecutionListenerSupport {
         jobExecution.getJobParameters(),
         jobExecution.getExitStatus().getExitCode(),
         jobExecution.getExitStatus().getExitDescription(),
-        DateFormatUtilsExt.format(jobExecution.getStartTime(), DateFormatVo.YYYYMMDDHHMMSSSSS),
-        DateFormatUtilsExt.format(jobExecution.getEndTime(), DateFormatVo.YYYYMMDDHHMMSSSSS),
+        DateFormatUtilsExt.format(jobExecution.getStartTime(), DateFormatVo.YYYYMMDDTHHMMSSSSS),
+        DateFormatUtilsExt.format(jobExecution.getEndTime(), DateFormatVo.YYYYMMDDTHHMMSSSSS),
         jobExecution.getExecutionContext(),
         jobExecution.getFailureExceptions());
 
