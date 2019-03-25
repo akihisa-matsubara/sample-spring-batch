@@ -1,10 +1,12 @@
 package jp.co.springbatch.framework.code;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * トリガーファイル操作VO.
  */
+@AllArgsConstructor
 @Getter
 public enum TriggerFileOperationVo implements CodeVo {
 
@@ -23,16 +25,5 @@ public enum TriggerFileOperationVo implements CodeVo {
 
   /** デコード. */
   private String decode;
-
-  /**
-   * デフォルトコンストラクタ.
-   *
-   * @param code コード
-   * @param decode デコード
-   */
-  private TriggerFileOperationVo(String code, String decode) {
-    this.code = code;
-    this.decode = decode;
-  }
 
 }

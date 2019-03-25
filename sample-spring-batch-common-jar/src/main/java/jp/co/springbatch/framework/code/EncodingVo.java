@@ -1,10 +1,12 @@
 package jp.co.springbatch.framework.code;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * エンコーディングVO.
  */
+@AllArgsConstructor
 @Getter
 public enum EncodingVo implements CodeVo {
 
@@ -20,14 +22,4 @@ public enum EncodingVo implements CodeVo {
   /** デコード. */
   private String decode;
 
-  /**
-   * デフォルトコンストラクタ.
-   *
-   * @param code コード
-   * @param decode デコード
-   */
-  private EncodingVo(String code, String decode) {
-    this.code = code;
-    this.decode = decode;
-  }
 }

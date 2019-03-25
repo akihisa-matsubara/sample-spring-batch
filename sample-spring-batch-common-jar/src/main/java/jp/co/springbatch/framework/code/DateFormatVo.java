@@ -1,10 +1,12 @@
 package jp.co.springbatch.framework.code;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * 日付フォーマットVO.
  */
+@AllArgsConstructor
 @Getter
 public enum DateFormatVo implements CodeVo {
 
@@ -12,8 +14,8 @@ public enum DateFormatVo implements CodeVo {
   YYYYMMDD("yyyy-MM-dd", "uuuu-MM-dd", "YYYYMMDD"),
   /** yyyyMMdd. */
   YYYYMMDD_NO_DELIMITER("yyyyMMdd", "uuuuMMdd", "YYYYMMDD_NO_DELIMITER"),
-  /** yyyy-MM-dd HH:mm:ss.SSS. */
-  YYYYMMDDHHMMSSSSS("yyyy-MM-dd HH:mm:ss.SSS", "uuuu-MM-dd HH:mm:ss.SSS", "YYYYMMDDHHMMSSSSS"),
+  /** yyyy-MM-dd'T'HH:mm:ss.SSS. */
+  YYYYMMDDTHHMMSSSSS("yyyy-MM-dd'T'HH:mm:ss.SSS", "uuuu-MM-dd'T'HH:mm:ss.SSS", "YYYYMMDDTHHMMSSSSS"),
   /** yyyyMMddHHmmssSSS. */
   YYYYMMDDHHMMSSSSS_NO_DELIMITER("yyyyMMddHHmmssSSS", "uuuuMMddHHmmssSSS", "YYYYMMDDHHMMSSSSS_NO_DELIMITER"),
   /** HHmmssSSS. */
@@ -28,18 +30,5 @@ public enum DateFormatVo implements CodeVo {
 
   /** デコード. */
   private String decode;
-
-  /**
-   * デフォルトコンストラクタ.
-   *
-   * @param code コード
-   * @param apiCode Date and Time API code
-   * @param decode デコード
-   */
-  private DateFormatVo(String code, String apiCode, String decode) {
-    this.code = code;
-    this.apiCode = apiCode;
-    this.decode = decode;
-  }
 
 }

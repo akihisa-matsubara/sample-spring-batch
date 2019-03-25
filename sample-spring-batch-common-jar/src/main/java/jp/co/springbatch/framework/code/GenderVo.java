@@ -1,10 +1,12 @@
 package jp.co.springbatch.framework.code;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * 性別VO.
  */
+@AllArgsConstructor
 @Getter
 public enum GenderVo implements CodeVo {
 
@@ -19,16 +21,5 @@ public enum GenderVo implements CodeVo {
 
   /** デコード. */
   private String decode;
-
-  /**
-   * デフォルトコンストラクタ.
-   *
-   * @param code コード
-   * @param decode デコード
-   */
-  private GenderVo(String code, String decode) {
-    this.code = code;
-    this.decode = decode;
-  }
 
 }

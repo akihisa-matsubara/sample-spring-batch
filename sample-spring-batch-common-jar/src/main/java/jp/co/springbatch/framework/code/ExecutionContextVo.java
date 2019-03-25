@@ -1,11 +1,12 @@
 package jp.co.springbatch.framework.code;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * Execution Context 内で扱うVO.
  */
-
+@AllArgsConstructor
 @Getter
 public enum ExecutionContextVo implements CodeVo {
 
@@ -18,16 +19,5 @@ public enum ExecutionContextVo implements CodeVo {
 
   /** デコード. */
   private String decode;
-
-  /**
-   * デフォルトコンストラクタ.
-   *
-   * @param code コード
-   * @param decode デコード
-   */
-  private ExecutionContextVo(String code, String decode) {
-    this.code = code;
-    this.decode = decode;
-  }
 
 }

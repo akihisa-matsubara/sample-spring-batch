@@ -2,9 +2,11 @@ package jp.co.springbatch.framework.util;
 
 import jp.co.springbatch.framework.code.DateFormatVo;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.Date;
 
 /**
  * 日付ユーティリティー(LocaleDateTIme).
@@ -22,12 +24,12 @@ public class LocalDateTimeFormatUtils {
   /**
    * Dateを指定フォーマットにフォーマットします.
    *
-   * @param date 日付文字列にフォーマットする時刻値
+   * @param dateTime 日付文字列にフォーマットする時刻値
    * @param format 日付フォーマットVO
    * @return フォーマットされた日時文字列.指定された時刻値がnullの場合はnullを返す.
    */
-  public static String format(LocalDateTime date, DateFormatVo format) {
-    return date == null ? "" : DateTimeFormatter.ofPattern(format.getApiCode()).format(date);
+  public static String format(LocalDateTime dateTime, DateFormatVo format) {
+    return dateTime == null ? "" : dateTime.format(DateTimeFormatter.ofPattern(format.getApiCode()));
   }
 
   /**
@@ -39,6 +41,25 @@ public class LocalDateTimeFormatUtils {
    * @throws DateTimeParseException 指定された文字列が解析できない場合
    */
   public static LocalDateTime parse(String text, DateFormatVo format) {
+    // 時刻を持たない場合そのまま変換できないので、一度Dateに変換する
+    Date date = null;
+    switch (format) {
+      case YYYYMMDD:
+        date = DateFormatUtilsExt.parse(text, DateFormatVo.YYYYMMDD);
+        break;
+      case YYYYMMDD_NO_DELIMITER:
+        date = DateFormatUtilsExt.parse(text, DateFormatVo.YYYYMMDD_NO_DELIMITER);
+        break;
+      case HHMMSSSSS_NO_DELIMITER:
+        throw new IllegalArgumentException("format '" + DateFormatVo.HHMMSSSSS_NO_DELIMITER.getCode() + "' could not be parsed.");
+      default:
+        break;
+    }
+
+    if (date != null) {
+      return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    }
+
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format.getApiCode());
     formatter.withResolverStyle(ResolverStyle.STRICT);
     return LocalDateTime.parse(text, formatter);
