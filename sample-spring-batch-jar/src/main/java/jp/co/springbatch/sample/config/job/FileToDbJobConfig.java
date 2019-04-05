@@ -4,6 +4,7 @@ import jp.co.springbatch.framework.code.EncodingVo;
 import jp.co.springbatch.framework.code.TriggerFileOperationVo;
 import jp.co.springbatch.framework.constant.ScopeConst;
 import jp.co.springbatch.framework.handler.SampleExceptionHandler;
+import jp.co.springbatch.framework.item.mapper.FieldSetMapper;
 import jp.co.springbatch.framework.listener.SampleJobExecutionListener;
 import jp.co.springbatch.framework.listener.SampleStepExecutionListener;
 import jp.co.springbatch.sample.biz.chunk.processor.PostCodeItemProcessor;
@@ -11,7 +12,7 @@ import jp.co.springbatch.sample.biz.chunk.reader.ReadSkippedLinesCallback;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
 import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
 import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
-import jp.co.springbatch.sample.data.primary.repository.PostCodeRepository;
+import jp.co.springbatch.sample.data.query.QueryId;
 import java.io.IOException;
 import javax.validation.ConstraintViolationException;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -26,7 +27,6 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -204,11 +204,7 @@ public class FileToDbJobConfig {
         .delimiter(",")
         .names(PostCodeFileDto.getFields())
         .encoding(EncodingVo.MS932.getCode())
-        .fieldSetMapper(new BeanWrapperFieldSetMapper<PostCodeFileDto>() {
-          {
-            setTargetType(PostCodeFileDto.class);
-          }
-        }).build();
+        .fieldSetMapper(new FieldSetMapper<PostCodeFileDto>(PostCodeFileDto.class)).build();
   }
 
   /**
@@ -231,7 +227,7 @@ public class FileToDbJobConfig {
   public MyBatisBatchItemWriter<PostCodeEntity> fileToDbItemWriter(SqlSessionFactory primarySqlSessionFactory) {
     MyBatisBatchItemWriter<PostCodeEntity> writer = new MyBatisBatchItemWriter<>();
     writer.setSqlSessionFactory(primarySqlSessionFactory);
-    writer.setStatementId(PostCodeRepository.INSERT);
+    writer.setStatementId(QueryId.POST_CODE_INSERT.getId());
     return writer;
   }
 

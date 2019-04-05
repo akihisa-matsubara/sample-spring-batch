@@ -9,9 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PostCodeRepository {
 
-  /** sql id: insert. */
-  public static final String INSERT = "jp.co.springbatch.sample.data.primary.repository.PostCodeRepository.insert";
-
   /**
    * 1件挿入.
    *

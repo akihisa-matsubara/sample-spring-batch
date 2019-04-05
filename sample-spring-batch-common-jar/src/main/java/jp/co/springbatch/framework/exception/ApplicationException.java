@@ -9,7 +9,7 @@ public class ApplicationException extends RuntimeException {
   private static final long serialVersionUID = 1L;
 
   /**
-   * デフォルトコンストラクター.
+   * デフォルトコンストラクタ.
    *
    * @param cause 例外
    */

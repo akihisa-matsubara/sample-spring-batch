@@ -86,7 +86,7 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
     } catch (ConstraintViolationException cve) {
       ExecutionContext stepExecutionContext = stepExecution.getExecutionContext();
 
-      List<PostCodeFileDto> errorRecordList = (List<PostCodeFileDto>) stepExecutionContext.get(ExecutionContextVo.ERROR_RECORDS.getCode());;
+      List<PostCodeFileDto> errorRecordList = (List<PostCodeFileDto>) stepExecutionContext.get(ExecutionContextVo.ERROR_RECORDS.getCode());
       if (errorRecordList == null) {
         errorRecordList = new ArrayList<>();
         errorRecordList.add(postCodeFileDto);

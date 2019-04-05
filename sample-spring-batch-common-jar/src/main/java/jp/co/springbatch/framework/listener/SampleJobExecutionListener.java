@@ -37,6 +37,8 @@ public class SampleJobExecutionListener extends JobExecutionListenerSupport {
    */
   @Override
   public void afterJob(JobExecution jobExecution) {
+    String startTime = DateFormatUtilsExt.format(jobExecution.getStartTime(), DateFormatVo.YYYYMMDDTHHMMSSSSS);
+    String endTime = DateFormatUtilsExt.format(jobExecution.getEndTime(), DateFormatVo.YYYYMMDDTHHMMSSSSS);
     LOGGER.info(
         "detailed results of job execution. jobName=[{}], jobParameter=[{}], "
             + "exitCode=[{}], exitDesctioption=[{}], time=[{}-{}], context=[{}], exceptions=[{}]",
@@ -44,8 +46,8 @@ public class SampleJobExecutionListener extends JobExecutionListenerSupport {
         jobExecution.getJobParameters(),
         jobExecution.getExitStatus().getExitCode(),
         jobExecution.getExitStatus().getExitDescription(),
-        DateFormatUtilsExt.format(jobExecution.getStartTime(), DateFormatVo.YYYYMMDDTHHMMSSSSS),
-        DateFormatUtilsExt.format(jobExecution.getEndTime(), DateFormatVo.YYYYMMDDTHHMMSSSSS),
+        startTime,
+        endTime,
         jobExecution.getExecutionContext(),
         jobExecution.getFailureExceptions());
 

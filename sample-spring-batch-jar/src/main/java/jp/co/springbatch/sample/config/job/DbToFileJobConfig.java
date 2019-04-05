@@ -12,7 +12,7 @@ import jp.co.springbatch.sample.biz.chunk.writer.WriteHeaderFlatFileCallback;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
 import jp.co.springbatch.sample.data.dto.CustomerFamilyFileDto;
 import jp.co.springbatch.sample.data.primary.entity.CustomerFamilyEntity;
-import jp.co.springbatch.sample.data.primary.repository.CustomerFamilyRepository;
+import jp.co.springbatch.sample.data.query.QueryId;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.core.ExitStatus;
@@ -184,7 +184,7 @@ public class DbToFileJobConfig {
   public MyBatisCursorItemReader<CustomerFamilyEntity> dbToFileItemReader(SqlSessionFactory primarySqlSessionFactory) {
     MyBatisCursorItemReader<CustomerFamilyEntity> reader = new MyBatisCursorItemReader<>();
     reader.setSqlSessionFactory(primarySqlSessionFactory);
-    reader.setQueryId(CustomerFamilyRepository.SELECT_ALL);
+    reader.setQueryId(QueryId.CUSTOMER_FAMILY_SELECT_ALL.getId());
     return reader;
   }
 

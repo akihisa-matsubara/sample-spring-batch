@@ -83,8 +83,9 @@ public class SampleRestServiceImpl implements SampleRestService {
   @Override
   public CustomerDto getCustomer(String customerNo) {
     ResponseEntity<CustomerResponseDto> response = restTemplate.getForEntity(url + "/{customerNo}", CustomerResponseDto.class, customerNo);
-    LOGGER.info("SampleRestService get customer response: httpStatus=[{}], customer=[{}]", response.getStatusCode(), response.getBody());
-    return response.getBody().getResponse();
+    CustomerResponseDto responseBody = response.getBody();
+    LOGGER.info("SampleRestService get customer response: httpStatus=[{}], customer=[{}]", response.getStatusCode(), responseBody);
+    return responseBody == null ? null : responseBody.getResponse();
   }
 
   /**
@@ -94,8 +95,9 @@ public class SampleRestServiceImpl implements SampleRestService {
   public List<CustomerDto> getCustomers() {
     ResponseEntity<CustomersResponseDto> response =
         restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<CustomersResponseDto>() {});
-    LOGGER.info("SampleRestService get customers response: httpStatus=[{}], customers=[{}]", response.getStatusCode(), response.getBody());
-    return response.getBody().getResponse();
+    CustomersResponseDto responseBody = response.getBody();
+    LOGGER.info("SampleRestService get customers response: httpStatus=[{}], customers=[{}]", response.getStatusCode(), responseBody);
+    return responseBody == null ? null : responseBody.getResponse();
   }
 
   /**
@@ -133,8 +135,8 @@ public class SampleRestServiceImpl implements SampleRestService {
     }
 
     ResponseEntity<IntegerResponseDto> response = restTemplate.exchange(requestEntity, IntegerResponseDto.class);
-
-    if (response == null || response.getBody() == null) {
+    IntegerResponseDto responseBody = response.getBody();
+    if (responseBody == null) {
       LOGGER.info("SampleRestService update customers: no update.");
       return 0;
     }
@@ -142,7 +144,7 @@ public class SampleRestServiceImpl implements SampleRestService {
     LOGGER.info("SampleRestService update customers: httpStatus=[{}], updateCount=[{}], customers=[{}]", response.getStatusCode(),
         response.getBody(), customers);
 
-    return response.getBody().getResponse() == null ? 0 : response.getBody().getResponse();
+    return responseBody.getResponse() == null ? 0 : responseBody.getResponse();
   }
 
   /**
