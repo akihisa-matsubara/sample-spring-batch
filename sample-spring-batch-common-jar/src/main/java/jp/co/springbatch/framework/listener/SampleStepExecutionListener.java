@@ -1,8 +1,7 @@
 package jp.co.springbatch.framework.listener;
 
 import jp.co.springbatch.framework.constant.ScopeConst;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.listener.StepExecutionListenerSupport;
@@ -14,10 +13,8 @@ import org.springframework.stereotype.Component;
  */
 @Scope(ScopeConst.SINGLETON)
 @Component
+@Slf4j
 public class SampleStepExecutionListener extends StepExecutionListenerSupport {
-
-  /** Logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(SampleStepExecutionListener.class);
 
   /**
    * ステップ開始時処理.
@@ -36,7 +33,7 @@ public class SampleStepExecutionListener extends StepExecutionListenerSupport {
    */
   @Override
   public ExitStatus afterStep(StepExecution stepExecution) {
-    LOGGER.info("detailed results of step execution. readCount=[{}], writeCount=[{}], commitCount=[{}], rollbackCount=[{}], "
+    log.info("detailed results of step execution. readCount=[{}], writeCount=[{}], commitCount=[{}], rollbackCount=[{}], "
             + "skipCount=[read=[{}], process=[{}], write=[{}]], filterCount=[{}]",
         stepExecution.getReadCount(),
         stepExecution.getWriteCount(),

@@ -5,23 +5,15 @@ import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Bean Validationユーティリティー.
  */
+@UtilityClass
+@Slf4j
 public class BeanValidationUtils {
-
-  /** Logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(BeanValidationUtils.class);
-
-  /**
-   * デフォルトコンストラクタ.
-   */
-  private BeanValidationUtils() {
-    throw new IllegalStateException("Utility class");
-  }
 
   /**
    * Bean Validaionを実行します.
@@ -38,8 +30,8 @@ public class BeanValidationUtils {
     }
 
     // fault
-    constraintViolations.forEach(cv -> LOGGER.warn("a validation error occurred. {}", cv.getMessage()));
-    LOGGER.warn("{}", bean);
+    constraintViolations.forEach(cv -> log.warn("a validation error occurred. {}", cv.getMessage()));
+    log.warn("{}", bean);
 
     throw new ConstraintViolationException(constraintViolations);
   }

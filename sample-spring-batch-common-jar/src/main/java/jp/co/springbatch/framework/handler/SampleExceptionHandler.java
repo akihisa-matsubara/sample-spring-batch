@@ -1,9 +1,8 @@
 package jp.co.springbatch.framework.handler;
 
 import jp.co.springbatch.framework.constant.ScopeConst;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.batch.repeat.RepeatContext;
 import org.springframework.batch.repeat.exception.ExceptionHandler;
 import org.springframework.context.annotation.Scope;
@@ -14,10 +13,8 @@ import org.springframework.stereotype.Component;
  */
 @Scope(ScopeConst.SINGLETON)
 @Component
+@Slf4j
 public class SampleExceptionHandler implements ExceptionHandler {
-
-  /** Logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(SampleExceptionHandler.class);
 
   /**
    * 例外ハンドラー処理.
@@ -27,7 +24,7 @@ public class SampleExceptionHandler implements ExceptionHandler {
    */
   @Override
   public void handleException(RepeatContext context, Throwable throwable) throws Throwable {
-    LOGGER.error("exception handler. stack trace:{}", ExceptionUtils.getStackTrace(throwable));
+    log.error("exception handler. stack trace:{}", ExceptionUtils.getStackTrace(throwable));
   }
 
 }

@@ -11,9 +11,8 @@ import jp.co.springbatch.sample.integration.service.SampleRestService;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Scope;
@@ -30,10 +29,8 @@ import org.springframework.web.client.RestTemplate;
  */
 @Scope(ScopeConst.SINGLETON)
 @Component
+@Slf4j
 public class SampleRestServiceImpl implements SampleRestService {
-
-  /** Logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(SampleRestServiceImpl.class);
 
   /** RestTemplate. */
   // thread safe
@@ -84,7 +81,7 @@ public class SampleRestServiceImpl implements SampleRestService {
   public CustomerDto getCustomer(String customerNo) {
     ResponseEntity<CustomerResponseDto> response = restTemplate.getForEntity(url + "/{customerNo}", CustomerResponseDto.class, customerNo);
     CustomerResponseDto responseBody = response.getBody();
-    LOGGER.info("SampleRestService get customer response: httpStatus=[{}], customer=[{}]", response.getStatusCode(), responseBody);
+    log.info("SampleRestService get customer response: httpStatus=[{}], customer=[{}]", response.getStatusCode(), responseBody);
     return responseBody == null ? null : responseBody.getResponse();
   }
 
@@ -96,7 +93,7 @@ public class SampleRestServiceImpl implements SampleRestService {
     ResponseEntity<CustomersResponseDto> response =
         restTemplate.exchange(url, HttpMethod.GET, null, new ParameterizedTypeReference<CustomersResponseDto>() {});
     CustomersResponseDto responseBody = response.getBody();
-    LOGGER.info("SampleRestService get customers response: httpStatus=[{}], customers=[{}]", response.getStatusCode(), responseBody);
+    log.info("SampleRestService get customers response: httpStatus=[{}], customers=[{}]", response.getStatusCode(), responseBody);
     return responseBody == null ? null : responseBody.getResponse();
   }
 
@@ -110,13 +107,13 @@ public class SampleRestServiceImpl implements SampleRestService {
       requestEntity = RequestEntity.post(new URI(url)).contentType(MediaType.APPLICATION_JSON).body(customers);
 
     } catch (URISyntaxException use) {
-      LOGGER.error(ExceptionUtils.getStackTrace(use));
+      log.error(ExceptionUtils.getStackTrace(use));
       throw new ApplicationException(use);
 
     }
 
     ResponseEntity<ObjectResponseDto> response = restTemplate.exchange(requestEntity, ObjectResponseDto.class);
-    LOGGER.info("SampleRestService create customers: httpStatus=[{}], customers=[{}]", response.getStatusCode(), customers);
+    log.info("SampleRestService create customers: httpStatus=[{}], customers=[{}]", response.getStatusCode(), customers);
   }
 
   /**
@@ -129,7 +126,7 @@ public class SampleRestServiceImpl implements SampleRestService {
       requestEntity = RequestEntity.put(new URI(url)).contentType(MediaType.APPLICATION_JSON).body(customers);
 
     } catch (URISyntaxException use) {
-      LOGGER.error(ExceptionUtils.getStackTrace(use));
+      log.error(ExceptionUtils.getStackTrace(use));
       throw new ApplicationException(use);
 
     }
@@ -137,11 +134,11 @@ public class SampleRestServiceImpl implements SampleRestService {
     ResponseEntity<IntegerResponseDto> response = restTemplate.exchange(requestEntity, IntegerResponseDto.class);
     IntegerResponseDto responseBody = response.getBody();
     if (responseBody == null) {
-      LOGGER.info("SampleRestService update customers: no update.");
+      log.info("SampleRestService update customers: no update.");
       return 0;
     }
 
-    LOGGER.info("SampleRestService update customers: httpStatus=[{}], updateCount=[{}], customers=[{}]", response.getStatusCode(),
+    log.info("SampleRestService update customers: httpStatus=[{}], updateCount=[{}], customers=[{}]", response.getStatusCode(),
         response.getBody(), customers);
 
     return responseBody.getResponse() == null ? 0 : responseBody.getResponse();
@@ -153,7 +150,7 @@ public class SampleRestServiceImpl implements SampleRestService {
   @Override
   public void deleteCustomer(String customerNo) {
     restTemplate.delete(url + "/{customerNo}", customerNo);
-    LOGGER.info("SampleRestService delete customer response: customerNo=[{}]", customerNo);
+    log.info("SampleRestService delete customer response: customerNo=[{}]", customerNo);
   }
 
 }

@@ -2,18 +2,13 @@ package jp.co.springbatch.framework.util;
 
 import jp.co.springbatch.framework.code.CodeVo;
 import java.lang.reflect.InvocationTargetException;
+import lombok.experimental.UtilityClass;
 
 /**
  * コード・ユーティリティ.
  */
+@UtilityClass
 public class CodeUtils {
-
-  /**
-   * デフォルトコンストラクタ.
-   */
-  private CodeUtils() {
-    throw new IllegalStateException("Utility class");
-  }
 
   /**
    * コード値をコードVOにデコードします.

@@ -6,6 +6,7 @@ import jp.co.springbatch.framework.constant.ScopeConst;
 import jp.co.springbatch.framework.handler.SampleExceptionHandler;
 import jp.co.springbatch.framework.listener.SampleJobExecutionListener;
 import jp.co.springbatch.framework.listener.SampleStepExecutionListener;
+import jp.co.springbatch.framework.util.FieldUtilsExt;
 import jp.co.springbatch.sample.biz.chunk.processor.CustomerFamilyItemProcessor;
 import jp.co.springbatch.sample.biz.chunk.writer.WriteFooterFlatFileCallback;
 import jp.co.springbatch.sample.biz.chunk.writer.WriteHeaderFlatFileCallback;
@@ -213,7 +214,7 @@ public class DbToFileJobConfig {
         .resource(new FileSystemResource(dataFilePath + "/" + dataFileName))
         .delimited()
         .delimiter(",")
-        .names(CustomerFamilyFileDto.getFields())
+        .names(FieldUtilsExt.getFields(CustomerFamilyFileDto.class))
         .encoding(EncodingVo.MS932.getCode())
         .headerCallback(writeHeaderFlatFileCallback)
         .footerCallback(writeFooterFlatFileCallback)

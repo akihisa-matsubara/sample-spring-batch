@@ -1,8 +1,7 @@
 package jp.co.springbatch.sample.biz.chunk.reader;
 
 import jp.co.springbatch.framework.constant.ScopeConst;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.file.LineCallbackHandler;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -12,10 +11,8 @@ import org.springframework.stereotype.Component;
  */
 @Scope(ScopeConst.SINGLETON)
 @Component
+@Slf4j
 public class ReadSkippedLinesCallback implements LineCallbackHandler {
-
-  /** Logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(ReadSkippedLinesCallback.class);
 
   /**
    * Skip時のコールバック.
@@ -25,7 +22,7 @@ public class ReadSkippedLinesCallback implements LineCallbackHandler {
    */
   @Override
   public void handleLine(String line) {
-    LOGGER.debug("skipped line: {}", line);
+    log.debug("skipped line: {}", line);
   }
 
 }

@@ -3,6 +3,7 @@ package jp.co.springbatch.framework.util;
 import jp.co.springbatch.framework.code.DateFormatVo;
 import java.text.ParseException;
 import java.util.Date;
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -10,14 +11,8 @@ import org.apache.commons.lang3.time.DateUtils;
  * 日付フォーマットユーティリティー(Date).
  * ※Apache Commons Lang3とクラス名が重複するため別名
  */
+@UtilityClass
 public class DateFormatUtilsExt {
-
-  /**
-   * デフォルトコンストラクタ.
-   */
-  private DateFormatUtilsExt() {
-    throw new IllegalStateException("Utility class");
-  }
 
   /**
    * Dateを指定フォーマットにフォーマットします.

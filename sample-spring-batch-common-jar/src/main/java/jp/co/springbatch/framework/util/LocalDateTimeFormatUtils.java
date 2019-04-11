@@ -7,19 +7,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Date;
+import lombok.experimental.UtilityClass;
 
 /**
  * 日付ユーティリティー(LocaleDateTIme).
  */
 // DateTimeFormatterはスレッドセーフなので定数定義してもよい.ただし、STRICT設定すること.
+@UtilityClass
 public class LocalDateTimeFormatUtils {
-
-  /**
-   * デフォルトコンストラクタ.
-   */
-  private LocalDateTimeFormatUtils() {
-    throw new IllegalStateException("Utility class");
-  }
 
   /**
    * Dateを指定フォーマットにフォーマットします.

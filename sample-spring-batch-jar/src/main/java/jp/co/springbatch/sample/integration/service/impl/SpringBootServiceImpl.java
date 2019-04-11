@@ -3,8 +3,7 @@ package jp.co.springbatch.sample.integration.service.impl;
 import jp.co.springbatch.framework.constant.ScopeConst;
 import jp.co.springbatch.sample.integration.dto.QuoteDto;
 import jp.co.springbatch.sample.integration.service.SpringBootService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Scope;
@@ -17,10 +16,8 @@ import org.springframework.web.client.RestTemplate;
  */
 @Scope(ScopeConst.SINGLETON)
 @Component
+@Slf4j
 public class SpringBootServiceImpl implements SpringBootService {
-
-  /** Logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(SpringBootServiceImpl.class);
 
   /** RestTemplate. */
   // thread safe
@@ -45,7 +42,7 @@ public class SpringBootServiceImpl implements SpringBootService {
   @Override
   public QuoteDto getRandomQuotation() {
     ResponseEntity<QuoteDto> response = restTemplate.getForEntity(url, QuoteDto.class);
-    LOGGER.info("SpringBootService get random response: httpStatus=[{}], quote=[{}]", response.getStatusCode(), response.getBody());
+    log.info("SpringBootService get random response: httpStatus=[{}], quote=[{}]", response.getStatusCode(), response.getBody());
     return response.getBody();
   }
 

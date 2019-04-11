@@ -3,8 +3,7 @@ package jp.co.springbatch.framework.listener;
 import jp.co.springbatch.framework.code.DateFormatVo;
 import jp.co.springbatch.framework.constant.ScopeConst;
 import jp.co.springbatch.framework.util.DateFormatUtilsExt;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.context.annotation.Scope;
@@ -15,10 +14,8 @@ import org.springframework.stereotype.Component;
  */
 @Scope(ScopeConst.SINGLETON)
 @Component
+@Slf4j
 public class SampleJobExecutionListener extends JobExecutionListenerSupport {
-
-  /** Logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(SampleJobExecutionListener.class);
 
   /**
    * ジョブ開始時処理.
@@ -39,7 +36,7 @@ public class SampleJobExecutionListener extends JobExecutionListenerSupport {
   public void afterJob(JobExecution jobExecution) {
     String startTime = DateFormatUtilsExt.format(jobExecution.getStartTime(), DateFormatVo.YYYYMMDDTHHMMSSSSS);
     String endTime = DateFormatUtilsExt.format(jobExecution.getEndTime(), DateFormatVo.YYYYMMDDTHHMMSSSSS);
-    LOGGER.info(
+    log.info(
         "detailed results of job execution. jobName=[{}], jobParameter=[{}], "
             + "exitCode=[{}], exitDesctioption=[{}], time=[{}-{}], context=[{}], exceptions=[{}]",
         jobExecution.getJobInstance().getJobName(),
@@ -54,7 +51,7 @@ public class SampleJobExecutionListener extends JobExecutionListenerSupport {
     jobExecution.getStepExecutions().forEach(stepExecution -> {
       Object errorItem = stepExecution.getExecutionContext().get("ERROR_ITEM");
       if (errorItem != null) {
-        LOGGER.error("detected error on this item processing. [step:{}] [item:{}]", stepExecution.getStepName(), errorItem);
+        log.error("detected error on this item processing. [step:{}] [item:{}]", stepExecution.getStepName(), errorItem);
       }
     });
   }

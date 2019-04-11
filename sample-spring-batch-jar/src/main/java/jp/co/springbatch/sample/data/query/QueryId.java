@@ -16,7 +16,7 @@ public enum QueryId {
   POST_CODE_INSERT("jp.co.springbatch.sample.data.primary.repository.PostCodeRepository.insert"),
   ;
 
-  /** コード. */
+  /** Id. */
   private String id;
 
 }

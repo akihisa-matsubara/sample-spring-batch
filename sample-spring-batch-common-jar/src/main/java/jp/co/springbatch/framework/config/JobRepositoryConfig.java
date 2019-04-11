@@ -1,8 +1,7 @@
 package jp.co.springbatch.framework.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.explore.support.MapJobExplorerFactoryBean;
@@ -14,10 +13,8 @@ import org.springframework.batch.core.repository.support.MapJobRepositoryFactory
 /**
  * in-memoryジョブリポジトリ.
  */
+@Slf4j
 public class JobRepositoryConfig extends DefaultBatchConfigurer {
-
-  /** Logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(JobRepositoryConfig.class);
 
   /** ジョブリポジトリー. */
   private JobRepository jobRepository;
@@ -47,7 +44,7 @@ public class JobRepositoryConfig extends DefaultBatchConfigurer {
       this.jobLauncher = launcher;
 
     } catch (Exception e) {
-      LOGGER.error(ExceptionUtils.getStackTrace(e));
+      log.error(ExceptionUtils.getStackTrace(e));
 
     }
   }

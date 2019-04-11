@@ -7,6 +7,7 @@ import jp.co.springbatch.framework.handler.SampleExceptionHandler;
 import jp.co.springbatch.framework.item.mapper.FieldSetMapper;
 import jp.co.springbatch.framework.listener.SampleJobExecutionListener;
 import jp.co.springbatch.framework.listener.SampleStepExecutionListener;
+import jp.co.springbatch.framework.util.FieldUtilsExt;
 import jp.co.springbatch.sample.biz.chunk.processor.PostCodeItemProcessor;
 import jp.co.springbatch.sample.biz.chunk.reader.ReadSkippedLinesCallback;
 import jp.co.springbatch.sample.biz.tasklet.TriggerFileTasklet;
@@ -202,7 +203,7 @@ public class FileToDbJobConfig {
         .skippedLinesCallback(readSkippedLinesCallback)
         .delimited()
         .delimiter(",")
-        .names(PostCodeFileDto.getFields())
+        .names(FieldUtilsExt.getFields(PostCodeFileDto.class))
         .encoding(EncodingVo.MS932.getCode())
         .fieldSetMapper(new FieldSetMapper<PostCodeFileDto>(PostCodeFileDto.class)).build();
   }

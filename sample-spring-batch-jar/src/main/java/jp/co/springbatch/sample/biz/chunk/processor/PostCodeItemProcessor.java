@@ -10,8 +10,7 @@ import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.ConstraintViolationException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.annotation.AfterStep;
 import org.springframework.batch.core.annotation.BeforeStep;
@@ -21,10 +20,8 @@ import org.springframework.batch.item.ItemProcessor;
 /**
  * 郵便番号ItemProcessor.
  */
+@Slf4j
 public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, PostCodeEntity> {
-
-  /** Logger. */
-  private static final Logger LOGGER = LoggerFactory.getLogger(PostCodeItemProcessor.class);
 
   /** ステップ実行情報. */
   private StepExecution stepExecution;
@@ -55,7 +52,7 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
     }
 
     // サンプルでは出力先をログにしています
-    errorRecordList.forEach(errorRecord -> LOGGER.warn("validate error record. {}", errorRecord));
+    errorRecordList.forEach(errorRecord -> log.warn("validate error record. {}", errorRecord));
   }
 
   /**
