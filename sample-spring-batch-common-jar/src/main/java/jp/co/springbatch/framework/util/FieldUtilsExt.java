@@ -1,5 +1,6 @@
 package jp.co.springbatch.framework.util;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import lombok.NonNull;
@@ -23,8 +24,9 @@ public class FieldUtilsExt {
    */
   public static String[] getFields(@NonNull Class<?> clazz) {
     return Arrays.stream(FieldUtils.getAllFields(clazz))
-        .filter(field -> Modifier.isStatic(field.getModifiers()))
-        .filter(field -> Modifier.isFinal(field.getModifiers()))
+        .filter(field -> !Modifier.isStatic(field.getModifiers()))
+        .filter(field -> !Modifier.isFinal(field.getModifiers()))
+        .map(Field::getName)
         .toArray(String[]::new);
   }
 
