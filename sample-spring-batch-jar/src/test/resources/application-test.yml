@@ -1,0 +1,66 @@
+# 環境設定値（テスト）
+# -----------------------------------------------------------------------------
+# Spring boot configurations
+# -----------------------------------------------------------------------------
+spring:
+  batch:
+    job:
+      enabled: false # Override
+
+# -----------------------------------------------------------------------------
+# logging configurations
+# -----------------------------------------------------------------------------
+logging:
+  file: log/spring-batch-test_debug.log
+  file.max-size: 20MB
+  file.max-history: 0
+  level:
+#    root: debug
+    org.springframework.web.client.RestTemplate: debug
+    org.springframework.jdbc: debug
+    jp.co.springbatch.sample: debug
+
+
+# -----------------------------------------------------------------------------
+# Framework configurations
+# -----------------------------------------------------------------------------
+framework:
+  system-date: 20190101 # Override
+
+
+# -----------------------------------------------------------------------------
+# Sample Application configurations
+# -----------------------------------------------------------------------------
+sample:
+  datasource:
+    # encoding UTF-8 (default)
+    primary:
+      driver-class-name: com.ibm.db2.jcc.DB2Driver
+      url: jdbc:db2://localhost:50000/mydb:currentSchema=TEST;
+      username: db2admin
+      password: db2admin
+
+    # multiple datasources sample
+    secondary:
+      driver-class-name: com.ibm.db2.jcc.DB2Driver
+      url: jdbc:db2://localhost:50000/mydb:currentSchema=TEST;
+      username: db2admin
+      password: db2admin
+
+  file:
+    db-to-file:
+      data-file:
+        path: data/test-outputs
+      trigger-file:
+        path: data/test-outputs
+
+    file-to-db:
+      data-file:
+        path: data/test-inputs
+      trigger-file:
+        path: data/test-inputs
+
+  service:
+    sample-rest-service:
+      base-url: http://localhost:9080/sample-rest-service-webapi/api/v1/sample
+
