@@ -17,6 +17,9 @@ public final class ScopeConst {
   /** session. */
   public static final String SESSION = "session";
 
+  /**
+   * デフォルトコンストラクタ.
+   */
   private ScopeConst() {
     // do nothing
   }

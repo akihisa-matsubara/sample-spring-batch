@@ -178,13 +178,13 @@ public class DbToFileJobConfig {
   /**
    * DB to File ItemReader.
    *
-   * @param primarySqlSessionFactory {@link SqlSessionFactory} 主DB用SqlSessionFactory
+   * @param sqlSessionFactory {@link SqlSessionFactory} SqlSessionFactory
    * @return {@link MyBatisCursorItemReader} DB to File ItemReader
    */
   @Bean
-  public MyBatisCursorItemReader<CustomerFamilyEntity> dbToFileItemReader(SqlSessionFactory primarySqlSessionFactory) {
+  public MyBatisCursorItemReader<CustomerFamilyEntity> dbToFileItemReader(SqlSessionFactory sqlSessionFactory) {
     MyBatisCursorItemReader<CustomerFamilyEntity> reader = new MyBatisCursorItemReader<>();
-    reader.setSqlSessionFactory(primarySqlSessionFactory);
+    reader.setSqlSessionFactory(sqlSessionFactory);
     reader.setQueryId(QueryId.CUSTOMER_FAMILY_SELECT_ALL.getId());
     return reader;
   }

@@ -8,9 +8,9 @@ public final class BatchConst {
   /** Framework Package. */
   public static final String FW_PACKAGE = "jp.co.springbatch.framework";
 
-  /** Version initial value. */
-  public static final int VERSION_INITIAL_VALUE = 1;
-
+  /**
+   * デフォルトコンストラクタ.
+   */
   private BatchConst() {
     // do nothing
   }

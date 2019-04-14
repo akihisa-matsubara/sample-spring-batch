@@ -1,9 +1,7 @@
 package jp.co.springbatch.sample.biz.chunk.processor;
 
 import jp.co.springbatch.framework.code.ExecutionContextVo;
-import jp.co.springbatch.framework.constant.BatchConst;
 import jp.co.springbatch.framework.util.BeanValidationUtils;
-import jp.co.springbatch.framework.util.SystemDateUtils;
 import jp.co.springbatch.sample.code.BatchVo;
 import jp.co.springbatch.sample.data.dto.PostCodeFileDto;
 import jp.co.springbatch.sample.data.primary.entity.PostCodeEntity;
@@ -113,11 +111,8 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
         .cityName(postCodeFileDto.getCityNameKanji())
         .townName(postCodeFileDto.getTownNameKanji())
         // common column
-        .version(BatchConst.VERSION_INITIAL_VALUE)
         .creationUserId(BatchVo.FILE_TO_DB.getCode())
-        .creationDate(SystemDateUtils.getNowLocalDateTime())
         .updatedUserId(BatchVo.FILE_TO_DB.getCode())
-        .updatedDate(SystemDateUtils.getNowLocalDateTime())
         .build();
   }
 

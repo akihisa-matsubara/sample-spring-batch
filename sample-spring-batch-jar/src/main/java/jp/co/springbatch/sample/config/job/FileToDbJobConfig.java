@@ -2,6 +2,7 @@ package jp.co.springbatch.sample.config.job;
 
 import jp.co.springbatch.framework.code.EncodingVo;
 import jp.co.springbatch.framework.code.TriggerFileOperationVo;
+import jp.co.springbatch.framework.constant.CommonFieldName;
 import jp.co.springbatch.framework.constant.ScopeConst;
 import jp.co.springbatch.framework.handler.SampleExceptionHandler;
 import jp.co.springbatch.framework.item.mapper.FieldSetMapper;
@@ -203,7 +204,7 @@ public class FileToDbJobConfig {
         .skippedLinesCallback(readSkippedLinesCallback)
         .delimited()
         .delimiter(",")
-        .names(FieldUtilsExt.getFields(PostCodeFileDto.class))
+        .names(FieldUtilsExt.getFields(PostCodeFileDto.class, CommonFieldName.ITEM_COUNT.getName()))
         .encoding(EncodingVo.MS932.getCode())
         .fieldSetMapper(new FieldSetMapper<PostCodeFileDto>(PostCodeFileDto.class)).build();
   }
@@ -221,13 +222,13 @@ public class FileToDbJobConfig {
   /**
    * File to DB ItemWriter.
    *
-   * @param primarySqlSessionFactory {@link SqlSessionFactory} 主DB用SqlSessionFactory
+   * @param sqlSessionFactory {@link SqlSessionFactory} SqlSessionFactory
    * @return {@link MyBatisBatchItemWriter} File to DB ItemWriter
    */
   @Bean
-  public MyBatisBatchItemWriter<PostCodeEntity> fileToDbItemWriter(SqlSessionFactory primarySqlSessionFactory) {
+  public MyBatisBatchItemWriter<PostCodeEntity> fileToDbItemWriter(SqlSessionFactory sqlSessionFactory) {
     MyBatisBatchItemWriter<PostCodeEntity> writer = new MyBatisBatchItemWriter<>();
-    writer.setSqlSessionFactory(primarySqlSessionFactory);
+    writer.setSqlSessionFactory(sqlSessionFactory);
     writer.setStatementId(QueryId.POST_CODE_INSERT.getId());
     return writer;
   }

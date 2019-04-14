@@ -31,11 +31,11 @@
             #{prefectureName,jdbcType=VARCHAR},
             #{cityName,jdbcType=VARCHAR},
             #{townName,jdbcType=VARCHAR},
-            #{version,jdbcType=INTEGER},
+            1,
             #{creationUserId,jdbcType=VARCHAR},
-            #{creationDate,jdbcType=TIMESTAMP},
+            CURRENT TIMESTAMP,
             #{updatedUserId,jdbcType=VARCHAR},
-            #{updatedDate,jdbcType=TIMESTAMP}
+            CURRENT TIMESTAMP
         )
     </insert>
 </mapper>
