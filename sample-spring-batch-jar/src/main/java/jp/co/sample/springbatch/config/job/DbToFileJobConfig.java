@@ -1,5 +1,6 @@
 package jp.co.sample.springbatch.config.job;
 
+import jp.co.sample.framework.code.EncodingVo;
 import jp.co.sample.springbatch.biz.chunk.processor.CustomerFamilyItemProcessor;
 import jp.co.sample.springbatch.biz.chunk.writer.WriteFooterFlatFileCallback;
 import jp.co.sample.springbatch.biz.chunk.writer.WriteHeaderFlatFileCallback;
@@ -7,7 +8,6 @@ import jp.co.sample.springbatch.biz.tasklet.TriggerFileTasklet;
 import jp.co.sample.springbatch.data.dto.CustomerFamilyFileDto;
 import jp.co.sample.springbatch.data.primary.entity.CustomerFamilyEntity;
 import jp.co.sample.springbatch.data.query.QueryId;
-import jp.co.sample.springbatch.framework.code.EncodingVo;
 import jp.co.sample.springbatch.framework.code.TriggerFileOperationVo;
 import jp.co.sample.springbatch.framework.constant.ScopeConst;
 import jp.co.sample.springbatch.framework.handler.SampleExceptionHandler;

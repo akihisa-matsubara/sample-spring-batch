@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.framework.util;
 
-import jp.co.sample.springbatch.framework.code.DateFormatVo;
+import jp.co.sample.framework.code.DateFormatVo;
 import java.text.ParseException;
 import java.util.Date;
 import lombok.experimental.UtilityClass;

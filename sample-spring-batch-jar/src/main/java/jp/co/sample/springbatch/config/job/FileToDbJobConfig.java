@@ -1,12 +1,12 @@
 package jp.co.sample.springbatch.config.job;
 
+import jp.co.sample.framework.code.EncodingVo;
 import jp.co.sample.springbatch.biz.chunk.processor.PostCodeItemProcessor;
 import jp.co.sample.springbatch.biz.chunk.reader.ReadSkippedLinesCallback;
 import jp.co.sample.springbatch.biz.tasklet.TriggerFileTasklet;
 import jp.co.sample.springbatch.data.dto.PostCodeFileDto;
 import jp.co.sample.springbatch.data.primary.entity.PostCodeEntity;
 import jp.co.sample.springbatch.data.query.QueryId;
-import jp.co.sample.springbatch.framework.code.EncodingVo;
 import jp.co.sample.springbatch.framework.code.TriggerFileOperationVo;
 import jp.co.sample.springbatch.framework.constant.CommonFieldName;
 import jp.co.sample.springbatch.framework.constant.ScopeConst;

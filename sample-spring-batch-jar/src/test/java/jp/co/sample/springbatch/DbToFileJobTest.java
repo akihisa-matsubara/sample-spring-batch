@@ -1,7 +1,7 @@
 package jp.co.sample.springbatch;
 
+import jp.co.sample.framework.code.DateFormatVo;
 import jp.co.sample.springbatch.config.job.DbToFileJobConfig;
-import jp.co.sample.springbatch.framework.code.DateFormatVo;
 import jp.co.sample.springbatch.framework.util.SystemDateUtils;
 import jp.co.sample.springbatch.test.context.SampleSpringBatchTest;
 import jp.co.sample.test.util.FileUtils;

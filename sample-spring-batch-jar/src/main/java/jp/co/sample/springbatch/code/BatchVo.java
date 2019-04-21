@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.code;
 
-import jp.co.sample.springbatch.framework.code.CodeVo;
+import jp.co.sample.framework.code.CodeVo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

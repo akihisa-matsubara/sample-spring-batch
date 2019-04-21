@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.biz.tasklet;
 
-import jp.co.sample.springbatch.framework.code.DateFormatVo;
+import jp.co.sample.framework.code.DateFormatVo;
 import jp.co.sample.springbatch.framework.code.TriggerFileOperationVo;
 import jp.co.sample.springbatch.framework.util.SystemDateUtils;
 import java.io.IOException;
