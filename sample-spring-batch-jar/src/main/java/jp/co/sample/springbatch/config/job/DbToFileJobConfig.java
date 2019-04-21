@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.config.job;
 
-import jp.co.sample.framework.code.EncodingVo;
+import jp.co.sample.common.code.EncodingVo;
 import jp.co.sample.springbatch.biz.chunk.processor.CustomerFamilyItemProcessor;
 import jp.co.sample.springbatch.biz.chunk.writer.WriteFooterFlatFileCallback;
 import jp.co.sample.springbatch.biz.chunk.writer.WriteHeaderFlatFileCallback;

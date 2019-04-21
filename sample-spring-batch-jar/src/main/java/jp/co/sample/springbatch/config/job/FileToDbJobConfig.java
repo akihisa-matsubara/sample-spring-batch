@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.config.job;
 
-import jp.co.sample.framework.code.EncodingVo;
+import jp.co.sample.common.code.EncodingVo;
 import jp.co.sample.springbatch.biz.chunk.processor.PostCodeItemProcessor;
 import jp.co.sample.springbatch.biz.chunk.reader.ReadSkippedLinesCallback;
 import jp.co.sample.springbatch.biz.tasklet.TriggerFileTasklet;

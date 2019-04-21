@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.framework.util;
 
-import jp.co.sample.framework.util.AbstractSystemDateUtils;
+import jp.co.sample.common.util.AbstractSystemDateUtils;
 import jp.co.sample.springbatch.framework.config.properties.SystemDateProperties;
 import jp.co.sample.springbatch.framework.constant.ScopeConst;
 import org.springframework.beans.factory.annotation.Autowired;

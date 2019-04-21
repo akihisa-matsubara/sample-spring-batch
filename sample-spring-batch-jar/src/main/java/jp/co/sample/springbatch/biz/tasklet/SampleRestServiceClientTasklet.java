@@ -1,7 +1,7 @@
 package jp.co.sample.springbatch.biz.tasklet;
 
-import jp.co.sample.framework.code.DateFormatVo;
-import jp.co.sample.framework.util.DateFormatUtilsExt;
+import jp.co.sample.common.code.DateFormatVo;
+import jp.co.sample.common.util.DateFormatUtilsExt;
 import jp.co.sample.springbatch.framework.constant.ScopeConst;
 import jp.co.sample.springbatch.integration.dto.CustomerDto;
 import jp.co.sample.springbatch.integration.service.SampleRestService;

@@ -1,7 +1,7 @@
 package jp.co.sample.springbatch.biz.chunk.processor;
 
-import jp.co.sample.framework.code.DateFormatVo;
-import jp.co.sample.framework.util.DateFormatUtilsExt;
+import jp.co.sample.common.code.DateFormatVo;
+import jp.co.sample.common.util.DateFormatUtilsExt;
 import jp.co.sample.springbatch.data.dto.CustomerFamilyFileDto;
 import jp.co.sample.springbatch.data.primary.entity.CustomerFamilyEntity;
 import org.springframework.batch.item.ItemProcessor;
