@@ -1,8 +1,8 @@
 package jp.co.sample.springbatch.framework.util;
 
 import static org.assertj.core.api.Assertions.*;
-import jp.co.sample.springbatch.framework.util.FieldUtilsExt;
-import jp.co.sample.test.util.ClassUtils;
+import jp.co.sample.test.util.ClassTestUtils;
+import jp.co.sample.test.util.StringTestUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.TestInstance;
@@ -18,15 +18,15 @@ class FieldUtilsExtTest {
     @DisplayName("正常系")
     @ParameterizedTest
     @CsvSource({
-        "final/staticではないフィールドが取得できること, java.io.File, 'status,filePath'",
+        "final/staticではないフィールドが取得できること, 'status,filePath', java.io.File",
     })
-    void test(String desc, String className, String expectedStr) throws ClassNotFoundException {
-      // --- setup ---
+    void test(String desc, String expectedStr, String className) {
+      // --- setup   ---
       // --- execute ---
-      String[] actual = FieldUtilsExt.getFields(ClassUtils.forName(className));
+      String[] actual = FieldUtilsExt.getFields(ClassTestUtils.forName(className));
 
-      // --- verify ---
-      String[] expected = expectedStr.split(",", -1);
+      // --- verify  ---
+      String[] expected = StringTestUtils.split(expectedStr);
       assertThat(actual).hasSize(expected.length).contains(expected);
     }
 
@@ -35,14 +35,14 @@ class FieldUtilsExtTest {
     @CsvSource({
         "nullの場合はNullPointerExceptionをthrowすること、'but is null'のメッセージを含むこと, java.lang.NullPointerException, but is null",
     })
-    void abnormalTest(String desc, String thrownClassName, String message) throws ClassNotFoundException {
-      // --- setup ---
+    void abnormalTest(String desc, String expectedThrownClassName, String expectedMessage) {
+      // --- setup   ---
       // --- execute ---
-      // --- verify ---
+      // --- verify  ---
       assertThatThrownBy(() -> {
         FieldUtilsExt.getFields(null);
-      }).isInstanceOf(ClassUtils.forName(thrownClassName))
-          .hasMessageContaining(message);
+      }).isInstanceOf(ClassTestUtils.forName(expectedThrownClassName))
+          .hasMessageContaining(expectedMessage);
     }
   }
 
@@ -52,32 +52,32 @@ class FieldUtilsExtTest {
     @DisplayName("正常系")
     @ParameterizedTest
     @CsvSource({
-        "final/staticではないフィールドが取得できること, java.io.File, , 'status,filePath'",
-        "excludeで指定したフィールドが除外されること, java.io.File, 'filePath', 'status'",
+        "final/staticではないフィールドが取得できること, 'status,filePath', java.io.File, ",
+        "excludeで指定したフィールドが除外されること,    'filePath',        java.io.File, 'status'",
     })
-    void test(String desc, String className, String excludeFields, String expectedStr) throws ClassNotFoundException {
-      // --- setup ---
+    void test(String desc, String expectedStr, String className, String excludeFields) {
+      // --- setup   ---
       // --- execute ---
-      String[] actual = FieldUtilsExt.getFields(ClassUtils.forName(className), excludeFields == null ? null : excludeFields.split(",", -1));
+      String[] actual = FieldUtilsExt.getFields(ClassTestUtils.forName(className), StringTestUtils.split(excludeFields));
 
-      // --- verify ---
-      String[] expected = expectedStr.split(",", -1);
+      // --- verify  ---
+      String[] expected = StringTestUtils.split(expectedStr);
       assertThat(actual).hasSize(expected.length).contains(expected);
     }
 
     @DisplayName("異常系")
     @ParameterizedTest
     @CsvSource({
-        "nullの場合はNullPointerExceptionをthrowすること、'but is null'のメッセージを含むこと, 'filePath', java.lang.NullPointerException, but is null",
+        "nullの場合はNullPointerExceptionをthrowすること、'but is null'のメッセージを含むこと, java.lang.NullPointerException, but is null, 'filePath'",
     })
-    void abnormalTest(String desc, String excludeFields, String thrownClassName, String message) throws ClassNotFoundException {
-      // --- setup ---
+    void abnormalTest(String desc, String expectedThrownClassName, String expectedMessage, String excludeFields) {
+      // --- setup   ---
       // --- execute ---
-      // --- verify ---
+      // --- verify  ---
       assertThatThrownBy(() -> {
-        FieldUtilsExt.getFields(null, excludeFields.split(",", -1));
-      }).isInstanceOf(ClassUtils.forName(thrownClassName))
-          .hasMessageContaining(message);
+        FieldUtilsExt.getFields(null, StringTestUtils.split(excludeFields));
+      }).isInstanceOf(ClassTestUtils.forName(expectedThrownClassName))
+          .hasMessageContaining(expectedMessage);
     }
   }
 

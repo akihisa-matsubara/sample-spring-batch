@@ -4,7 +4,7 @@ import jp.co.sample.common.code.DateFormatVo;
 import jp.co.sample.springbatch.config.job.DbToFileJobConfig;
 import jp.co.sample.springbatch.framework.util.SystemDateUtils;
 import jp.co.sample.springbatch.test.context.SampleSpringBatchTest;
-import jp.co.sample.test.util.FileUtils;
+import jp.co.sample.test.util.FileTestUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class DbToFileJobTest {
     // ジョブの実行状態を管理する場合はクリア
     // jobRepositoryTestUtils.removeJobExecutions();
     // trigger削除
-    FileUtils.deleteFile(triggerFilePath, triggerFileName.replace(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode(), SystemDateUtils.getNowDateString()));
+    FileTestUtils.deleteFile(triggerFilePath, triggerFileName.replace(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode(), SystemDateUtils.getNowDateString()));
   }
 
   @Test

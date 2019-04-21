@@ -1,7 +1,8 @@
 package jp.co.sample.springbatch.test.context;
 
 import jp.co.sample.springbatch.config.SampleBatchConfig;
-import jp.co.sample.springbatch.framework.constant.BatchConst;
+import jp.co.sample.springbatch.constant.BatchConst;
+import jp.co.sample.springbatch.framework.constant.BatchCommonConst;
 import jp.co.sample.springbatch.framework.constant.Profile;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -21,6 +22,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 /**
  * サンプルテスト用アノテーション.
+ * {@code @ComponentScan} では基底パッケージ(Application)とJOB用Configを読み込まないこと.
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
@@ -32,11 +34,11 @@ import org.springframework.test.context.ContextConfiguration;
     classes = {SampleBatchConfig.class},
     initializers = ConfigFileApplicationContextInitializer.class)
 @ComponentScan(basePackages = {
-    BatchConst.FW_PACKAGE,
-    "jp.co.sample.springbatch.biz",
-    "jp.co.sample.springbatch.config.database",
-    "jp.co.sample.springbatch.data",
-    "jp.co.sample.springbatch.integration"
+    BatchCommonConst.FW_PACKAGE,
+    BatchConst.BIZ_PACKAGE,
+    BatchConst.DB_CONFIG_PACKAGE,
+    BatchConst.DATA_PACKAGE,
+    BatchConst.INTEGRATION_PACKAGE
 })
 @EnableAutoConfiguration
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
