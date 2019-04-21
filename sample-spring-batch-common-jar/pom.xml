@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>jp.co.springbatch.sample</groupId>
+        <groupId>jp.co.sample</groupId>
         <artifactId>sample-spring-batch-parent</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -20,7 +20,7 @@
     </properties>
 
     <build>
-        <finalName>sample-spring-batch</finalName>
+        <finalName>sample-spring-batch-common</finalName>
     </build>
 
 </project>
