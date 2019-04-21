@@ -1,6 +1,7 @@
 package jp.co.springbatch.test.context;
 
 import jp.co.springbatch.framework.constant.BatchConst;
+import jp.co.springbatch.framework.constant.Profile;
 import jp.co.springbatch.sample.config.SampleBatchConfig;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -39,6 +40,6 @@ import org.springframework.test.context.ContextConfiguration;
 })
 @EnableAutoConfiguration
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles("test")
+@ActiveProfiles(Profile.TEST)
 public @interface SampleSpringBatchTest {
 }

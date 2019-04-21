@@ -17,6 +17,9 @@ public final class Profile {
   /** development. */
   public static final String DEV = "dev";
 
+  /** test. */
+  public static final String TEST = "test";
+
   /**
    * デフォルトコンストラクタ.
    */

@@ -16,21 +16,12 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1548000894258</id>
+			<id>1555821152161</id>
 			<name></name>
-			<type>26</type>
+			<type>10</type>
 			<matcher>
 				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-sample-spring-batch-common-jar</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1548000894289</id>
-			<name></name>
-			<type>26</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-sample-spring-batch-jar</arguments>
+				<arguments>1.0-name-matches-false-true-sample-spring-batch-.*</arguments>
 			</matcher>
 		</filter>
 	</filteredResources>
