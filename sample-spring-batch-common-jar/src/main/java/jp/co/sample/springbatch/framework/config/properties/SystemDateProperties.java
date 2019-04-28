@@ -1,7 +1,8 @@
 package jp.co.sample.springbatch.framework.config.properties;
 
 import jp.co.sample.springbatch.framework.constant.ScopeConst;
-import lombok.Getter;
+import jp.co.sample.springbatch.framework.util.SystemDateUtils;
+import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Component;
  */
 @Scope(ScopeConst.SINGLETON)
 @Component
-@Getter
 public class SystemDateProperties {
 
   /**
@@ -21,5 +21,13 @@ public class SystemDateProperties {
    */
   @Value("${framework.system-date}")
   private String systemDate;
+
+  /**
+   * 初期化.
+   */
+  @PostConstruct
+  public void initailize() {
+    SystemDateUtils.initailize(systemDate);
+  }
 
 }
