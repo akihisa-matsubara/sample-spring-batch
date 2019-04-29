@@ -1,9 +1,9 @@
 package jp.co.sample.springbatch.test.context;
 
+import jp.co.sample.common.constant.Profile;
 import jp.co.sample.springbatch.config.SampleBatchConfig;
 import jp.co.sample.springbatch.constant.BatchConst;
 import jp.co.sample.springbatch.framework.constant.BatchCommonConst;
-import jp.co.sample.springbatch.framework.constant.Profile;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
