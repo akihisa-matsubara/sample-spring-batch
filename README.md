@@ -4,8 +4,8 @@ Spring-Batch + Spring-Bootを利用したサンプルバッチです。
 ## 動作確認環境
 | Platform | Version |
 | -------- | ------- |
-| Java | 8 |
-| DB2 | 11.1 |
+| IBM Java | 1.8.0_181 |
+| DB2 | 11.1.4.4 |
 
 ## 利用技術
 | FW/OSS | Version |
@@ -19,3 +19,7 @@ Spring-Batch + Spring-Bootを利用したサンプルバッチです。
 - Rest Service呼び出しジョブ(CallRestService)
 - DB to File(DbToFile)
 - File to DB(FileToDb)
+
+## 実行方法
+1. Javaアプリケーションの実行構成より実行できます  
+> ex. callRestServiceJob
