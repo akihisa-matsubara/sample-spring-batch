@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * Response 基底Dto.
+ *
+ * @param <T> Responseの型
  */
 @AllArgsConstructor
 @NoArgsConstructor
