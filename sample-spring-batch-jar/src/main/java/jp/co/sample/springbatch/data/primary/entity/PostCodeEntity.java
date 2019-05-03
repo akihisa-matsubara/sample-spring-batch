@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.data.primary.entity;
 
-import jp.co.sample.springbatch.framework.data.entity.DbEntityBase;
+import jp.co.sample.springbatch.framework.data.entity.DbBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class PostCodeEntity extends DbEntityBase {
+public class PostCodeEntity extends DbBaseEntity {
 
   /** serialVersionUID. */
   private static final long serialVersionUID = -3324390606538995849L;

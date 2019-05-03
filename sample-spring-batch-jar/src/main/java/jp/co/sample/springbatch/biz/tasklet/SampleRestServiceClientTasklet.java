@@ -2,7 +2,7 @@ package jp.co.sample.springbatch.biz.tasklet;
 
 import jp.co.sample.common.code.DateFormat.DateFormatVo;
 import jp.co.sample.common.code.GenderVo;
-import jp.co.sample.common.util.DateFormatUtilsExt;
+import jp.co.sample.common.util.LocalDateFormatUtils;
 import jp.co.sample.springbatch.framework.constant.ScopeConst;
 import jp.co.sample.springbatch.integration.dto.CustomerDto;
 import jp.co.sample.springbatch.integration.service.SampleRestService;
@@ -84,7 +84,7 @@ public class SampleRestServiceClientTasklet implements Tasklet {
     newCustomer1.setNameKanji("さんぷるばっち１");
     newCustomer1.setNameKana("サンプルバッチイチ");
     newCustomer1.setGender(GenderVo.MALE.getCode());
-    newCustomer1.setBirthday(DateFormatUtilsExt.parse("19800505", DateFormatVo.YYYYMMDD_NO_DELIMITER));
+    newCustomer1.setBirthday(LocalDateFormatUtils.parse("1980-05-05", DateFormatVo.YYYYMMDD));
     newCustomer1.setAddressZip("9999999");
     newCustomer1.setAddress("埼玉県さんぷる");
 
@@ -92,7 +92,7 @@ public class SampleRestServiceClientTasklet implements Tasklet {
     newCustomer2.setNameKanji("さんぷるばっち２");
     newCustomer2.setNameKana("サンプルバッチニ");
     newCustomer2.setGender(GenderVo.FEMALE.getCode());
-    newCustomer2.setBirthday(DateFormatUtilsExt.parse("19831111", DateFormatVo.YYYYMMDD_NO_DELIMITER));
+    newCustomer2.setBirthday(LocalDateFormatUtils.parse("1983-11-11", DateFormatVo.YYYYMMDD));
     newCustomer2.setAddressZip("9999999");
     newCustomer2.setAddress("埼玉県さんぷる");
 

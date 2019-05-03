@@ -1,8 +1,8 @@
 package jp.co.sample.springbatch.framework.integration.dto;
 
 import java.util.List;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
  *
  * @param <T> Responseの型
  */
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
-@JsonIgnoreProperties(ignoreUnknown = true)
-public abstract class ResponseDto<T> {
+public class ResponseBaseDto<T> {
 
   /** 結果. */
   private String result;

@@ -3,3 +3,4 @@
 /log/*
 !/log/.gitkeep
 /target/
+/src/test/assertions/

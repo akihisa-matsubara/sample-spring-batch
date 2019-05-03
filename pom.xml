@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.co.sample</groupId>
@@ -30,6 +29,7 @@
         <mybatis-spring.version>2.0.1</mybatis-spring.version>
         <dbSetup.version>2.1.0</dbSetup.version>
         <mybatis-generator.version>1.3.7</mybatis-generator.version>
+        <assertj-assertions-generator.version>2.2.0</assertj-assertions-generator.version>
     </properties>
 
     <dependencyManagement>
@@ -39,16 +39,18 @@
                 <artifactId>sample-common-util-jar</artifactId>
                 <version>${sample-common-util.version}</version>
             </dependency>
-            <dependency>
-                <groupId>jp.co.sample</groupId>
-                <artifactId>sample-test-util-jar</artifactId>
-                <version>${sample-test-util.version}</version>
-            </dependency>
             <!-- OSS Library -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring.version}</version>
+            </dependency>
+
+            <!-- Test Library -->
+            <dependency>
+                <groupId>jp.co.sample</groupId>
+                <artifactId>sample-test-util-jar</artifactId>
+                <version>${sample-test-util.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.ninja-squad</groupId>
@@ -150,6 +152,11 @@
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
                     <version>${mybatis-generator.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.assertj</groupId>
+                    <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+                    <version>${assertj-assertions-generator.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
 
@@ -157,6 +164,34 @@
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
+            </plugin>
+            <!-- m2eのLife Cycle Mappingでエラーが出る場合、[generate-assertions]を無視に設定してください -->
+            <plugin>
+                <!-- Generate assertions at every build -->
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate-assertions</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <param>.*Abstract.*</param>
+                        <param>.*Base.*</param>
+                        <param>.*Listener.*</param>
+                    </excludes>
+                    <skip>true</skip>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                        <version>${junit.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>

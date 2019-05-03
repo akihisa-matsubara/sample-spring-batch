@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.integration.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,7 +28,7 @@ public class CustomerDto {
   private String gender;
 
   /** 生年月日. */
-  private Date birthday;
+  private LocalDate birthday;
 
   /** 郵便番号. */
   private String addressZip;
