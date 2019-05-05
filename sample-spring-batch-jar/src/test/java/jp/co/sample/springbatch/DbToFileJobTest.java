@@ -1,13 +1,13 @@
 package jp.co.sample.springbatch;
 
+import static org.assertj.core.api.Assertions.*;
 import jp.co.sample.common.code.DateFormat.DateFormatVo;
 import jp.co.sample.springbatch.config.job.DbToFileJobConfig;
 import jp.co.sample.springbatch.framework.util.SystemDateUtils;
 import jp.co.sample.springbatch.test.context.SampleSpringBatchTest;
 import jp.co.sample.test.util.FileTestUtils;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobExecution;
@@ -39,7 +39,7 @@ public class DbToFileJobTest {
   /**
    * 初期化します.
    */
-  @Before
+  @BeforeEach
   public void initialize() {
     // ジョブの実行状態を管理する場合はクリア
     // jobRepositoryTestUtils.removeJobExecutions();
@@ -54,7 +54,7 @@ public class DbToFileJobTest {
     JobExecution jobExecution = jobLauncherTestUtils.launchJob();
 
     // --- verify  ---
-    Assert.assertEquals(ExitStatus.COMPLETED, jobExecution.getExitStatus());
+    assertThat(jobExecution.getExitStatus()).isEqualTo(ExitStatus.COMPLETED);
   }
 
 }
