@@ -169,9 +169,10 @@
             <plugin>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
-                <!-- Generate assertions at every build -->
                 <executions>
                     <execution>
+                        <id>generate-assertions-test-sources</id>
+                        <phase>generate-test-sources</phase>
                         <goals>
                             <goal>generate-assertions</goal>
                         </goals>
