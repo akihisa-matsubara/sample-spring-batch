@@ -1,5 +1,7 @@
 # sample-spring-batch
-Spring-Batch + Spring-Bootを利用したサンプルバッチです。
+Spring-Batch + Spring-Bootを利用したサンプルバッチです。  
+in-memory方式のジョブリポジトリーを利用します。  
+バッチ実行時にSpring-Boot(Application Server)は起動しません。  
 
 ## 動作確認環境
 | Platform | Version |
