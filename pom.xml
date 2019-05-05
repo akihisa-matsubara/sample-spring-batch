@@ -167,6 +167,8 @@
             </plugin>
             <!-- m2eのLife Cycle Mappingでエラーが出る場合、[generate-assertions]を無視に設定してください -->
             <plugin>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
                 <!-- Generate assertions at every build -->
                 <executions>
                     <execution>
@@ -175,8 +177,6 @@
                         </goals>
                     </execution>
                 </executions>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
                         <param>.*Abstract.*</param>
