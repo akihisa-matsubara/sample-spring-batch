@@ -4,13 +4,13 @@ import jp.co.sample.springbatch.framework.constant.ScopeConst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.file.LineCallbackHandler;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Read Skipped Line Callback.
  */
 @Scope(ScopeConst.SINGLETON)
-@Component
+@Service
 @Slf4j
 public class ReadSkippedLinesCallback implements LineCallbackHandler {
 

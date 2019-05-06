@@ -8,13 +8,13 @@ import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Spring Boot Service Client.
  */
 @Scope(ScopeConst.SINGLETON)
-@Component
+@Service
 @RequiredArgsConstructor
 public class SpringBootServiceClientTasklet implements Tasklet {
 

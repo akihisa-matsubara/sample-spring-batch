@@ -14,13 +14,13 @@ import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * Sample Rest Service Client.
  */
 @Scope(ScopeConst.SINGLETON)
-@Component
+@Service
 @RequiredArgsConstructor
 public class SampleRestServiceClientTasklet implements Tasklet {
 

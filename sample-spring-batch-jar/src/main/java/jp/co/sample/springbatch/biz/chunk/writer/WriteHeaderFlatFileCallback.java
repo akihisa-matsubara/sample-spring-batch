@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.io.Writer;
 import org.springframework.batch.item.file.FlatFileHeaderCallback;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * ヘッダーWriterCallback.
  */
 @Scope(ScopeConst.SINGLETON)
-@Component
+@Service
 public class WriteHeaderFlatFileCallback implements FlatFileHeaderCallback {
 
   /**

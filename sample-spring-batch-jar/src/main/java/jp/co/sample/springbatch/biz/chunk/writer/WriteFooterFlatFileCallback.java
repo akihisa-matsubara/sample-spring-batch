@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.io.Writer;
 import org.springframework.batch.item.file.FlatFileFooterCallback;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * フッターWriterCallback.
  */
 @Scope(ScopeConst.SINGLETON)
-@Component
+@Service
 public class WriteFooterFlatFileCallback implements FlatFileFooterCallback {
 
   /**
