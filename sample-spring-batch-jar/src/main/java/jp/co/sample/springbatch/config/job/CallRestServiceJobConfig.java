@@ -4,13 +4,13 @@ import jp.co.sample.springbatch.biz.tasklet.SampleRestServiceClientTasklet;
 import jp.co.sample.springbatch.biz.tasklet.SpringBootServiceClientTasklet;
 import jp.co.sample.springbatch.framework.constant.ScopeConst;
 import jp.co.sample.springbatch.framework.listener.SampleJobExecutionListener;
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
@@ -21,11 +21,11 @@ import org.springframework.context.annotation.Scope;
 @Scope(ScopeConst.SINGLETON)
 @Configuration
 @EnableBatchProcessing
+@RequiredArgsConstructor
 public class CallRestServiceJobConfig {
 
-  /** StepBuilderFactory. */
-  @Autowired
-  private StepBuilderFactory steps;
+  /** StepBuilderFactory. (Constructor Injection) */
+  private final StepBuilderFactory steps;
 
   /**********************************************
    * job configurations.

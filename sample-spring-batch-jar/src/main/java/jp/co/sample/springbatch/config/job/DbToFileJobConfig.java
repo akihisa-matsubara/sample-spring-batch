@@ -14,6 +14,7 @@ import jp.co.sample.springbatch.framework.handler.SampleExceptionHandler;
 import jp.co.sample.springbatch.framework.listener.SampleJobExecutionListener;
 import jp.co.sample.springbatch.framework.listener.SampleStepExecutionListener;
 import jp.co.sample.springbatch.framework.util.FieldUtilsExt;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.springframework.batch.core.ExitStatus;
@@ -25,7 +26,6 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.file.FlatFileItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,11 +38,11 @@ import org.springframework.core.io.FileSystemResource;
 @Scope(ScopeConst.SINGLETON)
 @Configuration
 @EnableBatchProcessing
+@RequiredArgsConstructor
 public class DbToFileJobConfig {
 
-  /** StepBuilderFactory. */
-  @Autowired
-  private StepBuilderFactory steps;
+  /** StepBuilderFactory. (Constructor Injection) */
+  private final StepBuilderFactory steps;
 
   /** データファイルパス. */
   @Value("${sample.file.db-to-file.data-file.path}")

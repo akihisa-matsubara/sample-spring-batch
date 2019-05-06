@@ -17,6 +17,7 @@ import jp.co.sample.springbatch.framework.listener.SampleStepExecutionListener;
 import jp.co.sample.springbatch.framework.util.FieldUtilsExt;
 import java.io.IOException;
 import javax.validation.ConstraintViolationException;
+import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisBatchItemWriter;
 import org.springframework.batch.core.ExitStatus;
@@ -29,7 +30,6 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.FlatFileParseException;
 import org.springframework.batch.item.file.builder.FlatFileItemReaderBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,11 +44,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Scope(ScopeConst.SINGLETON)
 @Configuration
 @EnableBatchProcessing
+@RequiredArgsConstructor
 public class FileToDbJobConfig {
 
-  /** StepBuilderFactory. */
-  @Autowired
-  private StepBuilderFactory steps;
+  /** StepBuilderFactory. (Constructor Injection) */
+  private final StepBuilderFactory steps;
 
   /** データファイルパス. */
   @Value("${sample.file.file-to-db.data-file.path}")

@@ -8,11 +8,11 @@ import jp.co.sample.springbatch.integration.dto.CustomerDto;
 import jp.co.sample.springbatch.integration.service.SampleRestService;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -21,13 +21,11 @@ import org.springframework.stereotype.Component;
  */
 @Scope(ScopeConst.SINGLETON)
 @Component
+@RequiredArgsConstructor
 public class SampleRestServiceClientTasklet implements Tasklet {
 
-  /**
-   * Sample Rest Service.
-   */
-  @Autowired
-  private SampleRestService service;
+  /** Sample Rest Service. (Constructor Injection) */
+  private final SampleRestService service;
 
   /**
    * 実行.
