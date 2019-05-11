@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.config.job;
 
-import jp.co.sample.common.code.EncodingVo;
+import jp.co.sample.common.constant.Encoding;
 import jp.co.sample.springbatch.biz.chunk.processor.PostCodeItemProcessor;
 import jp.co.sample.springbatch.biz.chunk.reader.ReadSkippedLinesCallback;
 import jp.co.sample.springbatch.biz.tasklet.TriggerFileTasklet;
@@ -205,7 +205,7 @@ public class FileToDbJobConfig {
         .delimited()
         .delimiter(",")
         .names(FieldUtilsExt.getFields(PostCodeFileDto.class, CommonFieldName.ITEM_COUNT.getName()))
-        .encoding(EncodingVo.MS932.getCode())
+        .encoding(Encoding.MS932)
         .fieldSetMapper(new FieldSetMapper<PostCodeFileDto>(PostCodeFileDto.class)).build();
   }
 

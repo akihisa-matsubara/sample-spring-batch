@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.config.job;
 
-import jp.co.sample.common.code.EncodingVo;
+import jp.co.sample.common.constant.Encoding;
 import jp.co.sample.springbatch.biz.chunk.processor.CustomerFamilyItemProcessor;
 import jp.co.sample.springbatch.biz.chunk.writer.WriteFooterFlatFileCallback;
 import jp.co.sample.springbatch.biz.chunk.writer.WriteHeaderFlatFileCallback;
@@ -215,7 +215,7 @@ public class DbToFileJobConfig {
         .delimited()
         .delimiter(",")
         .names(FieldUtilsExt.getFields(CustomerFamilyFileDto.class))
-        .encoding(EncodingVo.MS932.getCode())
+        .encoding(Encoding.MS932)
         .headerCallback(writeHeaderFlatFileCallback)
         .footerCallback(writeFooterFlatFileCallback)
         .build();
