@@ -22,6 +22,9 @@
         <finalName>sample-spring-batch-common</finalName>
         <plugins>
             <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
                 <groupId>org.assertj</groupId>
                 <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
                 <configuration>

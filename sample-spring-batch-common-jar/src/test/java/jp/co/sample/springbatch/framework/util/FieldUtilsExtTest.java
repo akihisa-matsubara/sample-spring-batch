@@ -21,13 +21,13 @@ class FieldUtilsExtTest {
         "final/staticではないフィールドが取得できること, 'status,filePath', java.io.File",
     })
     void test(String desc, String expectedStr, String className) {
-      // --- setup   ---
+      // --- setup -----
       // --- execute ---
       String[] actual = FieldUtilsExt.getFields(ClassTestUtils.forName(className));
 
-      // --- verify  ---
+      // --- verify ----
       String[] expected = StringTestUtils.split(expectedStr);
-      assertThat(actual).hasSize(expected.length).contains(expected);
+      assertThat(actual).as(desc).hasSize(expected.length).contains(expected);
     }
 
     @DisplayName("異常系")
@@ -36,12 +36,12 @@ class FieldUtilsExtTest {
         "nullの場合はNullPointerExceptionをthrowすること、'but is null'のメッセージを含むこと, java.lang.NullPointerException, but is null",
     })
     void abnormalTest(String desc, String expectedThrownClassName, String expectedMessage) {
-      // --- setup   ---
+      // --- setup -----
       // --- execute ---
-      // --- verify  ---
+      // --- verify ----
       assertThatThrownBy(() -> {
         FieldUtilsExt.getFields(null);
-      }).isInstanceOf(ClassTestUtils.forName(expectedThrownClassName))
+      }).as(desc).isInstanceOf(ClassTestUtils.forName(expectedThrownClassName))
           .hasMessageContaining(expectedMessage);
     }
   }
@@ -56,13 +56,13 @@ class FieldUtilsExtTest {
         "excludeで指定したフィールドが除外されること,    'filePath',        java.io.File, 'status'",
     })
     void test(String desc, String expectedStr, String className, String excludeFields) {
-      // --- setup   ---
+      // --- setup -----
       // --- execute ---
       String[] actual = FieldUtilsExt.getFields(ClassTestUtils.forName(className), StringTestUtils.split(excludeFields));
 
-      // --- verify  ---
+      // --- verify ----
       String[] expected = StringTestUtils.split(expectedStr);
-      assertThat(actual).hasSize(expected.length).contains(expected);
+      assertThat(actual).as(desc).hasSize(expected.length).contains(expected);
     }
 
     @DisplayName("異常系")
@@ -71,12 +71,12 @@ class FieldUtilsExtTest {
         "nullの場合はNullPointerExceptionをthrowすること、'but is null'のメッセージを含むこと, java.lang.NullPointerException, but is null, 'filePath'",
     })
     void abnormalTest(String desc, String expectedThrownClassName, String expectedMessage, String excludeFields) {
-      // --- setup   ---
+      // --- setup -----
       // --- execute ---
-      // --- verify  ---
+      // --- verify ----
       assertThatThrownBy(() -> {
         FieldUtilsExt.getFields(null, StringTestUtils.split(excludeFields));
-      }).isInstanceOf(ClassTestUtils.forName(expectedThrownClassName))
+      }).as(desc).isInstanceOf(ClassTestUtils.forName(expectedThrownClassName))
           .hasMessageContaining(expectedMessage);
     }
   }

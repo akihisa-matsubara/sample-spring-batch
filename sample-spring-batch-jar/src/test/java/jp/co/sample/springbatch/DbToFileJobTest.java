@@ -7,6 +7,7 @@ import jp.co.sample.springbatch.framework.util.SystemDateUtils;
 import jp.co.sample.springbatch.test.context.SampleSpringBatchTest;
 import jp.co.sample.test.util.FileTestUtils;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.batch.core.ExitStatus;
@@ -33,12 +34,6 @@ public class DbToFileJobTest {
   @Value("${sample.file.db-to-file.trigger-file.name}")
   private String triggerFileName;
 
-  // @Autowired
-  // private JdbcTemplate jdbcTemplate;
-
-  /**
-   * 初期化します.
-   */
   @BeforeEach
   public void initialize() {
     // ジョブの実行状態を管理する場合はクリア
@@ -47,14 +42,15 @@ public class DbToFileJobTest {
     FileTestUtils.deleteFile(triggerFilePath, triggerFileName.replace(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode(), SystemDateUtils.getNowDateString()));
   }
 
+  @DisplayName("DbToFileのPre-IT")
   @Test
   public void testJob() throws Exception {
-    // --- setup   ---
+    // --- setup -----
     // --- execute ---
     JobExecution jobExecution = jobLauncherTestUtils.launchJob();
 
-    // --- verify  ---
-    assertThat(jobExecution.getExitStatus()).isEqualTo(ExitStatus.COMPLETED);
+    // --- verify ----
+    assertThat(jobExecution.getExitStatus()).as("結果コードがCOMPLETEDであること").isEqualTo(ExitStatus.COMPLETED);
   }
 
 }
