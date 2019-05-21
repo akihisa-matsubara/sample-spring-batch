@@ -15,7 +15,7 @@
 
     <properties>
         <!-- override -->
-        <project.lib.path>${basedir}/../lib</project.lib.path>
+        <project.lib.path>${project.basedir}/../lib</project.lib.path>
     </properties>
 
     <build>
@@ -31,9 +31,6 @@
                     <packages>
                         <param>jp.co.sample.springbatch.framework.integration.dto</param>
                     </packages>
-                    <targetDir>${basedir}/src/test/assertions</targetDir>
-                    <cleanTargetDir>true</cleanTargetDir>
-                    <skip>false</skip>
                 </configuration>
             </plugin>
         </plugins>

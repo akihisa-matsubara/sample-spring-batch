@@ -19,9 +19,9 @@
     </modules>
 
     <properties>
-        <project.lib.path>${basedir}/lib</project.lib.path>
+        <project.lib.path>${project.basedir}/lib</project.lib.path>
         <!-- MyBatis Generator Setting -->
-        <mybatis.generator.configurationFile>${basedir}/tools/mybatis-generator/generatorConfig.xml</mybatis.generator.configurationFile>
+        <mybatis.generator.configurationFile>${project.basedir}/tools/mybatis-generator/generatorConfig.xml</mybatis.generator.configurationFile>
         <mybatis.generator.overwrite>true</mybatis.generator.overwrite>
         <!-- version -->
         <sample-common-util.version>0.0.1-SNAPSHOT</sample-common-util.version>
@@ -156,6 +156,31 @@
                     <groupId>org.assertj</groupId>
                     <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
                     <version>${assertj-assertions-generator.version}</version>
+                    <executions>
+                        <execution>
+                            <id>generate-assertions-test-sources</id>
+                            <phase>generate-test-sources</phase>
+                            <goals>
+                                <goal>generate-assertions</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <excludes>
+                            <param>.*Abstract.*</param>
+                            <param>.*Base.*</param>
+                            <param>.*Listener.*</param>
+                        </excludes>
+                        <targetDir>${project.basedir}/src/test/assertions</targetDir>
+                        <cleanTargetDir>true</cleanTargetDir>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>junit</groupId>
+                            <artifactId>junit</artifactId>
+                            <version>${junit.version}</version>
+                        </dependency>
+                    </dependencies>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -164,35 +189,6 @@
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
-            </plugin>
-            <!-- m2eのLife Cycle Mappingでエラーが出る場合、[generate-assertions]を無視に設定してください -->
-            <plugin>
-                <groupId>org.assertj</groupId>
-                <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>generate-assertions-test-sources</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>generate-assertions</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <excludes>
-                        <param>.*Abstract.*</param>
-                        <param>.*Base.*</param>
-                        <param>.*Listener.*</param>
-                    </excludes>
-                    <skip>true</skip>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>junit</groupId>
-                        <artifactId>junit</artifactId>
-                        <version>${junit.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
