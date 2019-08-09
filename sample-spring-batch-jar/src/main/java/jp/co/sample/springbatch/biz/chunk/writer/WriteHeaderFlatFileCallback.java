@@ -25,7 +25,7 @@ public class WriteHeaderFlatFileCallback implements FlatFileHeaderCallback {
    */
   @Override
   public void writeHeader(Writer writer) throws IOException {
-    writer.write(RecodeTypeVo.HEADER_RECODE.getCode() + "," + SystemDateUtils.getNowDateString());
+    writer.write(RecodeTypeVo.HEADER_RECODE.getCode() + "," + SystemDateUtils.getNowDateAsString());
   }
 
 }

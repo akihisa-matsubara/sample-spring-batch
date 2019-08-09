@@ -15,8 +15,9 @@ spring:
 # Framework configurations
 # -----------------------------------------------------------------------------
 framework:
-  # format yyyyMMdd
   system-date:
+    use: false
+    deemed-date: # format yyyyMMdd
 
 
 # -----------------------------------------------------------------------------

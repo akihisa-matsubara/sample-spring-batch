@@ -15,19 +15,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class SystemDateProperties {
 
+  /** システム日付（みなし日付）の利用. */
+  @Value("${framework.system-date.use}")
+  private boolean use;
+
   /**
    * システム日付（みなし日付）.
    * ※起動時に読み込まれた後は利用しません.
    */
-  @Value("${framework.system-date}")
-  private String systemDate;
+  @Value("${framework.system-date.deemed-date}")
+  private String deemedDate;
 
   /**
    * 初期化.
    */
   @PostConstruct
   public void initailize() {
-    SystemDateUtils.initailize(systemDate);
+    SystemDateUtils.initailize(use, deemedDate);
   }
 
 }

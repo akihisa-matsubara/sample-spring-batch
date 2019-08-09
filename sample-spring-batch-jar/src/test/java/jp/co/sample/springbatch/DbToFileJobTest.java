@@ -39,7 +39,7 @@ public class DbToFileJobTest {
     // ジョブの実行状態を管理する場合はクリア
     // jobRepositoryTestUtils.removeJobExecutions();
     // trigger削除
-    FileTestUtils.deleteFile(triggerFilePath, triggerFileName.replace(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode(), SystemDateUtils.getNowDateString()));
+    FileTestUtils.deleteFile(triggerFilePath, triggerFileName.replace(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode(), SystemDateUtils.getNowDateAsString()));
   }
 
   @DisplayName("DbToFileのPre-IT")

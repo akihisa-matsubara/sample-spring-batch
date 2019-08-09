@@ -25,8 +25,16 @@ logging:
 # Framework configurations
 # -----------------------------------------------------------------------------
 framework:
-  system-date: 20190101 # Override
+  datasource:
+    core:
+      driver-class-name: com.ibm.db2.jcc.DB2Driver
+      url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
+      username: db2admin
+      password: db2admin
 
+  system-date:
+    use: true             # Override
+    deemed-date: 20190101 # Override
 
 # -----------------------------------------------------------------------------
 # Sample Application configurations
@@ -36,14 +44,14 @@ sample:
     # encoding UTF-8 (default)
     primary:
       driver-class-name: com.ibm.db2.jcc.DB2Driver
-      url: jdbc:db2://localhost:50000/mydb:currentSchema=TEST;
+      url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
       username: db2admin
       password: db2admin
 
     # multiple datasources sample
     secondary:
       driver-class-name: com.ibm.db2.jcc.DB2Driver
-      url: jdbc:db2://localhost:50000/mydb:currentSchema=TEST;
+      url: jdbc:db2://localhost:50000/mydb:currentSchema=MYSCHEMA;
       username: db2admin
       password: db2admin
 

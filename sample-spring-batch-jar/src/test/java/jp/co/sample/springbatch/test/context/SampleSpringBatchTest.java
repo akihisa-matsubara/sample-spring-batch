@@ -42,6 +42,6 @@ import org.springframework.test.context.ContextConfiguration;
 })
 @EnableAutoConfiguration
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles(Profile.TEST)
+@ActiveProfiles(Profile.UT)
 public @interface SampleSpringBatchTest {
 }

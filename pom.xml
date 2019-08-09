@@ -20,6 +20,7 @@
 
     <properties>
         <project.lib.path>${project.basedir}/lib</project.lib.path>
+        <assertj.assertions.target.dir>src/test/assertions</assertj.assertions.target.dir>
         <!-- MyBatis Generator Setting -->
         <mybatis.generator.configurationFile>${project.basedir}/tools/mybatis-generator/generatorConfig.xml</mybatis.generator.configurationFile>
         <mybatis.generator.overwrite>true</mybatis.generator.overwrite>

@@ -56,7 +56,7 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
    */
   @Override
   public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-    String replaceFileName = fileName.replace(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode(), SystemDateUtils.getNowDateString());
+    String replaceFileName = fileName.replace(DateFormatVo.YYYYMMDD_NO_DELIMITER.getCode(), SystemDateUtils.getNowDateAsString());
 
     validate(replaceFileName);
 
@@ -99,7 +99,7 @@ public class TriggerFileTasklet implements Tasklet, InitializingBean {
   private void process(String targetFile) throws IOException {
     switch (operation) {
       case CREATE_PROCCESS:
-        Files.write(Paths.get(filePath, targetFile), SystemDateUtils.getNowDateString().getBytes());
+        Files.write(Paths.get(filePath, targetFile), SystemDateUtils.getNowDateAsString().getBytes());
         break;
 
       case DELETE_PROCCESS:

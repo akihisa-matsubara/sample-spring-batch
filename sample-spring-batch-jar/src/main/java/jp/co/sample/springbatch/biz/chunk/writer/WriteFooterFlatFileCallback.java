@@ -25,7 +25,7 @@ public class WriteFooterFlatFileCallback implements FlatFileFooterCallback {
    */
   @Override
   public void writeFooter(Writer writer) throws IOException {
-    writer.write(RecodeTypeVo.TRAILER_RECORD.getCode() + "," + SystemDateUtils.getNowDateString());
+    writer.write(RecodeTypeVo.TRAILER_RECORD.getCode() + "," + SystemDateUtils.getNowDateAsString());
   }
 
 }
