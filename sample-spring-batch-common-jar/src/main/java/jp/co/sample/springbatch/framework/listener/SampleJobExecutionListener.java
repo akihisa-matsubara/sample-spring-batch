@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.framework.listener;
 
-import jp.co.sample.common.code.DateFormat.DateFormatVo;
+import jp.co.sample.common.util.DateFormat.DateFormatVo;
 import jp.co.sample.common.util.DateFormatUtilsExt;
 import jp.co.sample.springbatch.framework.constant.ScopeConst;
 import lombok.extern.slf4j.Slf4j;

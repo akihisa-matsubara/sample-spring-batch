@@ -38,6 +38,9 @@ public class CustomerFamilyEntity implements Serializable {
   /** 家族氏名カナ. */
   private String familyNameKana;
 
+  /** 家族続柄. */
+  private String familyRelationship;
+
   /** 家族性別. */
   private String familyGender;
 

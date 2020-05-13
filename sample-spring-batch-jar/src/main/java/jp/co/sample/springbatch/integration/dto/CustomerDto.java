@@ -30,10 +30,16 @@ public class CustomerDto {
   /** 生年月日. */
   private LocalDate birthday;
 
+  /** 電話番号. */
+  private String telNo;
+
   /** 郵便番号. */
   private String addressZip;
 
   /** 住所. */
   private String address;
+
+  /** Eメール. */
+  private String email;
 
 }

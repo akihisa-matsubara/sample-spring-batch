@@ -1,6 +1,6 @@
 package jp.co.sample.springbatch.framework.util;
 
-import jp.co.sample.common.code.DateFormat.DateFormatVo;
+import jp.co.sample.common.util.DateFormat.DateFormatVo;
 import jp.co.sample.common.util.LocalDateFormatUtils;
 import jp.co.sample.springbatch.framework.data.core.repository.SystemDateRepository;
 import java.time.LocalDate;

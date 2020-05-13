@@ -1,7 +1,7 @@
 package jp.co.sample.springbatch;
 
 import static org.assertj.core.api.Assertions.*;
-import jp.co.sample.common.code.DateFormat.DateFormatVo;
+import jp.co.sample.common.util.DateFormat.DateFormatVo;
 import jp.co.sample.springbatch.config.job.DbToFileJobConfig;
 import jp.co.sample.springbatch.framework.util.SystemDateUtils;
 import jp.co.sample.springbatch.test.context.SampleSpringBatchTest;

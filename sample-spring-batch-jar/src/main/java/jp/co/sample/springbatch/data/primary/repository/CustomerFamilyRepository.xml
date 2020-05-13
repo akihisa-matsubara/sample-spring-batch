@@ -10,6 +10,7 @@
         <result column="FAMILY_NO" jdbcType="CHAR" property="familyNo" />
         <result column="FAMILY_NAME_KANJI" jdbcType="VARCHAR" property="familyNameKanji" />
         <result column="FAMILY_NAME_KANA" jdbcType="VARCHAR" property="familyNameKana" />
+        <result column="FAMILY_RELATIONSHIP" jdbcType="CHAR" property="familyRelationship" />
         <result column="FAMILY_GENDER" jdbcType="CHAR" property="familyGender" />
         <result column="FAMILY_BIRTHDAY" jdbcType="DATE" property="familyBirthday" />
     </resultMap>
@@ -22,6 +23,7 @@
         FML.FAMILY_NO,
         FML.NAME_KANJI AS FAMILY_NAME_KANJI,
         FML.NAME_KANA AS FAMILY_NAME_KANA,
+        FML.RELATIONSHIP AS FAMILY_RELATIONSHIP,
         FML.GENDER AS FAMILY_GENDER,
         FML.BIRTHDAY AS FAMILY_BIRTHDAY
     </sql>
