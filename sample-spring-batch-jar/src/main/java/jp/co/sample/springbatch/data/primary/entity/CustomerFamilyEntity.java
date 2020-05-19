@@ -26,7 +26,7 @@ public class CustomerFamilyEntity implements Serializable {
   private String customerGender;
 
   /** 顧客生年月日. */
-  // XXX JDBC Driver v4.2以降でLocalDate利用可
+  // TODO JDBC Driver v4.2以降でLocalDate利用可
   private Date customerBirthday;
 
   /** 家族番号. */

@@ -30,8 +30,8 @@ public class SystemDateProperties {
    * 初期化.
    */
   @PostConstruct
-  public void initailize() {
-    SystemDateUtils.initailize(use, deemedDate);
+  public void init() {
+    SystemDateUtils.init(use, deemedDate);
   }
 
 }

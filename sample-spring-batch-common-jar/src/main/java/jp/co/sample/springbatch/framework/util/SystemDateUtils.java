@@ -42,13 +42,13 @@ public class SystemDateUtils {
    * @param use システム日付（みなし日付）利用
    * @param deemedDate システム日付（みなし日付）
    */
-  public static void initailize(boolean use, String deemedDate) {
+  public static void init(boolean use, String deemedDate) {
     if (!use) {
       restriction = true;
 
     } else if (StringUtils.isNotEmpty(deemedDate)) {
       propertyDateOpt = Optional.of(LocalDateFormatUtils.parse(deemedDate, DateFormatVo.YYYYMMDD_NO_DELIMITER));
-      log.debug("initialized. systemDate=[{}]", deemedDate);
+      log.info("initialized. systemDate=[{}]", deemedDate);
 
     }
 
