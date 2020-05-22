@@ -1,6 +1,9 @@
-/data/test-outputs/*
 !/data/test-outputs/.gitkeep
-/log/*
 !/log/.gitkeep
-/target/
+.classpath
+.project
+.settings/*prefs
+/data/test-outputs/*
+/log/*
 /src/test/assertions/
+/target/

@@ -1,4 +1,6 @@
-/target/
 !/tools/mybatis-generator/
-/tools/mybatis-generator/*
 !/tools/mybatis-generator/generatorConfig.xml
+.project
+.settings/*.prefs
+/target/
+/tools/mybatis-generator/*
