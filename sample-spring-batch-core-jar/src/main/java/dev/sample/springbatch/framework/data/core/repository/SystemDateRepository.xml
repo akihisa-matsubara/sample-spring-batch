@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.sample.springbatch.framework.data.core.repository.SystemDateRepository">
+    <select id="select" resultType="date">
+        SELECT
+            MSD.SYSTEM_DATE
+        FROM
+            M_SYSTEM_DATE MSD
+    </select>
+</mapper>

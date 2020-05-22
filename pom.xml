@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>jp.co.sample</groupId>
+    <groupId>dev.sample</groupId>
     <artifactId>sample-spring-batch-parent</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
@@ -14,7 +14,7 @@
     </parent>
 
     <modules>
-        <module>sample-spring-batch-common-jar</module>
+        <module>sample-spring-batch-core-jar</module>
         <module>sample-spring-batch-jar</module>
     </modules>
 
@@ -36,7 +36,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>jp.co.sample</groupId>
+                <groupId>dev.sample</groupId>
                 <artifactId>sample-common-util-jar</artifactId>
                 <version>${sample-common-util.version}</version>
             </dependency>
@@ -49,7 +49,7 @@
 
             <!-- Test Library -->
             <dependency>
-                <groupId>jp.co.sample</groupId>
+                <groupId>dev.sample</groupId>
                 <artifactId>sample-test-util-jar</artifactId>
                 <version>${sample-test-util.version}</version>
             </dependency>
@@ -78,7 +78,7 @@
         </dependency>
 
         <dependency>
-            <groupId>jp.co.sample</groupId>
+            <groupId>dev.sample</groupId>
             <artifactId>sample-common-util-jar</artifactId>
         </dependency>
 
@@ -97,7 +97,7 @@
 
         <!-- test scope -->
         <dependency>
-            <groupId>jp.co.sample</groupId>
+            <groupId>dev.sample</groupId>
             <artifactId>sample-test-util-jar</artifactId>
             <scope>test</scope>
         </dependency>

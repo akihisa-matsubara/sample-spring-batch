@@ -12,18 +12,18 @@
 			userId="db2admin"
 			password="db2admin" />
 		<javaModelGenerator
-			targetPackage="jp.co.sample.springbatch.data.primary.entity"
+			targetPackage="dev.sample.springbatch.data.primary.entity"
 			targetProject="tools/mybatis-generator/">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true"/>
 		</javaModelGenerator>
 		<sqlMapGenerator
-			targetPackage="jp.co.sample.springbatch.data.primary.repository"
+			targetPackage="dev.sample.springbatch.data.primary.repository"
 			targetProject="tools/mybatis-generator/">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 		<javaClientGenerator
-			targetPackage="jp.co.sample.springbatch.data.primary.repository"
+			targetPackage="dev.sample.springbatch.data.primary.repository"
 			targetProject="tools/mybatis-generator/" type="XMLMAPPER">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>

@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>jp.co.sample</groupId>
+        <groupId>dev.sample</groupId>
         <artifactId>sample-spring-batch-parent</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -33,8 +33,8 @@
 
         <!-- application -->
         <dependency>
-            <groupId>jp.co.sample</groupId>
-            <artifactId>sample-spring-batch-common-jar</artifactId>
+            <groupId>dev.sample</groupId>
+            <artifactId>sample-spring-batch-core-jar</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -78,9 +78,9 @@
                 <artifactId>assertj-assertions-generator-maven-plugin</artifactId>
                 <configuration>
                     <packages>
-                        <param>jp.co.sample.springbatch.data.dto</param>
-                        <param>jp.co.sample.springbatch.data.primary.entity</param>
-                        <param>jp.co.sample.springbatch.integration.dto</param>
+                        <param>dev.sample.springbatch.data.dto</param>
+                        <param>dev.sample.springbatch.data.primary.entity</param>
+                        <param>dev.sample.springbatch.integration.dto</param>
                     </packages>
                 </configuration>
             </plugin>
