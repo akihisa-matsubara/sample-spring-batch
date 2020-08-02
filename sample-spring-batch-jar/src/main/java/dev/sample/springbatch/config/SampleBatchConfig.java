@@ -1,10 +1,10 @@
 package dev.sample.springbatch.config;
 
+import dev.sample.springbatch.framework.constant.BatchCommonConst;
+import dev.sample.springbatch.framework.constant.ScopeConst;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import dev.sample.springbatch.framework.constant.BatchCommonConst;
-import dev.sample.springbatch.framework.constant.ScopeConst;
 
 /**
  * サンプルバッチ設定.

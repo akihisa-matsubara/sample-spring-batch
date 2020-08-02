@@ -1,6 +1,11 @@
 package dev.sample.springbatch;
 
 import static org.assertj.core.api.Assertions.*;
+import dev.sample.common.util.DateFormat.DateFormatVo;
+import dev.sample.springbatch.config.job.DbToFileJobConfig;
+import dev.sample.springbatch.framework.util.SystemDateUtils;
+import dev.sample.springbatch.test.context.SampleSpringBatchTest;
+import dev.sample.test.util.FileTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,16 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import dev.sample.common.util.DateFormat.DateFormatVo;
-import dev.sample.springbatch.config.job.DbToFileJobConfig;
-import dev.sample.springbatch.framework.util.SystemDateUtils;
-import dev.sample.springbatch.test.context.SampleSpringBatchTest;
-import dev.sample.test.util.FileTestUtils;
 
 @ExtendWith(SpringExtension.class)
 @SampleSpringBatchTest
 @ContextConfiguration(classes = {DbToFileJobConfig.class})
-public class DbToFileJobTest {
+class DbToFileJobTest {
 
   @Autowired
   private JobLauncherTestUtils jobLauncherTestUtils;
@@ -44,7 +44,7 @@ public class DbToFileJobTest {
 
   @DisplayName("DbToFileのPre-IT")
   @Test
-  public void testJob() throws Exception {
+  void testJob() throws Exception {
     // --- setup -----
     // --- execute ---
     JobExecution jobExecution = jobLauncherTestUtils.launchJob();

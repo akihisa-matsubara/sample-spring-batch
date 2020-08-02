@@ -1,11 +1,11 @@
 package dev.sample.springbatch.framework.config.properties;
 
+import dev.sample.springbatch.framework.constant.ScopeConst;
+import dev.sample.springbatch.framework.util.SystemDateUtils;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import dev.sample.springbatch.framework.constant.ScopeConst;
-import dev.sample.springbatch.framework.util.SystemDateUtils;
 
 /**
  * システム日付プロパティ.

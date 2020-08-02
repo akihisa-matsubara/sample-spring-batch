@@ -1,5 +1,6 @@
 package dev.sample.springbatch.config.database;
 
+import dev.sample.springbatch.framework.constant.ScopeConst;
 import javax.sql.DataSource;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.ExecutorType;
@@ -16,7 +17,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import dev.sample.springbatch.framework.constant.ScopeConst;
 
 /**
  * 副DB用設定.

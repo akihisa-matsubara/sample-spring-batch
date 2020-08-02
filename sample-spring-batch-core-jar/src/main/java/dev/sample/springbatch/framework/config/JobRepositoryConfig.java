@@ -33,9 +33,6 @@ public class JobRepositoryConfig extends DefaultBatchConfigurer {
     MapJobRepositoryFactoryBean jobRepositoryFactory = new MapJobRepositoryFactoryBean();
     try {
       this.jobRepository = jobRepositoryFactory.getObject();
-      if (jobRepository == null) {
-        throw new IllegalStateException("jobRepository is null.");
-      }
       MapJobExplorerFactoryBean jobExplorerFactory = new MapJobExplorerFactoryBean(jobRepositoryFactory);
       this.jobExplorer = jobExplorerFactory.getObject();
       SimpleJobLauncher launcher = new SimpleJobLauncher();

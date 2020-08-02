@@ -1,10 +1,10 @@
 package dev.sample.springbatch.data.primary.entity;
 
+import dev.sample.springbatch.framework.data.entity.DbBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import dev.sample.springbatch.framework.data.entity.DbBaseEntity;
 
 /**
  * 郵便番号マスタEntity.

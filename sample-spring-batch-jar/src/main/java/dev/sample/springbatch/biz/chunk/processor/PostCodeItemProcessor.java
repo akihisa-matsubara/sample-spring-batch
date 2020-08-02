@@ -1,5 +1,10 @@
 package dev.sample.springbatch.biz.chunk.processor;
 
+import dev.sample.springbatch.code.BatchVo;
+import dev.sample.springbatch.data.dto.PostCodeFileDto;
+import dev.sample.springbatch.data.primary.entity.PostCodeEntity;
+import dev.sample.springbatch.framework.code.ExecutionContextVo;
+import dev.sample.springbatch.framework.util.BeanValidationUtils;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.ConstraintViolationException;
@@ -9,11 +14,6 @@ import org.springframework.batch.core.annotation.AfterStep;
 import org.springframework.batch.core.annotation.BeforeStep;
 import org.springframework.batch.item.ExecutionContext;
 import org.springframework.batch.item.ItemProcessor;
-import dev.sample.springbatch.code.BatchVo;
-import dev.sample.springbatch.data.dto.PostCodeFileDto;
-import dev.sample.springbatch.data.primary.entity.PostCodeEntity;
-import dev.sample.springbatch.framework.code.ExecutionContextVo;
-import dev.sample.springbatch.framework.util.BeanValidationUtils;
 
 /**
  * 郵便番号ItemProcessor.
@@ -44,7 +44,7 @@ public class PostCodeItemProcessor implements ItemProcessor<PostCodeFileDto, Pos
     ExecutionContext stepExecutionContext = stepExecution.getExecutionContext();
 
 
-    List<PostCodeFileDto> errorRecordList = (List<PostCodeFileDto>)stepExecutionContext.remove(ExecutionContextVo.ERROR_RECORDS.getCode());
+    List<PostCodeFileDto> errorRecordList = (List<PostCodeFileDto>) stepExecutionContext.remove(ExecutionContextVo.ERROR_RECORDS.getCode());
     if (errorRecordList == null) {
       return;
     }

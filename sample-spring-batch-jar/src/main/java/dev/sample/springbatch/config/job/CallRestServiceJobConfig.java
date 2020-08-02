@@ -1,5 +1,9 @@
 package dev.sample.springbatch.config.job;
 
+import dev.sample.springbatch.biz.tasklet.SampleRestServiceClientTasklet;
+import dev.sample.springbatch.biz.tasklet.SpringBootServiceClientTasklet;
+import dev.sample.springbatch.framework.constant.ScopeConst;
+import dev.sample.springbatch.framework.listener.SampleJobExecutionListener;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -10,10 +14,6 @@ import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
-import dev.sample.springbatch.biz.tasklet.SampleRestServiceClientTasklet;
-import dev.sample.springbatch.biz.tasklet.SpringBootServiceClientTasklet;
-import dev.sample.springbatch.framework.constant.ScopeConst;
-import dev.sample.springbatch.framework.listener.SampleJobExecutionListener;
 
 /**
  * Rest Service呼び出しジョブ設定.
@@ -27,9 +27,9 @@ public class CallRestServiceJobConfig {
   /** StepBuilderFactory. (Constructor Injection) */
   private final StepBuilderFactory steps;
 
-  /**********************************************
-   * job configurations.
-   **********************************************/
+  // *********************************************
+  // job configurations.
+  // *********************************************
   /**
    * Rest Service呼び出しジョブ.
    *
@@ -52,9 +52,9 @@ public class CallRestServiceJobConfig {
         .build();
   }
 
-  /**********************************************
-   * step configurations.
-   **********************************************/
+  // *********************************************
+  // step configurations.
+  // *********************************************
   /**
    * Spring Boot Service呼び出しステップ.
    *

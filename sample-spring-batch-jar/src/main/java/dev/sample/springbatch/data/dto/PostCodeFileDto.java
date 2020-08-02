@@ -1,5 +1,6 @@
 package dev.sample.springbatch.data.dto;
 
+import dev.sample.springbatch.framework.data.dto.ItemDtoBase;
 import java.io.Serializable;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -8,7 +9,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import dev.sample.springbatch.framework.data.dto.ItemDtoBase;
 
 /**
  * 郵便番号FileDto.

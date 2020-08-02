@@ -1,8 +1,8 @@
 package dev.sample.springbatch.data.primary.repository;
 
+import dev.sample.springbatch.data.primary.entity.CustomerFamilyEntity;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
-import dev.sample.springbatch.data.primary.entity.CustomerFamilyEntity;
 
 /**
  * 顧客家族リポジトリー.

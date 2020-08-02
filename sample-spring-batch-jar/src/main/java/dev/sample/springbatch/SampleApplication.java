@@ -11,6 +11,7 @@ public class SampleApplication {
 
   /**
    * メイン処理.
+   * 
    * @param args パラメーター
    */
   public static void main(String[] args) {

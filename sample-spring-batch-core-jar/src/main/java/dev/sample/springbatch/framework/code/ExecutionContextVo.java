@@ -1,8 +1,8 @@
 package dev.sample.springbatch.framework.code;
 
+import dev.sample.common.code.CodeVo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import dev.sample.common.code.CodeVo;
 
 /**
  * Execution Context 内で扱うVO.

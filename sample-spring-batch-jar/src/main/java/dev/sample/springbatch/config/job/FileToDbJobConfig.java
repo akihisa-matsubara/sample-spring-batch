@@ -1,5 +1,20 @@
 package dev.sample.springbatch.config.job;
 
+import dev.sample.common.constant.Encoding;
+import dev.sample.springbatch.biz.chunk.processor.PostCodeItemProcessor;
+import dev.sample.springbatch.biz.chunk.reader.ReadSkippedLinesCallback;
+import dev.sample.springbatch.biz.tasklet.TriggerFileTasklet;
+import dev.sample.springbatch.data.dto.PostCodeFileDto;
+import dev.sample.springbatch.data.primary.entity.PostCodeEntity;
+import dev.sample.springbatch.data.query.QueryId;
+import dev.sample.springbatch.framework.code.TriggerFileOperationVo;
+import dev.sample.springbatch.framework.constant.CommonFieldName;
+import dev.sample.springbatch.framework.constant.ScopeConst;
+import dev.sample.springbatch.framework.handler.SampleExceptionHandler;
+import dev.sample.springbatch.framework.item.mapper.FieldSetMapper;
+import dev.sample.springbatch.framework.listener.SampleJobExecutionListener;
+import dev.sample.springbatch.framework.listener.SampleStepExecutionListener;
+import dev.sample.springbatch.framework.util.FieldUtilsExt;
 import java.io.IOException;
 import javax.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
@@ -22,21 +37,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.transaction.PlatformTransactionManager;
-import dev.sample.common.constant.Encoding;
-import dev.sample.springbatch.biz.chunk.processor.PostCodeItemProcessor;
-import dev.sample.springbatch.biz.chunk.reader.ReadSkippedLinesCallback;
-import dev.sample.springbatch.biz.tasklet.TriggerFileTasklet;
-import dev.sample.springbatch.data.dto.PostCodeFileDto;
-import dev.sample.springbatch.data.primary.entity.PostCodeEntity;
-import dev.sample.springbatch.data.query.QueryId;
-import dev.sample.springbatch.framework.code.TriggerFileOperationVo;
-import dev.sample.springbatch.framework.constant.CommonFieldName;
-import dev.sample.springbatch.framework.constant.ScopeConst;
-import dev.sample.springbatch.framework.handler.SampleExceptionHandler;
-import dev.sample.springbatch.framework.item.mapper.FieldSetMapper;
-import dev.sample.springbatch.framework.listener.SampleJobExecutionListener;
-import dev.sample.springbatch.framework.listener.SampleStepExecutionListener;
-import dev.sample.springbatch.framework.util.FieldUtilsExt;
 
 /**
  * File to DBジョブ設定.
@@ -66,9 +66,9 @@ public class FileToDbJobConfig {
   @Value("${sample.file.file-to-db.trigger-file.name}")
   private String triggerFileName;
 
-  /**********************************************
-   * job configurations.
-   **********************************************/
+  // *********************************************
+  // job configurations.
+  // *********************************************
   /**
    * File to DBジョブ.
    *
@@ -97,9 +97,9 @@ public class FileToDbJobConfig {
         .build();
   }
 
-  /**********************************************
-   * step configurations.
-   **********************************************/
+  // *********************************************
+  // * step configurations.
+  // *********************************************
   /**
    * トリガーファイルチェックステップ.
    *
@@ -187,9 +187,9 @@ public class FileToDbJobConfig {
     return tasklet;
   }
 
-  /**********************************************
-   * reader processor writer configurations.
-   **********************************************/
+  // *********************************************
+  // reader processor writer configurations.
+  // *********************************************
   /**
    * File to DB ItemReader.
    *
@@ -206,7 +206,7 @@ public class FileToDbJobConfig {
         .delimiter(",")
         .names(FieldUtilsExt.getFields(PostCodeFileDto.class, CommonFieldName.ITEM_COUNT.getName()))
         .encoding(Encoding.MS932)
-        .fieldSetMapper(new FieldSetMapper<PostCodeFileDto>(PostCodeFileDto.class)).build();
+        .fieldSetMapper(new FieldSetMapper<>(PostCodeFileDto.class)).build();
   }
 
   /**

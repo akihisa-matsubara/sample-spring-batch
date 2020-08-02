@@ -1,5 +1,13 @@
 package dev.sample.springbatch.integration.service.impl;
 
+import dev.sample.springbatch.framework.constant.ScopeConst;
+import dev.sample.springbatch.framework.exception.ApplicationException;
+import dev.sample.springbatch.framework.integration.dto.IntegerResponseDto;
+import dev.sample.springbatch.framework.integration.dto.ObjectResponseDto;
+import dev.sample.springbatch.integration.dto.CustomerDto;
+import dev.sample.springbatch.integration.dto.CustomerResponseDto;
+import dev.sample.springbatch.integration.dto.CustomersResponseDto;
+import dev.sample.springbatch.integration.service.SampleRestService;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -15,14 +23,6 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import dev.sample.springbatch.framework.constant.ScopeConst;
-import dev.sample.springbatch.framework.exception.ApplicationException;
-import dev.sample.springbatch.framework.integration.dto.IntegerResponseDto;
-import dev.sample.springbatch.framework.integration.dto.ObjectResponseDto;
-import dev.sample.springbatch.integration.dto.CustomerDto;
-import dev.sample.springbatch.integration.dto.CustomerResponseDto;
-import dev.sample.springbatch.integration.dto.CustomersResponseDto;
-import dev.sample.springbatch.integration.service.SampleRestService;
 
 /**
  * Sample Rest Service実装.
@@ -49,30 +49,28 @@ public class SampleRestServiceImpl implements SampleRestService {
     this.restTemplate = restTemplateBuilder.build();
   }
 
-  /**
-   *  説明：
-   *  サンプルではサービス呼び出し時にエラーハンドリングしない
-   *  アプリ要件により再送などエラーハンドリングする場合はResponseErrorHandlerを実装すること
-   *  RestClientException
-   *    ・HttpClientErrorException       - HTTPステータス4xxの場合
-   *    ・HttpServerErrorException       - HTTPステータス5xxの場合
-   *    ・UnknownHttpStatusCodeException - 不明なHTTPステータス(ユーザ定義のカスタムコードなど)の場合
-   *    ・ResourceAccessException        - IO系のエラーの場合
-   *
-   *  Get
-   *    ・getForObject  - レスポンスボディのみ取得する場合
-   *    ・getForEntity  - HTTPステータスコード、レスポンスヘッダ、レスポンスボディを取得する場合
-   *    ・exchange      - リクエストヘッダを指定する必要がある場合、コレクションで取得する場合
-   *  Post
-   *    ・postForEntity - 省略
-   *    ・exchange      - 省略
-   *  Put
-   *    ・put           - 省略
-   *    ・exchange      - 省略
-   *  Delete
-   *    ・delete        - 省略
-   *    ・exchange      - 省略
-   */
+  // 説明：
+  // サンプルではサービス呼び出し時にエラーハンドリングしない
+  // アプリ要件により再送などエラーハンドリングする場合はResponseErrorHandlerを実装すること
+  // RestClientException
+  // ・HttpClientErrorException - HTTPステータス4xxの場合
+  // ・HttpServerErrorException - HTTPステータス5xxの場合
+  // ・UnknownHttpStatusCodeException - 不明なHTTPステータス(ユーザ定義のカスタムコードなど)の場合
+  // ・ResourceAccessException - IO系のエラーの場合
+  //
+  // Get
+  // ・getForObject - レスポンスボディのみ取得する場合
+  // ・getForEntity - HTTPステータスコード、レスポンスヘッダ、レスポンスボディを取得する場合
+  // ・exchange - リクエストヘッダを指定する必要がある場合、コレクションで取得する場合
+  // Post
+  // ・postForEntity - 省略
+  // ・exchange - 省略
+  // Put
+  // ・put - 省略
+  // ・exchange - 省略
+  // Delete
+  // ・delete - 省略
+  // ・exchange - 省略
 
   /**
    * {@inheritDoc}

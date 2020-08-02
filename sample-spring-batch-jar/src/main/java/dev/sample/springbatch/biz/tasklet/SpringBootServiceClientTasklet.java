@@ -1,5 +1,7 @@
 package dev.sample.springbatch.biz.tasklet;
 
+import dev.sample.springbatch.framework.constant.ScopeConst;
+import dev.sample.springbatch.integration.service.SpringBootService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
@@ -7,8 +9,6 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import dev.sample.springbatch.framework.constant.ScopeConst;
-import dev.sample.springbatch.integration.service.SpringBootService;
 
 /**
  * Spring Boot Service Client.

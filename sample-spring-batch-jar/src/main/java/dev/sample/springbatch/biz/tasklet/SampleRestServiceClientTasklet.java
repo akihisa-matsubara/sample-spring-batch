@@ -1,5 +1,11 @@
 package dev.sample.springbatch.biz.tasklet;
 
+import dev.sample.common.code.GenderVo;
+import dev.sample.common.util.DateFormat.DateFormatVo;
+import dev.sample.common.util.LocalDateFormatUtils;
+import dev.sample.springbatch.framework.constant.ScopeConst;
+import dev.sample.springbatch.integration.dto.CustomerDto;
+import dev.sample.springbatch.integration.service.SampleRestService;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -9,12 +15,6 @@ import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import dev.sample.common.code.GenderVo;
-import dev.sample.common.util.LocalDateFormatUtils;
-import dev.sample.common.util.DateFormat.DateFormatVo;
-import dev.sample.springbatch.framework.constant.ScopeConst;
-import dev.sample.springbatch.integration.dto.CustomerDto;
-import dev.sample.springbatch.integration.service.SampleRestService;
 
 /**
  * Sample Rest Service Client.

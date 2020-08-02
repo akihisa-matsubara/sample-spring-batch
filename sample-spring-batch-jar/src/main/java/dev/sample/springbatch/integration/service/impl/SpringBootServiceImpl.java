@@ -1,5 +1,8 @@
 package dev.sample.springbatch.integration.service.impl;
 
+import dev.sample.springbatch.framework.constant.ScopeConst;
+import dev.sample.springbatch.integration.dto.QuoteDto;
+import dev.sample.springbatch.integration.service.SpringBootService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -7,9 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import dev.sample.springbatch.framework.constant.ScopeConst;
-import dev.sample.springbatch.integration.dto.QuoteDto;
-import dev.sample.springbatch.integration.service.SpringBootService;
 
 /**
  * Spring Boot Service実装.

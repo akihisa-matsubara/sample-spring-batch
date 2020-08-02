@@ -1,5 +1,9 @@
 package dev.sample.springbatch.test.context;
 
+import dev.sample.common.constant.Profile;
+import dev.sample.springbatch.config.SampleBatchConfig;
+import dev.sample.springbatch.constant.BatchConst;
+import dev.sample.springbatch.framework.constant.BatchCommonConst;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -15,10 +19,6 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import dev.sample.common.constant.Profile;
-import dev.sample.springbatch.config.SampleBatchConfig;
-import dev.sample.springbatch.constant.BatchConst;
-import dev.sample.springbatch.framework.constant.BatchCommonConst;
 
 /**
  * サンプルテスト用アノテーション.

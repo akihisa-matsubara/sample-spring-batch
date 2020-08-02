@@ -1,12 +1,12 @@
 package dev.sample.springbatch.framework.listener;
 
+import dev.sample.springbatch.framework.constant.ScopeConst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.listener.StepExecutionListenerSupport;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import dev.sample.springbatch.framework.constant.ScopeConst;
 
 /**
  * ステップ実行リスナー.
@@ -34,7 +34,7 @@ public class SampleStepExecutionListener extends StepExecutionListenerSupport {
   @Override
   public ExitStatus afterStep(StepExecution stepExecution) {
     log.info("detailed results of step execution. readCount=[{}], writeCount=[{}], commitCount=[{}], rollbackCount=[{}], "
-            + "skipCount=[read=[{}], process=[{}], write=[{}]], filterCount=[{}]",
+        + "skipCount=[read=[{}], process=[{}], write=[{}]], filterCount=[{}]",
         stepExecution.getReadCount(),
         stepExecution.getWriteCount(),
         stepExecution.getCommitCount(),

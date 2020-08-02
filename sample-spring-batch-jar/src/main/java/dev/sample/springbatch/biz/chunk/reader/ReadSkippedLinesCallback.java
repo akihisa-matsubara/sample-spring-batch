@@ -1,10 +1,10 @@
 package dev.sample.springbatch.biz.chunk.reader;
 
+import dev.sample.springbatch.framework.constant.ScopeConst;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.file.LineCallbackHandler;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import dev.sample.springbatch.framework.constant.ScopeConst;
 
 /**
  * Read Skipped Line Callback.

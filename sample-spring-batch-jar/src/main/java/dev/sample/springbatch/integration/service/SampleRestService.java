@@ -1,8 +1,8 @@
 package dev.sample.springbatch.integration.service;
 
-import java.util.List;
 import dev.sample.springbatch.framework.exception.ApplicationException;
 import dev.sample.springbatch.integration.dto.CustomerDto;
+import java.util.List;
 
 /**
  * Sample Rest Serviceインターフェース.

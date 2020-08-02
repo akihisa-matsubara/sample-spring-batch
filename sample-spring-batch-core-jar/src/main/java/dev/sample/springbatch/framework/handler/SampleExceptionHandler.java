@@ -1,12 +1,12 @@
 package dev.sample.springbatch.framework.handler;
 
+import dev.sample.springbatch.framework.constant.ScopeConst;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.batch.repeat.RepeatContext;
 import org.springframework.batch.repeat.exception.ExceptionHandler;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import dev.sample.springbatch.framework.constant.ScopeConst;
 
 /**
  * 例外ハンドラー.

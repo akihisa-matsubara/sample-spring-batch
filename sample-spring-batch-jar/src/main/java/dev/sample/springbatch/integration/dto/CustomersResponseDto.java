@@ -1,7 +1,7 @@
 package dev.sample.springbatch.integration.dto;
 
-import java.util.List;
 import dev.sample.springbatch.framework.integration.dto.ResponseBaseDto;
+import java.util.List;
 
 /**
  * Response Dto Customers.

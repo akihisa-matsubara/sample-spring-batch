@@ -35,11 +35,18 @@
         <sonar.organization>akihisa-matsubara</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
-        <!-- version -->
+        <!-- sample version -->
         <sample-common-util.version>1.0.0</sample-common-util.version>
         <sample-test-util.version>1.0.0</sample-test-util.version>
+
+        <!-- oss version -->
         <mybatis-spring.version>2.0.1</mybatis-spring.version>
+
+        <!-- oss version (test library) -->
         <dbSetup.version>2.1.0</dbSetup.version>
+
+        <!-- plugin version -->
+        <formatter-maven-plugin.version>2.12.1</formatter-maven-plugin.version>
         <mybatis-generator.version>1.3.7</mybatis-generator.version>
         <assertj-assertions-generator.version>2.2.0</assertj-assertions-generator.version>
         <github-site-maven-plugin>0.12</github-site-maven-plugin>
@@ -170,6 +177,32 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <groupId>net.revelc.code.formatter</groupId>
+                    <artifactId>formatter-maven-plugin</artifactId>
+                    <version>${formatter-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>format</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <configFile>style-guide/eclipse-java-my-style.xml</configFile>
+                        <excludes>
+                            <exclude>**/assertj/*Assert.java</exclude>
+                            <exclude>**/*.xml</exclude>
+                        </excludes>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>dev.sample</groupId>
+                            <artifactId>sample-build-tools</artifactId>
+                            <version>${project.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
                 <plugin>
                     <groupId>org.mybatis.generator</groupId>
                     <artifactId>mybatis-generator-maven-plugin</artifactId>

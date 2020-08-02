@@ -1,6 +1,8 @@
 !/tools/mybatis-generator/
 !/tools/mybatis-generator/generatorConfig.xml
+.cache
 .project
 .settings/*.prefs
+.sts4-cache
 /target/
 /tools/mybatis-generator/*

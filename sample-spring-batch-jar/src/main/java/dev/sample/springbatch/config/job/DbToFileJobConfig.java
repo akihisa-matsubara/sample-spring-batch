@@ -1,5 +1,19 @@
 package dev.sample.springbatch.config.job;
 
+import dev.sample.common.constant.Encoding;
+import dev.sample.springbatch.biz.chunk.processor.CustomerFamilyItemProcessor;
+import dev.sample.springbatch.biz.chunk.writer.WriteFooterFlatFileCallback;
+import dev.sample.springbatch.biz.chunk.writer.WriteHeaderFlatFileCallback;
+import dev.sample.springbatch.biz.tasklet.TriggerFileTasklet;
+import dev.sample.springbatch.data.dto.CustomerFamilyFileDto;
+import dev.sample.springbatch.data.primary.entity.CustomerFamilyEntity;
+import dev.sample.springbatch.data.query.QueryId;
+import dev.sample.springbatch.framework.code.TriggerFileOperationVo;
+import dev.sample.springbatch.framework.constant.ScopeConst;
+import dev.sample.springbatch.framework.handler.SampleExceptionHandler;
+import dev.sample.springbatch.framework.listener.SampleJobExecutionListener;
+import dev.sample.springbatch.framework.listener.SampleStepExecutionListener;
+import dev.sample.springbatch.framework.util.FieldUtilsExt;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.batch.MyBatisCursorItemReader;
@@ -17,20 +31,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
-import dev.sample.common.constant.Encoding;
-import dev.sample.springbatch.biz.chunk.processor.CustomerFamilyItemProcessor;
-import dev.sample.springbatch.biz.chunk.writer.WriteFooterFlatFileCallback;
-import dev.sample.springbatch.biz.chunk.writer.WriteHeaderFlatFileCallback;
-import dev.sample.springbatch.biz.tasklet.TriggerFileTasklet;
-import dev.sample.springbatch.data.dto.CustomerFamilyFileDto;
-import dev.sample.springbatch.data.primary.entity.CustomerFamilyEntity;
-import dev.sample.springbatch.data.query.QueryId;
-import dev.sample.springbatch.framework.code.TriggerFileOperationVo;
-import dev.sample.springbatch.framework.constant.ScopeConst;
-import dev.sample.springbatch.framework.handler.SampleExceptionHandler;
-import dev.sample.springbatch.framework.listener.SampleJobExecutionListener;
-import dev.sample.springbatch.framework.listener.SampleStepExecutionListener;
-import dev.sample.springbatch.framework.util.FieldUtilsExt;
 
 /**
  * DB to Fileジョブ設定.
@@ -60,9 +60,9 @@ public class DbToFileJobConfig {
   @Value("${sample.file.db-to-file.trigger-file.name}")
   private String triggerFileName;
 
-  /**********************************************
-   * job configurations.
-   **********************************************/
+  // *********************************************
+  // job configurations.
+  // *********************************************
   /**
    * DB to Fileジョブ.
    *
@@ -90,9 +90,9 @@ public class DbToFileJobConfig {
         .build();
   }
 
-  /**********************************************
-   * step configurations.
-   **********************************************/
+  // *********************************************
+  // step configurations.
+  // *********************************************
   /**
    * トリガーファイルチェックステップ.
    *
@@ -172,9 +172,9 @@ public class DbToFileJobConfig {
     return tasklet;
   }
 
-  /**********************************************
-   * reader processor writer configurations.
-   **********************************************/
+  // *********************************************
+  // reader processor writer configurations.
+  // *********************************************
   /**
    * DB to File ItemReader.
    *

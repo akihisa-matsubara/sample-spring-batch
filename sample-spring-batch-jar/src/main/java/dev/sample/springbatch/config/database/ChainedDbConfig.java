@@ -1,11 +1,11 @@
 package dev.sample.springbatch.config.database;
 
+import dev.sample.springbatch.framework.constant.ScopeConst;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.transaction.ChainedTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
-import dev.sample.springbatch.framework.constant.ScopeConst;
 
 /**
  * 複数DB用設定.

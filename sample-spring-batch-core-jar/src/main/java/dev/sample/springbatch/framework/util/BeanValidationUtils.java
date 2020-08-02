@@ -1,12 +1,12 @@
 package dev.sample.springbatch.framework.util;
 
+import dev.sample.springbatch.framework.data.dto.ItemDtoBase;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
-import dev.sample.springbatch.framework.data.dto.ItemDtoBase;
 
 /**
  * Bean Validationユーティリティー.
