@@ -19,6 +19,8 @@
     </modules>
 
     <properties>
+        <!-- NOTE: Versions are raised with the other modules. -->
+        <!-- <java.version>11</java.version> -->
         <project.lib.path>${project.basedir}/lib</project.lib.path>
         <assertj.assertions.target.dir>src/test/assertions</assertj.assertions.target.dir>
         <!-- MyBatis Generator Setting -->
